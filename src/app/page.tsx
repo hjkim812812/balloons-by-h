@@ -288,12 +288,6 @@ export default function HomePage() {
 
             </blockquote>
 
-            <p className="mt-8 text-center font-body text-sm text-ivory/60">
-
-              — Balloons by H
-
-            </p>
-
           </ScrollReveal>
 
         </div>
