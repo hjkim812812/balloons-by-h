@@ -6,7 +6,7 @@ export function FaqSection() {
   return (
     <section
       id="faq"
-      className="border-t border-champagne/15 bg-white py-20 sm:py-24 md:py-28"
+      className="border-t border-champagne/15 bg-ivory py-20 sm:py-24 md:py-28"
     >
       <div className="mx-auto max-w-3xl px-5 sm:px-6 md:px-8">
         <ScrollReveal>

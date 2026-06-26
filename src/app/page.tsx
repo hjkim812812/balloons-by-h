@@ -152,7 +152,7 @@ export default function HomePage() {
 
       {/* Editorial statement */}
 
-      <section className="border-b border-champagne/15 bg-white py-20 sm:py-24 md:py-32">
+      <section className="border-b border-champagne/15 bg-ivory py-20 sm:py-24 md:py-32">
 
         <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
 
@@ -194,7 +194,7 @@ export default function HomePage() {
 
       {/* Featured — one card per brand photo */}
 
-      <section className="border-t border-champagne/15 bg-white py-20 sm:py-24 md:py-28">
+      <section className="border-t border-champagne/15 bg-ivory py-20 sm:py-24 md:py-28">
 
         <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
 
@@ -238,7 +238,7 @@ export default function HomePage() {
 
       {/* Delivery */}
 
-      <section className="bg-blush-light py-20 sm:py-24 md:py-28">
+      <section className="bg-ivory py-20 sm:py-24 md:py-28">
 
         <div className="mx-auto max-w-6xl px-5 text-center sm:px-6 md:px-8">
 

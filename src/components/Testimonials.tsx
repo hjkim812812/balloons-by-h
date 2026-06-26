@@ -4,7 +4,7 @@ import { TESTIMONIALS } from "@/data/site";
 
 export function Testimonials() {
   return (
-    <section className="border-t border-champagne/15 bg-blush-light py-20 md:py-28">
+    <section className="border-t border-champagne/15 bg-ivory py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <ScrollReveal>
           <SectionHeader
