@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 const DELIVERY_TIME_OPTIONS = [
-  { value: "9am-2pm", label: "9am – 2pm" },
-  { value: "2pm-7pm", label: "2pm – 7pm" },
+  { value: "10am-2pm", label: "10am – 2pm" },
+  { value: "2pm-6pm", label: "2pm – 6pm" },
 ] as const;
 
 export function ContactForm() {
