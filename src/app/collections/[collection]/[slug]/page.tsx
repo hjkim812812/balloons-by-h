@@ -7,7 +7,9 @@ import { ProductGallery } from "@/components/ProductGallery";
 import { getBouquetSeo, getProductJsonLd } from "@/data/page-seo";
 import {
   BOUQUETS,
+  BOUQUET_PRICE,
   COLLECTION,
+  formatPrice,
   getBouquetBySlug,
   getBouquetImages,
 } from "@/data/site";
@@ -90,8 +92,11 @@ export default async function ProductDetailPage({ params }: Props) {
               <p className="mt-8 max-w-md font-body text-base leading-relaxed text-charcoal-soft md:text-lg">
                 {bouquet.mood}
               </p>
+              <p className="mt-6 font-body text-lg tracking-wide text-charcoal md:text-xl">
+                {formatPrice(BOUQUET_PRICE)}
+              </p>
 
-              <div className="mt-14 max-w-sm">
+              <div className="mt-10 max-w-sm">
                 <BookButton
                   bouquetName={bouquet.name}
                   slug={bouquet.slug}
