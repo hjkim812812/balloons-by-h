@@ -32,13 +32,7 @@ export default function ContactPage() {
 
           <ScrollReveal>
 
-            <SectionHeader
-
-              title="Contact"
-
-              description="Share your vision. We respond within twenty-four hours."
-
-            />
+            <SectionHeader title="Contact" />
 
           </ScrollReveal>
 
