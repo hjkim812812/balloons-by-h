@@ -289,6 +289,70 @@ export const BOUQUETS: Bouquet[] = [
 
   },
 
+  {
+
+    slug: "lavender-bloom",
+
+    name: "Lavender Bloom",
+
+    accent: "#B8A8C8",
+
+    accentLight: "#E8E0F0",
+
+    mood: "Soft lavender and gold with garden elegance",
+
+    image: "/images/bouquets/lavender-bloom.png",
+
+  },
+
+  {
+
+    slug: "azure-chateau",
+
+    name: "Azure Chateau",
+
+    accent: "#7BA3C0",
+
+    accentLight: "#D8E8F0",
+
+    mood: "Metallic blue and gold with refined poise",
+
+    image: "/images/bouquets/azure-chateau.png",
+
+  },
+
+  {
+
+    slug: "blue-buttercream",
+
+    name: "Blue Buttercream",
+
+    accent: "#98B8C8",
+
+    accentLight: "#E8E0D8",
+
+    mood: "Dusty blue and cream with quiet luxury",
+
+    image: "/images/bouquets/blue-buttercream.png",
+
+  },
+
+  {
+
+    slug: "seafoam-blush",
+
+    name: "Seafoam Blush",
+
+    accent: "#A8C4B0",
+
+    accentLight: "#E8D0D0",
+
+    mood: "Sage green and blush with soft romance",
+
+    image: "/images/bouquets/seafoam-blush.png",
+
+  },
+
 ];
 
 
