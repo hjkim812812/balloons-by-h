@@ -46,7 +46,7 @@ const FEATURED = [
 
   "welcome-baby",
 
-  "rose-champagne",
+  "the-hotel",
 
   "black-tie",
 
