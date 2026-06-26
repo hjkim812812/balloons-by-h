@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { BOUQUETS, COLLECTION } from "@/data/site";
 
-const BASE_URL = "https://balloonsbyh.com";
+const BASE_URL = "https://www.balloonsbyh.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
