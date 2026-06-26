@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { BRAND, BUSINESS_HOURS, COLLECTION, DELIVERY_AREAS } from "@/data/site";
+import { BRAND, BUSINESS_HOURS, DELIVERY_AREAS } from "@/data/site";
 
 const NAV_LINKS = [
   { href: "/collections", label: "Collections" },
-  { href: `/collections/${COLLECTION.slug}`, label: COLLECTION.name },
   { href: "/delivery", label: "Beverly Hills Delivery" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Inquire" },
