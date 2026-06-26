@@ -208,13 +208,8 @@ export default function HomePage() {
           <ScrollReveal>
 
             <SectionHeader
-
-              title="Color Stories"
-
-              description="Each palette, its own quiet narrative."
-
+              title="Our Collections"
               className="mb-12 md:mb-16"
-
             />
 
           </ScrollReveal>
