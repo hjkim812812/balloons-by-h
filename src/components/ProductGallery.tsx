@@ -12,14 +12,14 @@ type ProductGalleryProps = {
 function GalleryArrow({ direction }: { direction: "prev" | "next" }) {
   return (
     <svg
-      viewBox="0 0 16 16"
-      className="h-3.5 w-3.5 stroke-current stroke-[1.5] [stroke-linecap:round] [stroke-linejoin:round] fill-none"
+      viewBox="0 0 24 24"
+      className="h-4 w-4 stroke-current stroke-[1] [stroke-linecap:round] [stroke-linejoin:round] fill-none"
       aria-hidden
     >
       {direction === "prev" ? (
-        <path d="M10 3L5 8l5 5" />
+        <path d="M15 6l-6 6 6 6" />
       ) : (
-        <path d="M6 3l5 5-5 5" />
+        <path d="M9 6l6 6-6 6" />
       )}
     </svg>
   );
@@ -47,10 +47,13 @@ export function ProductGallery({ images, name }: ProductGalleryProps) {
     touchStartX.current = null;
   }
 
+  const arrowClass =
+    "absolute top-1/2 z-10 flex min-h-[44px] min-w-[44px] -translate-y-1/2 items-center justify-center text-charcoal/30 transition-colors duration-300 hover:text-charcoal/65";
+
   return (
     <div className="relative">
       <div
-        className="relative aspect-[3/4] overflow-hidden bg-ivory-deep touch-pan-y"
+        className="group/gallery relative aspect-[3/4] overflow-hidden bg-ivory-deep touch-pan-y"
         onTouchStart={hasMultiple ? handleTouchStart : undefined}
         onTouchEnd={hasMultiple ? handleTouchEnd : undefined}
       >
@@ -72,45 +75,47 @@ export function ProductGallery({ images, name }: ProductGalleryProps) {
           />
         ))}
         <div className="pointer-events-none absolute inset-5 border border-charcoal/10 md:inset-8" />
+
+        {hasMultiple && (
+          <>
+            <button
+              type="button"
+              onClick={() => goTo(index - 1)}
+              aria-label="Previous photo"
+              className={cn(arrowClass, "left-1 md:left-2")}
+            >
+              <GalleryArrow direction="prev" />
+            </button>
+            <button
+              type="button"
+              onClick={() => goTo(index + 1)}
+              aria-label="Next photo"
+              className={cn(arrowClass, "right-1 md:right-2")}
+            >
+              <GalleryArrow direction="next" />
+            </button>
+          </>
+        )}
       </div>
 
       {hasMultiple && (
-        <>
-          <button
-            type="button"
-            onClick={() => goTo(index - 1)}
-            aria-label="Previous photo"
-            className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-charcoal/15 bg-ivory/90 text-charcoal backdrop-blur-sm transition-all duration-300 hover:border-champagne hover:text-champagne-dark md:left-4"
-          >
-            <GalleryArrow direction="prev" />
-          </button>
-          <button
-            type="button"
-            onClick={() => goTo(index + 1)}
-            aria-label="Next photo"
-            className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-charcoal/15 bg-ivory/90 text-charcoal backdrop-blur-sm transition-all duration-300 hover:border-champagne hover:text-champagne-dark md:right-4"
-          >
-            <GalleryArrow direction="next" />
-          </button>
-
-          <div className="mt-5 flex items-center justify-center gap-2.5">
-            {images.map((src, i) => (
-              <button
-                key={src}
-                type="button"
-                aria-label={`View photo ${i + 1}`}
-                aria-current={i === index ? "true" : undefined}
-                onClick={() => setIndex(i)}
-                className={cn(
-                  "h-1.5 rounded-full transition-all duration-500 ease-luxury",
-                  i === index
-                    ? "w-6 bg-champagne"
-                    : "w-1.5 bg-charcoal/20 hover:bg-charcoal/35"
-                )}
-              />
-            ))}
-          </div>
-        </>
+        <div className="mt-4 flex items-center justify-center gap-2">
+          {images.map((src, i) => (
+            <button
+              key={src}
+              type="button"
+              aria-label={`View photo ${i + 1}`}
+              aria-current={i === index ? "true" : undefined}
+              onClick={() => setIndex(i)}
+              className={cn(
+                "h-px transition-all duration-500 ease-luxury",
+                i === index
+                  ? "w-8 bg-charcoal/50"
+                  : "w-4 bg-charcoal/15 hover:bg-charcoal/30"
+              )}
+            />
+          ))}
+        </div>
       )}
     </div>
   );
