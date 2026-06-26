@@ -44,7 +44,7 @@ const FEATURED = [
 
   "golden-buttercream",
 
-  "welcome-baby",
+  "cotton-candy",
 
   "the-hotel",
 

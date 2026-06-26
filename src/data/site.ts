@@ -82,7 +82,7 @@ export const INSTAGRAM_PLACEHOLDERS = [
 
   { src: "/images/bouquets/golden-buttercream.png", alt: "Instagram placeholder — Golden Buttercream bouquet" },
 
-  { src: "/images/bouquets/welcome-baby.png", alt: "Instagram placeholder — Welcome Baby bouquet" },
+  { src: "/images/bouquets/cotton-candy.png", alt: "Instagram placeholder — Cotton Candy bouquet" },
 
   { src: "/images/bouquets/rose-champagne.png", alt: "Instagram placeholder — Rosé Champagne bouquet" },
 
@@ -192,17 +192,17 @@ export const BOUQUETS: Bouquet[] = [
 
   {
 
-    slug: "welcome-baby",
+    slug: "cotton-candy",
 
-    name: "Welcome Baby",
+    name: "Cotton Candy",
 
     accent: "#D8C0C8",
 
     accentLight: "#F5E8EC",
 
-    mood: "Gentle and welcoming, softly feminine",
+    mood: "Soft pastel pink and blue with sweet charm",
 
-    image: "/images/bouquets/welcome-baby.png",
+    image: "/images/bouquets/cotton-candy.png",
 
   },
 
