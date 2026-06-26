@@ -43,13 +43,13 @@ export default function AboutPage() {
               </div>
             </ScrollReveal>
             <ScrollReveal delay={100}>
-              <div className="space-y-6 font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
-                <p>
+              <div className="space-y-8 lg:py-4">
+                <p className="font-display text-balance text-[clamp(1.25rem,2.8vw,1.75rem)] leading-[1.65] tracking-[0.01em] text-charcoal md:text-[1.875rem] md:leading-[1.6]">
                   At Balloons by H, we create refined balloon designs with
                   timeless elegance, premium craftsmanship, and meticulous
                   attention to detail.
                 </p>
-                <p>
+                <p className="max-w-md font-display text-[clamp(1.125rem,2.4vw,1.5rem)] italic leading-[1.7] text-charcoal-soft md:text-2xl md:leading-relaxed">
                   Every piece is thoughtfully designed to feel elevated,
                   intentional, and memorable.
                 </p>
