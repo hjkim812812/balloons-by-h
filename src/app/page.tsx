@@ -16,8 +16,6 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 
 import { Testimonials } from "@/components/Testimonials";
 
-import { TrustSection } from "@/components/TrustSection";
-
 import { SectionHeader } from "@/components/SectionHeader";
 
 import {
@@ -357,10 +355,6 @@ export default function HomePage() {
 
 
       <FaqSection />
-
-      <TrustSection />
-
-
 
       {/* CTA */}
 
