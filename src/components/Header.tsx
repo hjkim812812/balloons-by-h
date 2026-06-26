@@ -74,8 +74,8 @@ export function Header() {
           {BRAND.name}
         </Link>
 
-        <div className="flex items-center gap-3 md:gap-8">
-          <ul className="hidden items-center gap-8 md:flex">
+        <div className="flex items-center">
+          <ul className="hidden items-center gap-8 md:flex md:mr-8">
             {NAV_LINKS.map(({ href, label }) => (
               <li key={href}>
                 <Link
@@ -97,28 +97,29 @@ export function Header() {
             ))}
           </ul>
 
-          <a
-            href={BRAND.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Follow ${BRAND.name} on Instagram`}
-            className={cn(
-              "inline-flex h-11 w-11 items-center justify-center transition-colors duration-300",
-              transparent
-                ? "text-ivory/85 hover:text-ivory"
-                : "text-charcoal-soft hover:text-charcoal"
-            )}
-          >
-            <InstagramIcon className="h-[1.125rem] w-[1.125rem]" />
-          </a>
+          <div className="flex items-center max-md:-space-x-1">
+            <a
+              href={BRAND.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Follow ${BRAND.name} on Instagram`}
+              className={cn(
+                "inline-flex h-11 w-9 items-center justify-center transition-colors duration-300 md:w-11",
+                transparent
+                  ? "text-ivory/85 hover:text-ivory"
+                  : "text-charcoal-soft hover:text-charcoal"
+              )}
+            >
+              <InstagramIcon className="h-[1.125rem] w-[1.125rem]" />
+            </a>
 
-          <button
-            type="button"
-            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            onClick={() => setOpen(!open)}
-          >
+            <button
+              type="button"
+              className="flex h-11 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              onClick={() => setOpen(!open)}
+            >
             <span
               className={cn(
                 "block h-px w-5 transition-all duration-300",
@@ -134,6 +135,7 @@ export function Header() {
               )}
             />
           </button>
+          </div>
         </div>
       </nav>
 
