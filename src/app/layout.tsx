@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { BRAND, SITE_URL } from "@/data/site";
+import { HOME_SEO } from "@/data/page-seo";
+import { SITE_URL } from "@/data/site";
 import { getLocalBusinessJsonLd } from "@/data/seo";
-import { createPageMetadata } from "@/lib/metadata";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -23,26 +23,13 @@ const jost = Jost({
   display: "swap",
 });
 
-const defaultMetadata = createPageMetadata({
-  title: "Luxury Balloon Delivery | Balloons by H | Beverly Hills",
-  description:
-    "Luxury balloon delivery in Beverly Hills and across the Westside — handcrafted bouquets delivered to Bel Air, Brentwood, West Hollywood, and Santa Monica.",
-  path: "/",
-  keywords: [
-    "balloon delivery Beverly Hills",
-    "luxury balloons Los Angeles",
-    "balloon bouquets Beverly Hills",
-    "balloons near me Beverly Hills",
-  ],
-});
-
 export const metadata: Metadata = {
-  ...defaultMetadata,
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Luxury Balloon Delivery | Balloons by H | Beverly Hills",
-    template: `%s | ${BRAND.name}`,
+    default: HOME_SEO.title,
+    template: "%s | Balloons by H",
   },
+  description: HOME_SEO.description,
   icons: {
     icon: "/favicon.svg",
   },

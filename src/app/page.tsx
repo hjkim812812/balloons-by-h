@@ -33,6 +33,7 @@ import {
 } from "@/data/site";
 
 import { createPageMetadata } from "@/lib/metadata";
+import { HOME_SEO } from "@/data/page-seo";
 import { getFaqJsonLd } from "@/data/seo";
 import { COLLECTION } from "@/data/site";
 
@@ -57,17 +58,11 @@ const FEATURED = [
 
 
 export const metadata: Metadata = createPageMetadata({
-
-  title: "Luxury Balloon Delivery | Balloons by H | Beverly Hills",
-
-  description:
-    "Luxury balloon delivery in Beverly Hills and the Westside. Handcrafted bouquets delivered to Bel Air, Brentwood, West Hollywood, and Santa Monica.",
+  title: HOME_SEO.title,
+  description: HOME_SEO.description,
   path: "/",
-  keywords: [
-    "balloon delivery Beverly Hills",
-    "luxury balloons Los Angeles",
-    "balloons near me Beverly Hills",
-  ],
+  keywords: [...HOME_SEO.keywords],
+  absoluteTitle: true,
 });
 
 

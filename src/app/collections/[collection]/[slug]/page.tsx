@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookButton } from "@/components/BookButton";
+import { JsonLd } from "@/components/JsonLd";
 import { ProductGallery } from "@/components/ProductGallery";
+import { getBouquetSeo, getProductJsonLd } from "@/data/page-seo";
 import {
   BOUQUETS,
   COLLECTION,
@@ -25,13 +27,15 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const bouquet = getBouquetBySlug(slug);
-  if (!bouquet) return { title: "Bouquet Not Found" };
+  if (!bouquet) return { title: "Bouquet Not Found | Balloons by H" };
+  const seo = getBouquetSeo(bouquet);
   return createPageMetadata({
-    title: `${bouquet.name} | Beverly Hills Delivery`,
-    description: `${bouquet.name} — ${bouquet.mood}. Luxury balloon bouquet by Balloons by H with delivery in Beverly Hills and Westside Los Angeles.`,
+    title: seo.title,
+    description: seo.description,
     path: `/collections/${COLLECTION.slug}/${slug}`,
     image: bouquet.image,
-    keywords: [`${bouquet.name} balloon bouquet`, "balloon delivery Beverly Hills"],
+    keywords: seo.keywords,
+    absoluteTitle: true,
   });
 }
 
@@ -53,6 +57,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
   return (
     <div className="bg-ivory pt-16 md:pt-[4.5rem]">
+      <JsonLd data={getProductJsonLd(bouquet)} />
       <section className="py-16 md:py-28">
         <div className="mx-auto max-w-5xl px-6 md:px-10">
           <nav className="mb-14 font-body text-[0.65rem] uppercase tracking-luxury text-charcoal-muted">

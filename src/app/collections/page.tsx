@@ -3,15 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeader } from "@/components/SectionHeader";
+import { COLLECTIONS_SEO } from "@/data/page-seo";
 import { COLLECTION, BOUQUET_PHOTOS } from "@/data/site";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Luxury Balloon Collections",
-  description:
-    "Explore luxury balloon bouquets by Balloons by H — the Signature Collection, handcrafted and delivered across Beverly Hills and Westside Los Angeles.",
+  title: COLLECTIONS_SEO.title,
+  description: COLLECTIONS_SEO.description,
   path: "/collections",
-  keywords: ["luxury balloon bouquets Beverly Hills", "balloon collection Los Angeles"],
+  keywords: [...COLLECTIONS_SEO.keywords],
+  absoluteTitle: true,
 });
 
 export default function CollectionsPage() {

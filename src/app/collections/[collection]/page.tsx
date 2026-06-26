@@ -4,6 +4,7 @@ import { BouquetCard } from "@/components/BouquetCard";
 import { BookButton } from "@/components/BookButton";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeader } from "@/components/SectionHeader";
+import { COLLECTION_DETAIL_SEO } from "@/data/page-seo";
 import { BOUQUETS, BOUQUET_PRICE, COLLECTION, formatPrice } from "@/data/site";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -17,10 +18,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Collection Not Found" };
   }
   return createPageMetadata({
-    title: `${COLLECTION.name} | Beverly Hills`,
-    description: `${COLLECTION.description} Luxury balloon delivery in Beverly Hills, Bel Air, Brentwood, and Westside Los Angeles. Starting at ${formatPrice(BOUQUET_PRICE)}.`,
+    title: COLLECTION_DETAIL_SEO.title,
+    description: COLLECTION_DETAIL_SEO.description,
     path: `/collections/${COLLECTION.slug}`,
-    keywords: ["Signature balloon bouquet Beverly Hills", "luxury balloon delivery Los Angeles"],
+    keywords: [...COLLECTION_DETAIL_SEO.keywords],
+    absoluteTitle: true,
   });
 }
 

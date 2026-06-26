@@ -3,19 +3,16 @@ import Link from "next/link";
 import { DeliveryMap } from "@/components/DeliveryMap";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeader } from "@/components/SectionHeader";
+import { DELIVERY_SEO } from "@/data/page-seo";
 import { COLLECTION } from "@/data/site";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Balloon Delivery Beverly Hills",
-  description:
-    "Luxury balloon delivery in Beverly Hills, Bel Air, Brentwood, West Hollywood, and Santa Monica. Hand-delivered balloon bouquets across Westside Los Angeles.",
+  title: DELIVERY_SEO.title,
+  description: DELIVERY_SEO.description,
   path: "/delivery",
-  keywords: [
-    "balloon delivery Beverly Hills",
-    "balloons near me Beverly Hills",
-    "Westside Los Angeles balloon delivery",
-  ],
+  keywords: [...DELIVERY_SEO.keywords],
+  absoluteTitle: true,
 });
 
 export default function DeliveryPage() {

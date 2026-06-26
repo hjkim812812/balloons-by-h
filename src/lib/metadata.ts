@@ -9,6 +9,7 @@ type PageMetadataOptions = {
   path: string;
   image?: string;
   keywords?: string[];
+  absoluteTitle?: boolean;
   noIndex?: boolean;
 };
 
@@ -18,19 +19,22 @@ export function createPageMetadata({
   path,
   image = DEFAULT_OG_IMAGE,
   keywords,
+  absoluteTitle = false,
   noIndex = false,
 }: PageMetadataOptions): Metadata {
   const url = canonicalUrl(path);
   const ogImage = image.startsWith("http") ? image : canonicalUrl(image);
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     ...(keywords?.length ? { keywords } : {}),
     alternates: {
       canonical: url,
     },
-    ...(noIndex && { robots: { index: false, follow: false } }),
+    robots: noIndex
+      ? { index: false, follow: false }
+      : { index: true, follow: true },
     openGraph: {
       title,
       description,
@@ -43,7 +47,7 @@ export function createPageMetadata({
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: `${BRAND.name} — luxury balloon bouquets`,
+          alt: `${title} — ${BRAND.name}`,
         },
       ],
     },

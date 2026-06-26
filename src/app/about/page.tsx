@@ -3,15 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { ABOUT_SEO } from "@/data/page-seo";
 import { BOUQUET_PHOTOS, COLLECTION } from "@/data/site";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "About",
-  description:
-    "Balloons by H is a Beverly Hills atelier for luxury balloon delivery — refined designs, premium craftsmanship, and white-glove service across Los Angeles.",
+  title: ABOUT_SEO.title,
+  description: ABOUT_SEO.description,
   path: "/about",
-  keywords: ["luxury balloons Beverly Hills", "balloon boutique Los Angeles"],
+  keywords: [...ABOUT_SEO.keywords],
+  absoluteTitle: true,
 });
 
 export default function AboutPage() {
