@@ -3,7 +3,7 @@ import { BRAND, BUSINESS_HOURS, DELIVERY_AREAS } from "@/data/site";
 
 const NAV_LINKS = [
   { href: "/collections", label: "Collections" },
-  { href: "/delivery", label: "Beverly Hills Delivery" },
+  { href: "/delivery", label: "Delivery" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Inquire" },
   { href: "/#faq", label: "FAQ" },
