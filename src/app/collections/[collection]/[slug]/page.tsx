@@ -27,10 +27,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const bouquet = getBouquetBySlug(slug);
   if (!bouquet) return { title: "Bouquet Not Found" };
   return createPageMetadata({
-    title: bouquet.name,
-    description: `${bouquet.name} — ${bouquet.mood}. Luxury signature balloon bouquet by Balloons by H, delivered in Beverly Hills and Los Angeles.`,
+    title: `${bouquet.name} | Beverly Hills Delivery`,
+    description: `${bouquet.name} — ${bouquet.mood}. Luxury balloon bouquet by Balloons by H with delivery in Beverly Hills and Westside Los Angeles.`,
     path: `/collections/${COLLECTION.slug}/${slug}`,
     image: bouquet.image,
+    keywords: [`${bouquet.name} balloon bouquet`, "balloon delivery Beverly Hills"],
   });
 }
 

@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { BOUQUET_PHOTOS } from "@/data/site";
+import { BOUQUET_PHOTOS, COLLECTION } from "@/data/site";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
   title: "About",
   description:
-    "Inspired by quiet luxury. Balloons by H creates refined balloon designs with timeless elegance, premium craftsmanship, and meticulous attention to detail.",
+    "Balloons by H is a Beverly Hills atelier for luxury balloon delivery — refined designs, premium craftsmanship, and white-glove service across Los Angeles.",
   path: "/about",
+  keywords: ["luxury balloons Beverly Hills", "balloon boutique Los Angeles"],
 });
 
 export default function AboutPage() {
@@ -33,7 +35,7 @@ export default function AboutPage() {
               <div className="relative aspect-[4/5] overflow-hidden">
                 <Image
                   src={BOUQUET_PHOTOS["sunset-rose"]}
-                  alt="Balloons by H signature balloon bouquet"
+                  alt="Luxury balloon bouquet by Balloons by H — Beverly Hills balloon delivery"
                   fill
                   loading="lazy"
                   quality={85}
@@ -52,6 +54,30 @@ export default function AboutPage() {
                 <p className="max-w-md font-display text-[clamp(1.125rem,2.4vw,1.5rem)] italic leading-[1.7] text-charcoal-soft md:text-2xl md:leading-relaxed">
                   Every piece is thoughtfully designed to feel elevated,
                   intentional, and memorable.
+                </p>
+                <p className="font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
+                  Based in Beverly Hills, we serve the Westside with{" "}
+                  <Link
+                    href="/delivery"
+                    className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
+                  >
+                    local balloon delivery
+                  </Link>
+                  . Explore the{" "}
+                  <Link
+                    href={`/collections/${COLLECTION.slug}`}
+                    className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
+                  >
+                    Signature Collection
+                  </Link>{" "}
+                  or{" "}
+                  <Link
+                    href="/contact"
+                    className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
+                  >
+                    inquire
+                  </Link>{" "}
+                  for your celebration.
                 </p>
               </div>
             </ScrollReveal>

@@ -8,7 +8,9 @@ import { BookButton } from "@/components/BookButton";
 
 import { BouquetCard } from "@/components/BouquetCard";
 
+import { FaqSection } from "@/components/FaqSection";
 import { InstagramGallery } from "@/components/InstagramGallery";
+import { JsonLd } from "@/components/JsonLd";
 
 import { ScrollReveal } from "@/components/ScrollReveal";
 
@@ -31,6 +33,8 @@ import {
 } from "@/data/site";
 
 import { createPageMetadata } from "@/lib/metadata";
+import { getFaqJsonLd } from "@/data/seo";
+import { COLLECTION } from "@/data/site";
 
 
 
@@ -57,11 +61,13 @@ export const metadata: Metadata = createPageMetadata({
   title: "Luxury Balloon Delivery | Balloons by H | Beverly Hills",
 
   description:
-
-    "Luxury handcrafted balloon bouquets delivered throughout Beverly Hills, Bel Air, Brentwood, Santa Monica and Los Angeles.",
-
+    "Luxury balloon delivery in Beverly Hills and the Westside. Handcrafted bouquets delivered to Bel Air, Brentwood, West Hollywood, and Santa Monica.",
   path: "/",
-
+  keywords: [
+    "balloon delivery Beverly Hills",
+    "luxury balloons Los Angeles",
+    "balloons near me Beverly Hills",
+  ],
 });
 
 
@@ -71,6 +77,8 @@ export default function HomePage() {
   return (
 
     <>
+
+      <JsonLd data={getFaqJsonLd()} />
 
       {/* Editorial Hero */}
 
@@ -321,6 +329,24 @@ export default function HomePage() {
 
           <ScrollReveal delay={80}>
 
+            <p className="mx-auto mt-8 max-w-xl font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
+              Luxury balloon delivery from our Beverly Hills atelier. Explore the{" "}
+              <Link
+                href={`/collections/${COLLECTION.slug}`}
+                className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
+              >
+                Signature Collection
+              </Link>{" "}
+              or view{" "}
+              <Link
+                href="/#faq"
+                className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
+              >
+                delivery FAQs
+              </Link>
+              .
+            </p>
+
             <div className="mt-10 flex flex-wrap justify-center gap-3">
 
               {DELIVERY_AREAS.map((area) => (
@@ -354,6 +380,8 @@ export default function HomePage() {
       </section>
 
 
+
+      <FaqSection />
 
       <TrustSection />
 

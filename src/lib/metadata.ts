@@ -8,6 +8,7 @@ type PageMetadataOptions = {
   description: string;
   path: string;
   image?: string;
+  keywords?: string[];
   noIndex?: boolean;
 };
 
@@ -16,6 +17,7 @@ export function createPageMetadata({
   description,
   path,
   image = DEFAULT_OG_IMAGE,
+  keywords,
   noIndex = false,
 }: PageMetadataOptions): Metadata {
   const url = canonicalUrl(path);
@@ -24,6 +26,7 @@ export function createPageMetadata({
   return {
     title,
     description,
+    ...(keywords?.length ? { keywords } : {}),
     alternates: {
       canonical: url,
     },

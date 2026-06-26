@@ -17,9 +17,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Collection Not Found" };
   }
   return createPageMetadata({
-    title: COLLECTION.name,
-    description: `${COLLECTION.description} Luxury balloon bouquets from $${BOUQUET_PRICE}, hand-delivered across Beverly Hills and Los Angeles.`,
+    title: `${COLLECTION.name} | Beverly Hills`,
+    description: `${COLLECTION.description} Luxury balloon delivery in Beverly Hills, Bel Air, Brentwood, and Westside Los Angeles. Starting at ${formatPrice(BOUQUET_PRICE)}.`,
     path: `/collections/${COLLECTION.slug}`,
+    keywords: ["Signature balloon bouquet Beverly Hills", "luxury balloon delivery Los Angeles"],
   });
 }
 

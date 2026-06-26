@@ -13,15 +13,11 @@ import { createPageMetadata } from "@/lib/metadata";
 
 
 export const metadata: Metadata = createPageMetadata({
-
   title: "Contact",
-
   description:
-
-    "Inquire with Balloons by H for luxury balloon delivery in Beverly Hills and Los Angeles. Every bouquet is made to order — we respond within 24 hours.",
-
+    "Inquire for luxury balloon delivery in Beverly Hills and Westside Los Angeles. Balloons by H responds within 24 hours for made-to-order bouquets.",
   path: "/contact",
-
+  keywords: ["balloon delivery inquiry Beverly Hills", "order balloons Los Angeles"],
 });
 
 
