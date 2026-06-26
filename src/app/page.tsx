@@ -319,21 +319,7 @@ export default function HomePage() {
           <ScrollReveal delay={80}>
 
             <p className="mx-auto mt-8 max-w-xl font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
-              Luxury balloon delivery from our Beverly Hills atelier. Explore the{" "}
-              <Link
-                href={`/collections/${COLLECTION.slug}`}
-                className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
-              >
-                {COLLECTION.name}
-              </Link>{" "}
-              or view{" "}
-              <Link
-                href="/#faq"
-                className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
-              >
-                delivery FAQs
-              </Link>
-              .
+              Luxury balloon delivery from our Beverly Hills atelier.
             </p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
