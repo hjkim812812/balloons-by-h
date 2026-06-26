@@ -10,13 +10,7 @@ export function FaqSection() {
     >
       <div className="mx-auto max-w-3xl px-5 sm:px-6 md:px-8">
         <ScrollReveal>
-          <SectionHeader
-            eyebrow="FAQ"
-            title="Questions"
-            description="Balloon delivery in Beverly Hills and across the Westside."
-            align="center"
-            className="mx-auto"
-          />
+          <SectionHeader title="FAQ" align="center" className="mx-auto" />
         </ScrollReveal>
 
         <div className="mt-12 divide-y divide-champagne/15 md:mt-16">
