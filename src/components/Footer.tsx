@@ -21,9 +21,6 @@ export function Footer() {
           <p className="mt-2 font-display text-sm italic opacity-60">
             {BRAND.tagline}
           </p>
-          <p className="mt-4 text-sm leading-relaxed opacity-70">
-            Luxury balloon delivery in Beverly Hills &amp; Westside Los Angeles.
-          </p>
         </div>
 
         <div>

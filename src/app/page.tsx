@@ -135,12 +135,6 @@ export default function HomePage() {
 
           </p>
 
-          <p className="animate-fade-up mt-3 max-w-lg font-body text-[0.72rem] uppercase tracking-[0.16em] text-ivory/70 opacity-0 [animation-delay:0.3s] md:text-[0.75rem] md:tracking-[0.18em]">
-
-            Luxury Balloon Delivery in Beverly Hills &amp; Los Angeles.
-
-          </p>
-
           <div className="animate-fade-up mt-10 opacity-0 [animation-delay:0.36s]">
 
             <Link href="/collections" className="btn-luxury-primary">
