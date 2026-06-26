@@ -1,12 +1,9 @@
 import {
-  BOUQUET_PRICE,
   BRAND,
-  BUSINESS_HOURS,
   COLLECTION,
   DELIVERY_AREAS,
   SITE_URL,
   canonicalUrl,
-  formatPrice,
 } from "@/data/site";
 
 export const LOCAL_SEO = {
@@ -36,38 +33,46 @@ export type FaqItem = {
 
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    id: "beverly-hills-delivery",
-    question: "Do you offer balloon delivery in Beverly Hills?",
+    id: "why-balloons-by-h",
+    question: "Why Balloons by H?",
     answerText:
-      "Yes. Balloons by H provides luxury balloon delivery throughout Beverly Hills and across the Westside of Los Angeles, including Bel Air, Brentwood, West Hollywood, and Santa Monica.",
+      "Every arrangement is thoughtfully designed with premium materials, refined color palettes, and meticulous attention to detail, inspired by the elegance of quiet luxury.",
   },
   {
-    id: "delivery-areas",
-    question: "Which neighborhoods do you deliver to near Beverly Hills?",
-    answerText: `We deliver to ${DELIVERY_AREAS.join(", ")}. If your address is outside our regular delivery area, please inquire and we will do our best to accommodate your request.`,
-  },
-  {
-    id: "pricing",
-    question: "How much do your luxury balloon bouquets cost?",
-    answerText: `Our Luxury Garden bouquets are ${formatPrice(BOUQUET_PRICE)}. Each color story is hand-finished and delivered with care.`,
+    id: "delivery",
+    question: "Do you deliver?",
+    answerText:
+      "Yes. We deliver throughout Beverly Hills, Bel Air, Brentwood, West Hollywood, Santa Monica, and surrounding Los Angeles areas.",
   },
   {
     id: "ordering",
-    question: "How far in advance should I place an order?",
+    question: "How far in advance should I place my order?",
     answerText:
-      "We recommend inquiring at least a few days ahead so we can confirm your delivery date and window. Every bouquet is made to order, and we respond within 24 hours.",
+      "We recommend ordering at least 3–7 days in advance. If your preferred date is available, we'll always do our best to accommodate last-minute requests.",
+  },
+  {
+    id: "customization",
+    question: "Can I customize the colors and message?",
+    answerText:
+      "Absolutely. Every design can be customized to match your celebration, color palette, and personal style.",
   },
   {
     id: "same-day",
-    question: "Do you offer same-day balloon delivery in Los Angeles?",
+    question: "Do you offer same-day delivery?",
     answerText:
-      "Availability depends on your date and delivery window. Share your preferred delivery time when you inquire, and we will confirm what is possible for your celebration.",
+      "Depending on availability, same-day delivery may be possible. Please contact us for more information.",
   },
   {
-    id: "difference",
-    question: "What makes Balloons by H different from other balloon shops?",
+    id: "longevity",
+    question: "How long do the balloons last?",
     answerText:
-      "Balloons by H is a Beverly Hills atelier focused on quiet luxury — refined color stories, premium craftsmanship, and white-glove local delivery rather than mass-produced party decor.",
+      "Our premium balloon arrangements are designed to stay beautiful for days. Longevity may vary depending on temperature and handling.",
+  },
+  {
+    id: "delivery-only",
+    question: "Do you offer delivery only?",
+    answerText:
+      "Yes. We currently specialize in local delivery to ensure every arrangement arrives beautifully presented.",
   },
 ];
 

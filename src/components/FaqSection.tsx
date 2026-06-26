@@ -1,68 +1,6 @@
-import Link from "next/link";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeader } from "@/components/SectionHeader";
-import { FAQ_ITEMS, type FaqItem } from "@/data/seo";
-import { COLLECTION } from "@/data/site";
-
-function FaqAnswer({ item }: { item: FaqItem }) {
-  switch (item.id) {
-    case "beverly-hills-delivery":
-      return (
-        <p className="font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
-          Yes. Balloons by H provides luxury balloon delivery throughout{" "}
-          <Link href="/delivery" className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline">
-            Beverly Hills and the Westside
-          </Link>
-          , including Bel Air, Brentwood, West Hollywood, and Santa Monica.
-        </p>
-      );
-    case "delivery-areas":
-      return (
-        <p className="font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
-          We deliver across the Westside of Los Angeles. View our full{" "}
-          <Link href="/delivery" className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline">
-            delivery map
-          </Link>
-          , or{" "}
-          <Link href="/contact" className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline">
-            inquire
-          </Link>{" "}
-          if your address is outside our regular area.
-        </p>
-      );
-    case "pricing":
-      return (
-        <p className="font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
-          Our{" "}
-          <Link
-            href={`/collections/${COLLECTION.slug}`}
-            className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
-          >
-            {COLLECTION.name}
-          </Link>{" "}
-          bouquets are thoughtfully priced for a luxury, made-to-order experience.
-          Hand-finished and delivered with care.
-        </p>
-      );
-    case "ordering":
-      return (
-        <p className="font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
-          We recommend inquiring a few days ahead so we can confirm your delivery
-          date and window. Every bouquet is made to order —{" "}
-          <Link href="/contact" className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline">
-            send an inquiry
-          </Link>{" "}
-          and we will respond within 24 hours.
-        </p>
-      );
-    default:
-      return (
-        <p className="font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
-          {item.answerText}
-        </p>
-      );
-  }
-}
+import { FAQ_ITEMS } from "@/data/seo";
 
 export function FaqSection() {
   return (
@@ -95,7 +33,9 @@ export function FaqSection() {
                   </span>
                 </summary>
                 <div className="mt-4 pr-8">
-                  <FaqAnswer item={item} />
+                  <p className="font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
+                    {item.answerText}
+                  </p>
                 </div>
               </details>
             </ScrollReveal>
