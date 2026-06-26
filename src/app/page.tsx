@@ -9,7 +9,6 @@ import { BookButton } from "@/components/BookButton";
 import { BouquetCard } from "@/components/BouquetCard";
 
 import { FaqSection } from "@/components/FaqSection";
-import { InstagramGallery } from "@/components/InstagramGallery";
 import { JsonLd } from "@/components/JsonLd";
 
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -344,10 +343,6 @@ export default function HomePage() {
         </div>
 
       </section>
-
-
-
-      <InstagramGallery />
 
     </>
 

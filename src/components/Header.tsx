@@ -13,6 +13,23 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      className={className}
+      aria-hidden
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -57,50 +74,67 @@ export function Header() {
           {BRAND.name}
         </Link>
 
-        <ul className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map(({ href, label }) => (
-            <li key={href}>
-              <Link
-                href={href}
-                className={cn(
-                  "inline-flex min-h-[44px] items-center font-body text-[0.68rem] uppercase tracking-luxury transition-colors duration-300",
-                  transparent
-                    ? pathname === href || pathname.startsWith(href + "/")
-                      ? "text-champagne-muted"
-                      : "text-ivory/80 hover:text-ivory"
-                    : pathname === href || pathname.startsWith(href + "/")
-                      ? "text-champagne-dark"
-                      : "text-charcoal-soft hover:text-charcoal"
-                )}
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="flex items-center gap-3 md:gap-8">
+          <ul className="hidden items-center gap-8 md:flex">
+            {NAV_LINKS.map(({ href, label }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={cn(
+                    "inline-flex min-h-[44px] items-center font-body text-[0.68rem] uppercase tracking-luxury transition-colors duration-300",
+                    transparent
+                      ? pathname === href || pathname.startsWith(href + "/")
+                        ? "text-champagne-muted"
+                        : "text-ivory/80 hover:text-ivory"
+                      : pathname === href || pathname.startsWith(href + "/")
+                        ? "text-champagne-dark"
+                        : "text-charcoal-soft hover:text-charcoal"
+                  )}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        <button
-          type="button"
-          className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-        >
-          <span
+          <a
+            href={BRAND.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Follow ${BRAND.name} on Instagram`}
             className={cn(
-              "block h-px w-5 transition-all duration-300",
-              transparent ? "bg-ivory" : "bg-charcoal",
-              open && "translate-y-[3.5px] rotate-45"
+              "inline-flex h-11 w-11 items-center justify-center transition-colors duration-300",
+              transparent
+                ? "text-ivory/85 hover:text-ivory"
+                : "text-charcoal-soft hover:text-charcoal"
             )}
-          />
-          <span
-            className={cn(
-              "block h-px w-5 transition-all duration-300",
-              transparent ? "bg-ivory" : "bg-charcoal",
-              open && "-translate-y-[3.5px] -rotate-45"
-            )}
-          />
-        </button>
+          >
+            <InstagramIcon className="h-[1.125rem] w-[1.125rem]" />
+          </a>
+
+          <button
+            type="button"
+            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen(!open)}
+          >
+            <span
+              className={cn(
+                "block h-px w-5 transition-all duration-300",
+                transparent ? "bg-ivory" : "bg-charcoal",
+                open && "translate-y-[3.5px] rotate-45"
+              )}
+            />
+            <span
+              className={cn(
+                "block h-px w-5 transition-all duration-300",
+                transparent ? "bg-ivory" : "bg-charcoal",
+                open && "-translate-y-[3.5px] -rotate-45"
+              )}
+            />
+          </button>
+        </div>
       </nav>
 
       <div
