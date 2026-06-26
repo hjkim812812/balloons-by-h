@@ -49,7 +49,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: "pricing",
     question: "How much do your luxury balloon bouquets cost?",
-    answerText: `Our Signature Collection bouquets are ${formatPrice(BOUQUET_PRICE)}. Each color story shares one refined sculptural design, hand-finished and delivered with care.`,
+    answerText: `Our Luxury Garden bouquets are ${formatPrice(BOUQUET_PRICE)}. Each color story is hand-finished and delivered with care.`,
   },
   {
     id: "ordering",

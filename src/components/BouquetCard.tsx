@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Bouquet } from "@/data/site";
+import { COLLECTION, type Bouquet } from "@/data/site";
 
 type BouquetCardProps = {
   bouquet: Bouquet;
@@ -26,13 +26,13 @@ export function BouquetCard({ bouquet, index = 0 }: BouquetCardProps) {
       style={{ animationDelay: `${index * 0.06}s`, animationFillMode: "forwards" }}
     >
       <Link
-        href={`/collections/signature-balloon-bouquet-collection/${bouquet.slug}`}
+        href={`/collections/${COLLECTION.slug}/${bouquet.slug}`}
         className="block min-h-[44px]"
       >
         <div className="relative aspect-[3/4] overflow-hidden bg-ivory-deep">
           <Image
             src={bouquet.image}
-            alt={`${bouquet.name} — Signature Balloon Bouquet by Balloons by H`}
+            alt={`${bouquet.name} — Luxury Garden Balloon Bouquet by Balloons by H`}
             fill
             loading="lazy"
             quality={85}

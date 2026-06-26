@@ -234,7 +234,7 @@ export default function HomePage() {
           <ScrollReveal className="mt-14 text-center md:mt-16">
 
             <Link
-              href="/collections/signature-balloon-bouquet-collection"
+              href={`/collections/${COLLECTION.slug}`}
               className="btn-luxury-primary"
             >
               View the Collection
@@ -260,7 +260,7 @@ export default function HomePage() {
 
           src={BOUQUET_PHOTOS["black-tie"]}
 
-          alt="Black Tie Signature Balloon Bouquet"
+          alt="Black Tie Luxury Garden Balloon Bouquet"
 
           fill
 
@@ -330,7 +330,7 @@ export default function HomePage() {
                 href={`/collections/${COLLECTION.slug}`}
                 className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
               >
-                Signature Collection
+                {COLLECTION.name}
               </Link>{" "}
               or view{" "}
               <Link
@@ -412,9 +412,9 @@ export default function HomePage() {
 
               <BookButton
 
-                bouquetName="Signature Balloon Bouquet"
+                bouquetName={COLLECTION.name}
 
-                slug="signature-balloon-bouquet-collection"
+                slug={COLLECTION.slug}
 
                 variant="primary"
 

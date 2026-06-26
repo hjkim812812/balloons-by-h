@@ -40,7 +40,6 @@ export default async function CollectionDetailPage({ params }: Props) {
           <ScrollReveal>
             <SectionHeader
               title={COLLECTION.name}
-              description={COLLECTION.description}
             />
             <p className="mt-6 font-body text-sm tracking-wide text-charcoal">
               Starting at {formatPrice(BOUQUET_PRICE)}

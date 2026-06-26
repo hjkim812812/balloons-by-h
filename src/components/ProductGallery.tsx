@@ -61,7 +61,7 @@ export function ProductGallery({ images, name }: ProductGalleryProps) {
           <Image
             key={src}
             src={src}
-            alt={`${name} — Signature Balloon Bouquet by Balloons by H, view ${i + 1}`}
+            alt={`${name} — Luxury Garden Balloon Bouquet by Balloons by H, view ${i + 1}`}
             fill
             priority={i === 0}
             loading={i === 0 ? undefined : "lazy"}

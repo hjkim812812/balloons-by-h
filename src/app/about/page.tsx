@@ -69,7 +69,7 @@ export default function AboutPage() {
                     href={`/collections/${COLLECTION.slug}`}
                     className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
                   >
-                    Signature Collection
+                    {COLLECTION.name}
                   </Link>{" "}
                   or{" "}
                   <Link

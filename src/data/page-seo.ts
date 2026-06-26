@@ -41,13 +41,13 @@ export const CONTACT_SEO = {
 export const COLLECTIONS_SEO = {
   title: "Luxury Balloon Collections | Balloons by H",
   description:
-    "Explore luxury balloon bouquets by Balloons by H. The Signature Collection features curated color stories, handcrafted in Los Angeles and delivered across Beverly Hills and the Westside.",
+    "Explore luxury balloon bouquets by Balloons by H. The Luxury Garden collection features curated color stories, handcrafted in Los Angeles and delivered across Beverly Hills and the Westside.",
   keywords: ["luxury balloon bouquets Beverly Hills", "balloon collection Los Angeles"],
 } as const;
 
 export const COLLECTION_DETAIL_SEO = {
-  title: "Signature Balloon Bouquet Collection | Balloons by H",
-  description: `${COLLECTION.description} Luxury balloon delivery in Beverly Hills, Bel Air, Brentwood, and Westside Los Angeles. Starting at ${formatPrice(BOUQUET_PRICE)}.`,
+  title: "Luxury Garden Balloon Collection | Balloons by H",
+  description: `Luxury balloon bouquets handcrafted in Beverly Hills. Delivered across Bel Air, Brentwood, and Westside Los Angeles. Starting at ${formatPrice(BOUQUET_PRICE)}.`,
   keywords: [
     "signature balloon bouquet Beverly Hills",
     "luxury balloon collection Los Angeles",
@@ -79,7 +79,7 @@ export function getProductJsonLd(bouquet: Bouquet) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: `${bouquet.name} — Signature Balloon Bouquet`,
+    name: `${bouquet.name} — Luxury Garden Balloon Bouquet`,
     description: bouquet.mood,
     image: canonicalUrl(bouquet.image),
     brand: {

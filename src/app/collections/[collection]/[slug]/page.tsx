@@ -69,7 +69,7 @@ export default async function ProductDetailPage({ params }: Props) {
               href={`/collections/${COLLECTION.slug}`}
               className="transition-colors hover:text-charcoal"
             >
-              Signature
+              {COLLECTION.name}
             </Link>
             <span className="mx-3 opacity-40">/</span>
             <span className="text-charcoal">{bouquet.name}</span>

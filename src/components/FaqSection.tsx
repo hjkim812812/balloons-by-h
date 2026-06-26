@@ -38,11 +38,10 @@ function FaqAnswer({ item }: { item: FaqItem }) {
             href={`/collections/${COLLECTION.slug}`}
             className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
           >
-            Signature Collection
+            {COLLECTION.name}
           </Link>{" "}
           bouquets are thoughtfully priced for a luxury, made-to-order experience.
-          Each color story shares one refined sculptural design, hand-finished and
-          delivered with care.
+          Hand-finished and delivered with care.
         </p>
       );
     case "ordering":

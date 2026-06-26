@@ -106,11 +106,11 @@ export const COLLECTION = {
 
   slug: "signature-balloon-bouquet-collection",
 
-  name: "Signature Collection",
+  name: "Luxury Garden",
 
-  description: "One sculptural design. Nine curated color stories.",
+  description: "Luxury balloon bouquets handcrafted in Beverly Hills.",
 
-  shortDescription: "One sculptural design. Nine curated color stories.",
+  shortDescription: "Luxury balloon bouquets handcrafted in Beverly Hills.",
 
 } as const;
 
