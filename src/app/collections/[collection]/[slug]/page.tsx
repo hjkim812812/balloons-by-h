@@ -4,13 +4,11 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { BookButton } from "@/components/BookButton";
 import {
-  BOUQUET_PRICE,
   BOUQUETS,
   COLLECTION,
-  canonicalUrl,
-  formatPrice,
   getBouquetBySlug,
 } from "@/data/site";
+import { createPageMetadata } from "@/lib/metadata";
 
 type Props = {
   params: Promise<{ collection: string; slug: string }>;
@@ -27,13 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const bouquet = getBouquetBySlug(slug);
   if (!bouquet) return { title: "Bouquet Not Found" };
-  return {
+  return createPageMetadata({
     title: bouquet.name,
-    description: `${bouquet.name} — ${bouquet.mood}. Part of the ${COLLECTION.name}.`,
-    alternates: {
-      canonical: canonicalUrl(`/collections/${COLLECTION.slug}/${slug}`),
-    },
-  };
+    description: `${bouquet.name} — ${bouquet.mood}. Luxury signature balloon bouquet by Balloons by H, delivered in Beverly Hills and Los Angeles.`,
+    path: `/collections/${COLLECTION.slug}/${slug}`,
+    image: bouquet.image,
+  });
 }
 
 export default async function ProductDetailPage({ params }: Props) {
@@ -79,6 +76,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 alt={`${bouquet.name} — Signature Balloon Bouquet by Balloons by H`}
                 fill
                 priority
+                quality={90}
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
@@ -92,9 +90,6 @@ export default async function ProductDetailPage({ params }: Props) {
               </h1>
               <p className="mt-8 max-w-md font-body text-base leading-relaxed text-charcoal-soft md:text-lg">
                 {bouquet.mood}
-              </p>
-              <p className="mt-12 font-body text-lg tracking-wide text-charcoal">
-                {formatPrice(BOUQUET_PRICE)}
               </p>
 
               <div className="mt-14 max-w-sm">

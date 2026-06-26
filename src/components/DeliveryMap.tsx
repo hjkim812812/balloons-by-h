@@ -9,8 +9,9 @@ export function DeliveryMap() {
         alt={`Delivery across Westside Los Angeles: ${DELIVERY_AREAS.join(", ")}`}
         width={800}
         height={1200}
+        loading="lazy"
+        quality={85}
         className="h-auto w-full"
-        priority
         sizes="(max-width: 768px) 100vw, 448px"
       />
     </figure>

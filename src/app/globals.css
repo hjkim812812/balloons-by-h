@@ -1,33 +1,53 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    @apply bg-ivory text-charcoal;
-  }
-
-  ::selection {
-    @apply bg-champagne/30 text-charcoal;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ivory text-charcoal;
+  }
+
+  ::selection {
+    @apply bg-champagne/30 text-charcoal;
+  }
+}
+
+@layer components {
+  .btn-luxury {
+    @apply inline-flex min-h-[44px] items-center justify-center font-body text-[0.68rem] uppercase tracking-luxury transition-all duration-500 ease-luxury;
+  }
+
+  .btn-luxury-primary {
+    @apply btn-luxury border border-champagne bg-champagne px-8 py-3.5 text-ivory hover:-translate-y-px hover:bg-champagne-dark hover:border-champagne-dark;
+  }
+
+  .btn-luxury-outline {
+    @apply btn-luxury border border-ivory/50 bg-transparent px-8 py-3.5 text-ivory hover:bg-ivory/10;
+  }
+
+  .btn-luxury-outline-dark {
+    @apply btn-luxury border border-charcoal/25 bg-transparent px-8 py-3.5 text-charcoal hover:border-champagne hover:bg-champagne hover:text-ivory;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -32,6 +32,66 @@ export const BRAND = {
 
 
 
+export const BUSINESS_HOURS = {
+
+  days: "Monday–Saturday",
+
+  hours: "10AM–6PM",
+
+} as const;
+
+
+
+export const TESTIMONIALS = [
+
+  "Absolutely stunning. Even more beautiful in person.",
+
+  "The most elegant balloon bouquet I've ever ordered.",
+
+  "Beautiful craftsmanship and flawless delivery.",
+
+] as const;
+
+
+
+export const TRUST_ITEMS = [
+
+  { label: "Handmade in Los Angeles", icon: "handmade" },
+
+  { label: "Luxury Local Delivery", icon: "delivery" },
+
+  { label: "Premium Balloon Art", icon: "art" },
+
+  { label: "Secure Checkout", icon: "secure" },
+
+  { label: "Fast Response", icon: "response" },
+
+  { label: "Custom Designs", icon: "custom" },
+
+] as const;
+
+
+
+/** Placeholder grid until Instagram photos are connected */
+
+export const INSTAGRAM_PLACEHOLDERS = [
+
+  { src: "/images/bouquets/sunset-rose.png", alt: "Instagram placeholder — Sunset Rose bouquet" },
+
+  { src: "/images/bouquets/french-blush.png", alt: "Instagram placeholder — French Blush bouquet" },
+
+  { src: "/images/bouquets/golden-buttercream.png", alt: "Instagram placeholder — Golden Buttercream bouquet" },
+
+  { src: "/images/bouquets/welcome-baby.png", alt: "Instagram placeholder — Welcome Baby bouquet" },
+
+  { src: "/images/bouquets/rose-champagne.png", alt: "Instagram placeholder — Rosé Champagne bouquet" },
+
+  { src: "/images/bouquets/black-tie.png", alt: "Instagram placeholder — Black Tie bouquet" },
+
+] as const;
+
+
+
 /** Set your number to enable direct SMS inquiry links */
 
 export const SMS_PHONE = "";

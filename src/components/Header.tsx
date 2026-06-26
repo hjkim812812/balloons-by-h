@@ -63,7 +63,7 @@ export function Header() {
               <Link
                 href={href}
                 className={cn(
-                  "font-body text-[0.68rem] uppercase tracking-luxury transition-colors duration-300",
+                  "inline-flex min-h-[44px] items-center font-body text-[0.68rem] uppercase tracking-luxury transition-colors duration-300",
                   transparent
                     ? pathname === href || pathname.startsWith(href + "/")
                       ? "text-champagne-muted"
@@ -81,7 +81,7 @@ export function Header() {
 
         <button
           type="button"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+          className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
@@ -110,13 +110,13 @@ export function Header() {
           open ? "max-h-80 opacity-100" : "max-h-0 overflow-hidden opacity-0"
         )}
       >
-        <ul className="flex flex-col items-center gap-6 px-5 py-8">
+        <ul className="flex flex-col items-center gap-2 px-5 py-8">
           {NAV_LINKS.map(({ href, label }) => (
             <li key={href}>
               <Link
                 href={href}
                 className={cn(
-                  "font-body text-xs uppercase tracking-luxury",
+                  "inline-flex min-h-[44px] items-center font-body text-xs uppercase tracking-luxury",
                   transparent ? "text-ivory" : "text-charcoal"
                 )}
                 onClick={() => setOpen(false)}
