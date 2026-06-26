@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BRAND, BUSINESS_HOURS, DELIVERY_AREAS } from "@/data/site";
+import { BRAND, BUSINESS_HOURS } from "@/data/site";
 
 const NAV_LINKS = [
   { href: "/collections", label: "Collections" },
@@ -66,9 +66,6 @@ export function Footer() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-xs leading-relaxed opacity-50">
-            {DELIVERY_AREAS.join(" · ")}
-          </p>
         </div>
       </div>
 
