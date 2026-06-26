@@ -140,17 +140,11 @@ export default function HomePage() {
 
           </p>
 
-          <div className="animate-fade-up mt-10 flex flex-col gap-3 opacity-0 [animation-delay:0.36s] sm:flex-row sm:gap-4">
+          <div className="animate-fade-up mt-10 opacity-0 [animation-delay:0.36s]">
 
             <Link href="/collections" className="btn-luxury-primary">
 
               View Collection
-
-            </Link>
-
-            <Link href="/contact" className="btn-luxury-outline">
-
-              Inquire
 
             </Link>
 
@@ -184,7 +178,7 @@ export default function HomePage() {
 
               <div className="md:col-span-8">
 
-                <p className="font-display text-balance text-[clamp(1.5rem,4vw,2.25rem)] leading-snug text-charcoal md:text-4xl md:leading-snug">
+                <p className="font-display text-balance text-[clamp(1.375rem,3.5vw,2rem)] leading-snug text-charcoal md:text-3xl md:leading-snug">
 
                   Balloons, reimagined as objets d&apos;art — for moments
 
