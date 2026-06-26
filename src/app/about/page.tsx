@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { SectionHeader } from "@/components/SectionHeader";
-import { BRAND, BOUQUET_PHOTOS } from "@/data/site";
+import { BRAND, BOUQUET_PHOTOS, canonicalUrl } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "About",
   description: `${BRAND.name} — a Beverly Hills atelier for timeless celebrations.`,
+  alternates: {
+    canonical: canonicalUrl("/about"),
+  },
 };
 
 export default function AboutPage() {

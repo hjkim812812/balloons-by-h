@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { BouquetCard } from "@/components/BouquetCard";
 import { BookButton } from "@/components/BookButton";
 import { SectionHeader } from "@/components/SectionHeader";
-import { BOUQUETS, BOUQUET_PRICE, COLLECTION, formatPrice } from "@/data/site";
+import { BOUQUETS, BOUQUET_PRICE, COLLECTION, canonicalUrl, formatPrice } from "@/data/site";
 
 type Props = {
   params: Promise<{ collection: string }>;
@@ -17,6 +17,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: COLLECTION.name,
     description: COLLECTION.description,
+    alternates: {
+      canonical: canonicalUrl(`/collections/${COLLECTION.slug}`),
+    },
   };
 }
 

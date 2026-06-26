@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { DeliveryMap } from "@/components/DeliveryMap";
 import { SectionHeader } from "@/components/SectionHeader";
+import { canonicalUrl } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Delivery",
   description: "Delivery across Westside Los Angeles — Beverly Hills, Bel Air, Brentwood, West Hollywood, and Santa Monica.",
+  alternates: {
+    canonical: canonicalUrl("/delivery"),
+  },
 };
 
 export default function DeliveryPage() {

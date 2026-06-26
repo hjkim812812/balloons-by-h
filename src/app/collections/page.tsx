@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { SectionHeader } from "@/components/SectionHeader";
-import { COLLECTION, BOUQUET_PHOTOS } from "@/data/site";
+import { COLLECTION, BOUQUET_PHOTOS, canonicalUrl } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Collections",
   description: "The Signature Collection by Balloons by H.",
+  alternates: {
+    canonical: canonicalUrl("/collections"),
+  },
 };
 
 export default function CollectionsPage() {

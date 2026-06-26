@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { SectionHeader } from "@/components/SectionHeader";
-import { BRAND } from "@/data/site";
+import { BRAND, canonicalUrl } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Contact",
   description: `Inquire with ${BRAND.name}.`,
+  alternates: {
+    canonical: canonicalUrl("/contact"),
+  },
 };
 
 export default function ContactPage() {

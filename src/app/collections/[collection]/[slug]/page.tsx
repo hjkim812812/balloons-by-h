@@ -7,6 +7,7 @@ import {
   BOUQUET_PRICE,
   BOUQUETS,
   COLLECTION,
+  canonicalUrl,
   formatPrice,
   getBouquetBySlug,
 } from "@/data/site";
@@ -29,6 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: bouquet.name,
     description: `${bouquet.name} — ${bouquet.mood}. Part of the ${COLLECTION.name}.`,
+    alternates: {
+      canonical: canonicalUrl(`/collections/${COLLECTION.slug}/${slug}`),
+    },
   };
 }
 

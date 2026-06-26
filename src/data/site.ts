@@ -266,6 +266,12 @@ export function getBouquetBySlug(slug: string): Bouquet | undefined {
 
 
 
+export function canonicalUrl(path = "/"): string {
+  const base = SITE_URL.replace(/\/$/, "");
+  if (!path || path === "/") return base;
+  return `${base}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
 export function formatPrice(amount: number): string {
 
   return new Intl.NumberFormat("en-US", {

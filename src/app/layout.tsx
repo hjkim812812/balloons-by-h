@@ -22,6 +22,9 @@ const jost = Jost({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: `${BRAND.name} | Luxury Balloon Boutique`,
     template: `%s | ${BRAND.name}`,
