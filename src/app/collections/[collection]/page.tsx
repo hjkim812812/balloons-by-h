@@ -5,7 +5,7 @@ import { BookButton } from "@/components/BookButton";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { COLLECTION_DETAIL_SEO } from "@/data/page-seo";
-import { BOUQUETS, BOUQUET_PRICE, COLLECTION, formatPrice } from "@/data/site";
+import { BOUQUETS, COLLECTION } from "@/data/site";
 import { createPageMetadata } from "@/lib/metadata";
 
 type Props = {
@@ -41,9 +41,6 @@ export default async function CollectionDetailPage({ params }: Props) {
             <SectionHeader
               title={COLLECTION.name}
             />
-            <p className="mt-6 font-body text-sm tracking-wide text-charcoal">
-              Starting at {formatPrice(BOUQUET_PRICE)}
-            </p>
           </ScrollReveal>
         </div>
       </section>
