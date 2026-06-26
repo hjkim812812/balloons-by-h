@@ -20,10 +20,7 @@ export default function AboutPage() {
       <section className="border-b border-champagne/15 py-16 sm:py-20 md:py-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
           <ScrollReveal>
-            <SectionHeader
-              title="About"
-              description="Inspired by quiet luxury. Designed for unforgettable celebrations."
-            />
+            <SectionHeader title="About" />
           </ScrollReveal>
         </div>
       </section>
@@ -46,6 +43,10 @@ export default function AboutPage() {
             </ScrollReveal>
             <ScrollReveal delay={100}>
               <div className="space-y-8 lg:py-4">
+                <p className="font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
+                  Inspired by quiet luxury. Designed for unforgettable
+                  celebrations.
+                </p>
                 <p className="font-display text-balance text-[clamp(1.25rem,2.8vw,1.75rem)] leading-[1.65] tracking-[0.01em] text-charcoal md:text-[1.875rem] md:leading-[1.6]">
                   At Balloons by H, we create refined balloon designs with
                   timeless elegance, premium craftsmanship, and meticulous
