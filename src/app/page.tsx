@@ -237,52 +237,6 @@ export default function HomePage() {
 
       <Testimonials />
 
-
-
-      {/* Philosophy — Black Tie */}
-
-      <section className="relative min-h-[420px] overflow-hidden py-24 md:min-h-[480px] md:py-32">
-
-        <Image
-
-          src={BOUQUET_PHOTOS["black-tie"]}
-
-          alt="Black Tie Luxury Garden Balloon Bouquet"
-
-          fill
-
-          loading="lazy"
-
-          quality={85}
-
-          className="object-cover"
-
-          sizes="100vw"
-
-        />
-
-        <div className="absolute inset-0 bg-charcoal/55" />
-
-        <div className="relative mx-auto max-w-3xl px-5 sm:px-6 md:px-8">
-
-          <ScrollReveal>
-
-            <blockquote className="text-center font-display text-balance text-[clamp(1.375rem,4vw,2.25rem)] italic leading-relaxed text-ivory md:text-4xl">
-
-              &ldquo;Luxury is not loud. It is the detail you notice when
-
-              everything else falls away.&rdquo;
-
-            </blockquote>
-
-          </ScrollReveal>
-
-        </div>
-
-      </section>
-
-
-
       {/* Delivery */}
 
       <section className="bg-blush-light py-20 sm:py-24 md:py-28">
