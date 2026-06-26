@@ -24,7 +24,7 @@ export default function ContactPage() {
 
   return (
 
-    <div className="bg-blush-light pt-16 md:pt-[4.5rem]">
+    <div className="bg-ivory pt-16 md:pt-[4.5rem]">
 
       <section className="border-b border-champagne/15 py-16 sm:py-20 md:py-24">
 
