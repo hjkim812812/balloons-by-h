@@ -1,99 +1,63 @@
-import type { Metadata } from "next";
-import Image from "next/image";
-import { SectionHeader } from "@/components/SectionHeader";
-import { ScrollReveal } from "@/components/ScrollReveal";
-import { BOUQUET_PHOTOS } from "@/data/site";
-import { createPageMetadata } from "@/lib/metadata";
-
-export const metadata: Metadata = createPageMetadata({
-  title: "About",
-  description:
-    "Balloons by H is a Beverly Hills atelier crafting luxury balloon bouquets for weddings, birthdays, and private celebrations across Los Angeles.",
-  path: "/about",
-});
-
-export default function AboutPage() {
-  return (
-    <div className="bg-ivory pt-16 md:pt-[4.5rem]">
-      <section className="border-b border-champagne/15 py-16 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
-          <ScrollReveal>
-            <SectionHeader
-              title="About"
-              description="Celebration, considered."
-            />
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-            <ScrollReveal>
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <Image
-                  src={BOUQUET_PHOTOS["sunset-rose"]}
-                  alt="Balloons by H signature balloon bouquet"
-                  fill
-                  loading="lazy"
-                  quality={85}
-                  className="object-cover transition-transform duration-700 ease-luxury hover:scale-[1.02]"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <div className="space-y-6 font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
-                <p className="font-display text-balance text-2xl leading-snug text-charcoal md:text-3xl">
-                  Balloons deserve the same intention as every other detail
-                  of a beautiful event.
-                </p>
-                <p>
-                  Based in Beverly Hills, we work in restraint — the perfect
-                  shade of blush, the quiet drama of scale, the ribbon tied just so.
-                </p>
-                <p>
-                  An atelier for balloon design. Birthdays, weddings, private
-                  gatherings — each piece, considered.
-                </p>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-champagne/15 bg-white py-16 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-3xl px-5 sm:px-6 md:px-8">
-          <ScrollReveal>
-            <h2 className="text-center font-display text-3xl text-charcoal">
-              Our Approach
-            </h2>
-          </ScrollReveal>
-          <div className="mt-12 space-y-10 text-left">
-            {[
-              {
-                title: "Curation",
-                text: "Every color, proportion, and finish — considered.",
-              },
-              {
-                title: "Craft",
-                text: "Hand-finished. Never mass-produced.",
-              },
-              {
-                title: "Service",
-                text: "Personal, from inquiry to doorstep.",
-              },
-            ].map((item, i) => (
-              <ScrollReveal key={item.title} delay={i * 80}>
-                <div className="border-b border-champagne/15 pb-8">
-                  <h3 className="font-display text-xl text-charcoal">{item.title}</h3>
-                  <p className="mt-2 font-body text-sm text-charcoal-soft">{item.text}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-}
+import type { Metadata } from "next";
+import Image from "next/image";
+import { SectionHeader } from "@/components/SectionHeader";
+import { ScrollReveal } from "@/components/ScrollReveal";
+import { BOUQUET_PHOTOS } from "@/data/site";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "About",
+  description:
+    "Inspired by quiet luxury. Balloons by H creates refined balloon designs with timeless elegance, premium craftsmanship, and meticulous attention to detail.",
+  path: "/about",
+});
+
+export default function AboutPage() {
+  return (
+    <div className="bg-ivory pt-16 md:pt-[4.5rem]">
+      <section className="border-b border-champagne/15 py-16 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
+          <ScrollReveal>
+            <SectionHeader
+              title="About"
+              description="Inspired by quiet luxury. Designed for unforgettable celebrations."
+            />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+            <ScrollReveal>
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <Image
+                  src={BOUQUET_PHOTOS["sunset-rose"]}
+                  alt="Balloons by H signature balloon bouquet"
+                  fill
+                  loading="lazy"
+                  quality={85}
+                  className="object-cover transition-transform duration-700 ease-luxury hover:scale-[1.02]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={100}>
+              <div className="space-y-6 font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
+                <p>
+                  At Balloons by H, we create refined balloon designs with
+                  timeless elegance, premium craftsmanship, and meticulous
+                  attention to detail.
+                </p>
+                <p>
+                  Every piece is thoughtfully designed to feel elevated,
+                  intentional, and memorable.
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
