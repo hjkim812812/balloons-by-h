@@ -71,8 +71,7 @@ export function Footer() {
 
       <div className="border-t border-ivory/10 py-6 text-center sm:py-7">
         <p className="text-[0.65rem] tracking-wide opacity-40">
-          &copy; {year} {BRAND.name}. Beverly Hills balloon delivery. All rights
-          reserved.
+          &copy; {year} {BRAND.name}. All rights reserved.
         </p>
       </div>
     </footer>
