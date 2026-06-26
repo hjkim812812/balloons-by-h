@@ -130,6 +130,8 @@ export type Bouquet = {
 
   image: string;
 
+  images?: string[];
+
 };
 
 
@@ -280,6 +282,11 @@ export const BOUQUETS: Bouquet[] = [
 
     image: "/images/bouquets/black-tie.png",
 
+    images: [
+      "/images/bouquets/black-tie.png",
+      "/images/bouquets/black-tie-2.png",
+    ],
+
   },
 
 ];
@@ -321,6 +328,14 @@ export const DELIVERY_AREAS = [
 export function getBouquetBySlug(slug: string): Bouquet | undefined {
 
   return BOUQUETS.find((b) => b.slug === slug);
+
+}
+
+
+
+export function getBouquetImages(bouquet: Bouquet): string[] {
+
+  return bouquet.images ?? [bouquet.image];
 
 }
 

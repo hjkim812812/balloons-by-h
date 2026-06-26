@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { BookButton } from "@/components/BookButton";
+import { ProductGallery } from "@/components/ProductGallery";
 import {
   BOUQUETS,
   COLLECTION,
   getBouquetBySlug,
+  getBouquetImages,
 } from "@/data/site";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -70,18 +71,10 @@ export default async function ProductDetailPage({ params }: Props) {
 
           <div className="grid gap-16 lg:grid-cols-2 lg:gap-24 lg:items-center">
             {/* Product visual */}
-            <div className="relative aspect-[3/4] overflow-hidden bg-ivory-deep">
-              <Image
-                src={bouquet.image}
-                alt={`${bouquet.name} — Signature Balloon Bouquet by Balloons by H`}
-                fill
-                priority
-                quality={90}
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-5 border border-charcoal/10 md:inset-8" />
-            </div>
+            <ProductGallery
+              images={getBouquetImages(bouquet)}
+              name={bouquet.name}
+            />
 
             {/* Product info */}
             <div className="flex flex-col justify-center py-4 lg:py-12">
