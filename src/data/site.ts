@@ -355,6 +355,38 @@ export const BOUQUETS: Bouquet[] = [
 
   },
 
+  {
+
+    slug: "blanc-noir",
+
+    name: "Blanc & Noir",
+
+    accent: "#3C3C3C",
+
+    accentLight: "#E8E8E8",
+
+    mood: "Classic black and white with formal elegance",
+
+    image: "/images/bouquets/blanc-noir.png",
+
+  },
+
+  {
+
+    slug: "the-hotel",
+
+    name: "The Hotel",
+
+    accent: "#2F5D4A",
+
+    accentLight: "#E8C0C8",
+
+    mood: "Forest green and blush with refined charm",
+
+    image: "/images/bouquets/the-hotel.png",
+
+  },
+
 ];
 
 
