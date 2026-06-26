@@ -21,10 +21,7 @@ export default function DeliveryPage() {
       <section className="border-b border-champagne/15 py-16 sm:py-20 md:py-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
           <ScrollReveal>
-            <SectionHeader
-              title="Delivery"
-              description="Luxury balloon delivery across Beverly Hills and the Westside. Delivered with care."
-            />
+            <SectionHeader title="Delivery" />
           </ScrollReveal>
         </div>
       </section>
