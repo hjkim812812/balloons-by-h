@@ -26,7 +26,9 @@ export function SectionHeader({
       )}
       <h2 className="font-display text-3xl text-charcoal md:text-4xl">{title}</h2>
       {description && (
-        <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
+        <p
+          className={`mt-4 max-w-xl font-body text-sm leading-relaxed text-charcoal-soft md:text-base${align === "center" ? " mx-auto" : ""}`}
+        >
           {description}
         </p>
       )}
