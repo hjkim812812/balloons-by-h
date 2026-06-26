@@ -8,8 +8,7 @@ export function Testimonials() {
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <ScrollReveal>
           <SectionHeader
-            title="Kind Words"
-            description="From clients who trust us with their celebrations."
+            title="What Our Clients Say"
             align="center"
             className="mx-auto"
           />
