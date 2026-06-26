@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { ABOUT_SEO } from "@/data/page-seo";
-import { BOUQUET_PHOTOS, COLLECTION } from "@/data/site";
+import { BOUQUET_PHOTOS } from "@/data/site";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
@@ -55,30 +54,6 @@ export default function AboutPage() {
                 <p className="max-w-md font-display text-[clamp(1.125rem,2.4vw,1.5rem)] italic leading-[1.7] text-charcoal-soft md:text-2xl md:leading-relaxed">
                   Every piece is thoughtfully designed to feel elevated,
                   intentional, and memorable.
-                </p>
-                <p className="font-body text-sm leading-relaxed text-charcoal-soft md:text-base">
-                  Based in Beverly Hills, we serve the Westside with{" "}
-                  <Link
-                    href="/delivery"
-                    className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
-                  >
-                    local balloon delivery
-                  </Link>
-                  . Explore the{" "}
-                  <Link
-                    href={`/collections/${COLLECTION.slug}`}
-                    className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
-                  >
-                    {COLLECTION.name}
-                  </Link>{" "}
-                  or{" "}
-                  <Link
-                    href="/contact"
-                    className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
-                  >
-                    inquire
-                  </Link>{" "}
-                  for your celebration.
                 </p>
               </div>
             </ScrollReveal>
