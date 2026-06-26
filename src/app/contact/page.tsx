@@ -43,87 +43,48 @@ export default function ContactPage() {
 
 
       <section className="py-16 sm:py-20 md:py-24">
-
         <div className="mx-auto grid max-w-6xl gap-12 px-5 sm:px-6 md:grid-cols-5 md:px-8 lg:gap-16">
-
-          <ScrollReveal className="md:col-span-2">
-
+          <ScrollReveal className="order-2 md:order-1 md:col-span-2">
             <div className="space-y-8 font-body text-sm text-charcoal-soft">
-
               <div>
-
                 <p className="text-[0.65rem] uppercase tracking-luxury text-champagne">
-
                   Email
-
                 </p>
-
                 <a
-
                   href={`mailto:${BRAND.email}`}
-
                   className="mt-2 inline-flex min-h-[44px] items-center text-charcoal transition-colors hover:text-champagne-dark"
-
                 >
-
                   {BRAND.email}
-
                 </a>
-
               </div>
 
               <div>
-
                 <p className="text-[0.65rem] uppercase tracking-luxury text-champagne">
-
                   Instagram
-
                 </p>
-
                 <a
-
                   href={BRAND.instagram}
-
                   target="_blank"
-
                   rel="noopener noreferrer"
-
                   className="mt-2 inline-flex min-h-[44px] items-center text-charcoal transition-colors hover:text-champagne-dark"
-
                 >
-
                   @{BRAND.instagramHandle}
-
                 </a>
-
               </div>
 
               <div>
-
                 <p className="text-[0.65rem] uppercase tracking-luxury text-champagne">
-
                   Location
-
                 </p>
-
                 <p className="mt-2 text-charcoal">{BRAND.location}</p>
-
               </div>
-
             </div>
-
           </ScrollReveal>
 
-
-
-          <ScrollReveal delay={100} className="md:col-span-3">
-
+          <ScrollReveal delay={100} className="order-1 md:order-2 md:col-span-3">
             <ContactForm />
-
           </ScrollReveal>
-
         </div>
-
       </section>
 
     </div>
