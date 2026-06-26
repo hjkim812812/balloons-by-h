@@ -40,6 +40,7 @@ export default async function CollectionDetailPage({ params }: Props) {
           <ScrollReveal>
             <SectionHeader
               title={COLLECTION.name}
+              description={COLLECTION.subtitle}
             />
           </ScrollReveal>
         </div>

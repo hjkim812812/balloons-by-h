@@ -108,6 +108,8 @@ export const COLLECTION = {
 
   name: "Luxury Garden",
 
+  subtitle: "30 Handcrafted Balloon Flowers · 10 Floating Hearts",
+
   description: "Luxury balloon bouquets handcrafted in Beverly Hills.",
 
   shortDescription: "Luxury balloon bouquets handcrafted in Beverly Hills.",
