@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { BRAND } from "@/data/site";
 
 const DELIVERY_TIME_OPTIONS = [
   { value: "9am-2pm", label: "9am – 2pm" },
@@ -17,7 +16,7 @@ export function ContactForm() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    const required = ["name", "email", "delivery-time"];
+    const required = ["name", "email"];
     const newErrors: Record<string, boolean> = {};
     required.forEach((field) => {
       if (!String(data.get(field) ?? "").trim()) {
@@ -68,7 +67,7 @@ export function ContactForm() {
       <div className="grid gap-5 md:grid-cols-2">
         <div className="flex flex-col gap-2">
           <label htmlFor="name" className="text-[0.65rem] uppercase tracking-luxury text-charcoal-soft">
-            Full Name
+            Full Name <span className="text-champagne">*</span>
           </label>
           <input
             id="name"
@@ -81,7 +80,7 @@ export function ContactForm() {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="email" className="text-[0.65rem] uppercase tracking-luxury text-charcoal-soft">
-            Email
+            Email <span className="text-champagne">*</span>
           </label>
           <input
             id="email"
@@ -129,7 +128,6 @@ export function ContactForm() {
         <select
           id="delivery-time"
           name="delivery-time"
-          required
           defaultValue=""
           className={`border bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 ${errors["delivery-time"] ? "border-red-300" : "border-champagne/20"}`}
         >
@@ -163,10 +161,6 @@ export function ContactForm() {
       >
         Send
       </button>
-
-      <p className="mt-4 text-center font-body text-xs italic text-charcoal-muted">
-        Handled personally by {BRAND.name}.
-      </p>
     </form>
   );
 }
