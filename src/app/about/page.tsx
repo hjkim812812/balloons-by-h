@@ -48,12 +48,12 @@ export default function AboutPage() {
                   celebrations.
                 </p>
                 <div className="space-y-6 font-body">
-                  <p className="text-sm leading-[1.75] text-charcoal md:text-base">
+                  <p className="text-sm italic leading-[1.75] text-charcoal-soft md:text-base">
                     At Balloons by H, we create refined balloon designs with
                     timeless elegance, premium craftsmanship, and meticulous
                     attention to detail.
                   </p>
-                  <p className="max-w-md text-sm italic leading-[1.75] text-charcoal-soft md:text-base">
+                  <p className="text-sm italic leading-[1.75] text-charcoal-soft md:text-base">
                     Every piece is thoughtfully designed to feel elevated,
                     intentional, and memorable.
                   </p>
