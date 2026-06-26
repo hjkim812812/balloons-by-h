@@ -18,9 +18,9 @@ const config: Config = {
           light: "#F5EBE8",
         },
         champagne: {
-          DEFAULT: "#C9A962",
-          dark: "#A8894A",
-          muted: "#D4C4A8",
+          DEFAULT: "#C2A56B",
+          dark: "#A08850",
+          muted: "#DCC9A3",
         },
         charcoal: {
           DEFAULT: "#2C2C2C",

@@ -16,7 +16,7 @@ import { Testimonials } from "@/components/Testimonials";
 
 import { TrustSection } from "@/components/TrustSection";
 
-import { EditorialLink, SectionHeader } from "@/components/SectionHeader";
+import { SectionHeader } from "@/components/SectionHeader";
 
 import {
 
@@ -231,15 +231,10 @@ export default function HomePage() {
           <ScrollReveal className="mt-14 text-center md:mt-16">
 
             <Link
-
               href="/collections/signature-balloon-bouquet-collection"
-
-              className="inline-flex min-h-[44px] items-center font-body text-[0.68rem] uppercase tracking-luxury text-charcoal transition-colors hover:text-champagne-dark"
-
+              className="btn-luxury-primary"
             >
-
               View the Collection
-
             </Link>
 
           </ScrollReveal>
@@ -347,9 +342,9 @@ export default function HomePage() {
             </div>
 
             <div className="mt-10">
-
-              <EditorialLink href="/delivery">Delivery</EditorialLink>
-
+              <Link href="/delivery" className="btn-luxury-primary">
+                Delivery
+              </Link>
             </div>
 
           </ScrollReveal>

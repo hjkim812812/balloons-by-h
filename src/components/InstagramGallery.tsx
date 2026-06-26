@@ -40,7 +40,7 @@ export function InstagramGallery() {
             href={BRAND.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] items-center justify-center border border-charcoal/25 bg-transparent px-10 py-3.5 font-body text-[0.68rem] uppercase tracking-luxury text-charcoal transition-all duration-500 ease-luxury hover:border-champagne hover:bg-champagne hover:text-ivory"
+            className="btn-luxury-primary"
           >
             Follow @{BRAND.instagramHandle}
           </Link>
