@@ -12,10 +12,12 @@ export const ENHANCEMENTS: Enhancement[] = [
     slug: "36-number-balloon",
     name: '36" Number Balloon',
     image: "/images/enhancements/36-number-balloon.png",
+    price: 45,
   },
   {
     slug: "mini-numbers",
     name: "Mini Number Accent",
+    price: 15,
   },
   {
     slug: "heart-bouquets",

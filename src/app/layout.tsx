@@ -1,5 +1,6 @@
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import type { Metadata } from "next";
+import { CartProvider } from "@/context/CartContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
@@ -44,9 +45,11 @@ export default function RootLayout({
     <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
       <body className="font-body antialiased">
         <JsonLd data={getLocalBusinessJsonLd()} />
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

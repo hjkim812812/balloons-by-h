@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BRAND } from "@/data/site";
+import { CartIcon } from "@/components/CartIcon";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -99,6 +100,8 @@ export function Header() {
           </ul>
 
           <div className="flex items-center max-md:-space-x-1">
+            <CartIcon transparent={transparent} />
+
             <a
               href={BRAND.instagram}
               target="_blank"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AddToCartButton } from "@/components/AddToCartButton";
 import { BookButton } from "@/components/BookButton";
 import { JsonLd } from "@/components/JsonLd";
 import { ProductGallery } from "@/components/ProductGallery";
@@ -96,7 +97,18 @@ export default async function ProductDetailPage({ params }: Props) {
                 {formatPrice(BOUQUET_PRICE)}
               </p>
 
-              <div className="mt-10 max-w-sm">
+              <div className="mt-10 max-w-sm space-y-4">
+                <AddToCartButton
+                  item={{
+                    id: `bouquet-${bouquet.slug}`,
+                    name: bouquet.name,
+                    price: BOUQUET_PRICE,
+                    slug: bouquet.slug,
+                    productType: "bouquet",
+                    href: `/collections/${COLLECTION.slug}/${bouquet.slug}`,
+                  }}
+                  fullWidth
+                />
                 <BookButton
                   bouquetName={bouquet.name}
                   slug={bouquet.slug}
