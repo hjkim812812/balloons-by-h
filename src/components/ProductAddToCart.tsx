@@ -18,6 +18,9 @@ type ProductAddToCartProps = {
 const quantityControlClass =
   "inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-champagne/20 bg-ivory font-body text-sm text-charcoal transition-all hover:bg-white focus:border-champagne focus:outline-none focus:ring-2 focus:ring-champagne/15 disabled:cursor-not-allowed disabled:opacity-50";
 
+const balloonNumberSelectClass =
+  "w-full min-h-[44px] appearance-none border border-champagne/20 bg-ivory bg-[length:1rem] bg-[right_1rem_center] bg-no-repeat px-4 py-2 pr-10 font-body text-base text-charcoal outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm [background-image:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%232C2C2C%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')]";
+
 export function ProductAddToCart({
   item,
   fullWidth,
@@ -184,7 +187,7 @@ export function ProductAddToCart({
             value={balloonNumber}
             onChange={(e) => setBalloonNumber(e.target.value)}
             disabled={disabled}
-            className="border border-champagne/20 bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 disabled:cursor-not-allowed disabled:opacity-50"
+            className={balloonNumberSelectClass}
           >
             {Array.from({ length: 10 }, (_, digit) => (
               <option key={digit} value={digit}>
