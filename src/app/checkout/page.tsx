@@ -10,6 +10,10 @@ import { setLastOrder } from "@/lib/order-session";
 import { DeliveryAddressInput } from "@/components/DeliveryAddressInput";
 import { DeliveryDateInput } from "@/components/DeliveryDateInput";
 import { getTomorrowLocalDateString, isValidDeliveryDate } from "@/lib/delivery-date";
+import {
+  CHECKOUT_SELECT_CLASS,
+  getCheckoutFieldClass,
+} from "@/lib/checkout-form-styles";
 import type { OrderSummary } from "@/types/cart";
 
 const DELIVERY_TIME_OPTIONS = [
@@ -239,7 +243,7 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} noValidate>
+            <form onSubmit={handleSubmit} noValidate className="checkout-form">
               <div className="grid gap-5 md:grid-cols-2">
                 <div className="flex flex-col gap-2">
                   <label
@@ -253,7 +257,7 @@ export default function CheckoutPage() {
                     name="name"
                     required
                     autoComplete="name"
-                    className={`border bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 ${errors.name ? "border-red-300" : "border-champagne/20"}`}
+                    className={getCheckoutFieldClass(Boolean(errors.name))}
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -269,7 +273,7 @@ export default function CheckoutPage() {
                     type="email"
                     required
                     autoComplete="email"
-                    className={`border bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 ${errors.email ? "border-red-300" : "border-champagne/20"}`}
+                    className={getCheckoutFieldClass(Boolean(errors.email))}
                   />
                 </div>
               </div>
@@ -287,7 +291,7 @@ export default function CheckoutPage() {
                   type="tel"
                   required
                   autoComplete="tel"
-                  className={`border bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 ${errors.phone ? "border-red-300" : "border-champagne/20"}`}
+                  className={getCheckoutFieldClass(Boolean(errors.phone))}
                 />
               </div>
 
@@ -302,7 +306,7 @@ export default function CheckoutPage() {
                   id="delivery-address"
                   name="delivery-address"
                   required
-                  className={`border bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 ${errors["delivery-address"] ? "border-red-300" : "border-champagne/20"}`}
+                  className={getCheckoutFieldClass(Boolean(errors["delivery-address"]))}
                 />
               </div>
 
@@ -321,7 +325,7 @@ export default function CheckoutPage() {
                     min={minDeliveryDate}
                     onChange={validateDeliveryDate}
                     onBlur={validateDeliveryDate}
-                    className={`border bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 ${errors["delivery-date"] ? "border-red-300" : "border-champagne/20"}`}
+                    className={getCheckoutFieldClass(Boolean(errors["delivery-date"]))}
                   />
                   {deliveryDateError && (
                     <p className="font-body text-xs text-red-600">{deliveryDateError}</p>
@@ -339,7 +343,7 @@ export default function CheckoutPage() {
                     name="delivery-time"
                     required
                     defaultValue=""
-                    className={`border bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 ${errors["delivery-time"] ? "border-red-300" : "border-champagne/20"}`}
+                    className={`${getCheckoutFieldClass(Boolean(errors["delivery-time"]))} ${CHECKOUT_SELECT_CLASS}`}
                   >
                     <option value="" disabled>
                       Select a window

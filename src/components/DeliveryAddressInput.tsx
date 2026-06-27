@@ -9,9 +9,9 @@ type DeliveryAddressInputProps = {
   className: string;
 };
 
-const IVORY = "#FAF8F5";
+const CHARCOAL_SOFT = "#5A5A5A";
 const CHAMPAGNE_BORDER = "rgba(194, 165, 107, 0.2)";
-const ERROR_BORDER = "#fca5a5";
+const CHECKOUT_FIELD_HEIGHT = "3rem";
 const MOBILE_MEDIA_QUERY = "(max-width: 768px)";
 const LOCATION_BIAS = {
   center: { lat: 34.0736, lng: -118.4004 },
@@ -22,24 +22,34 @@ const AUTOCOMPLETE_STYLES = `
   .delivery-address-autocomplete-host {
     position: relative;
     isolation: isolate;
+    width: 100%;
   }
 
-  gmp-place-autocomplete {
+  .checkout-form .delivery-address-autocomplete-host gmp-place-autocomplete {
     width: 100%;
+    height: ${CHECKOUT_FIELD_HEIGHT};
+    min-height: ${CHECKOUT_FIELD_HEIGHT};
     color-scheme: light;
   }
 
-  @media (min-width: 769px) {
-    gmp-place-autocomplete {
-      font-size: 0.875rem;
-    }
+  .checkout-form .delivery-address-autocomplete-host gmp-place-autocomplete::part(input) {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    min-height: ${CHECKOUT_FIELD_HEIGHT};
+    padding: 0 1rem;
+    font-family: var(--font-jost), system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: ${CHARCOAL_SOFT};
+  }
+
+  .checkout-form .delivery-address-autocomplete-host gmp-place-autocomplete::part(input)::placeholder {
+    color: ${CHARCOAL_SOFT};
+    opacity: 1;
   }
 
   @media (max-width: 768px) {
-    .delivery-address-mobile-input {
-      font-size: 16px;
-    }
-
     .delivery-address-suggestions {
       position: absolute;
       top: 100%;
@@ -81,15 +91,11 @@ const AUTOCOMPLETE_STYLES = `
       font-size: 0.75rem;
       color: #5a5a5a;
     }
-
-    .delivery-address-fallback-input {
-      font-size: 16px;
-    }
   }
 `;
 
 function hasErrorClass(className: string) {
-  return className.includes("border-red-300");
+  return className.includes("checkout-field-error");
 }
 
 function waitForImportLibrary(timeoutMs = 10000): Promise<void> {
@@ -140,14 +146,14 @@ function applyAutocompleteStyles(
 ) {
   element.style.width = "100%";
   element.style.display = "block";
-  element.style.backgroundColor = IVORY;
-  element.style.border = hasError
-    ? `1px solid ${ERROR_BORDER}`
-    : `1px solid ${CHAMPAGNE_BORDER}`;
+  element.style.height = CHECKOUT_FIELD_HEIGHT;
+  element.style.minHeight = CHECKOUT_FIELD_HEIGHT;
   element.style.borderRadius = "0";
   element.style.colorScheme = "light";
   element.style.fontFamily = "var(--font-jost), system-ui, sans-serif";
-  element.style.fontSize = "0.875rem";
+  element.style.fontSize = "1rem";
+  element.style.backgroundColor = "transparent";
+  element.style.border = "none";
 }
 
 function FallbackAddressInput({
@@ -163,7 +169,7 @@ function FallbackAddressInput({
       required={required}
       autoComplete="street-address"
       placeholder="Start typing your delivery address"
-      className={`delivery-address-fallback-input ${className}`}
+      className={className}
     />
   );
 }
@@ -317,7 +323,7 @@ function MobilePlacesAutocomplete({
             setOpen(true);
           }
         }}
-        className={`delivery-address-mobile-input ${className}`}
+        className={className}
       />
       {open && suggestions.length > 0 && (
         <ul className="delivery-address-suggestions" role="listbox">
@@ -438,7 +444,9 @@ function DesktopPlaceAutocomplete({
 
   return (
     <div className="delivery-address-autocomplete-host">
-      <div ref={containerRef} className={useFallback ? "hidden" : "block"} />
+      <div className={`${className} ${useFallback ? "hidden" : "block !px-0"}`}>
+        <div ref={containerRef} className="w-full" />
+      </div>
       {useFallback && (
         <FallbackAddressInput
           id={id}

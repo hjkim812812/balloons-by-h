@@ -125,10 +125,9 @@ function MobileDeliveryDateInput({
         aria-expanded={open}
         aria-controls={calendarId}
         onClick={() => setOpen((current) => !current)}
-        className={`${className} text-left`}
-        style={{ fontSize: "16px" }}
+        className={className}
       >
-        {value ? formatDisplayDate(value) : ""}
+        {value ? formatDisplayDate(value) : "Select delivery date"}
       </button>
       {open && (
         <div
