@@ -18,7 +18,7 @@ export type OrderEmailData = {
 };
 
 const ORDER_NOTIFICATION_EMAIL =
-  process.env.ORDER_NOTIFICATION_EMAIL ?? "agsefee@yahoo.com";
+  process.env.ORDER_NOTIFICATION_EMAIL ?? "hjkim812@yahoo.com";
 
 const RESEND_TEST_SENDER = `${BRAND.name} <onboarding@resend.dev>`;
 
