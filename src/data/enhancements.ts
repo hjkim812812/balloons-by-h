@@ -2,6 +2,8 @@ export type Enhancement = {
   slug: string;
   name: string;
   image?: string;
+  description?: string;
+  price?: number;
 };
 
 export const ENHANCEMENTS: Enhancement[] = [
@@ -17,7 +19,10 @@ export const ENHANCEMENTS: Enhancement[] = [
   {
     slug: "heart-bouquets",
     name: "Heart Bouquets",
-    image: "/images/enhancements/heart-bouquets-v2.png",
+    image: "/images/enhancements/heart-bouquets.png",
+    description:
+      "Enhance your bouquet with a matching 10-heart bouquet for a fuller, more elegant presentation. Created in the same color palette as your main bouquet.",
+    price: 95,
   },
   {
     slug: "personalized-bubble-accent",

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { ENHANCEMENTS } from "@/data/enhancements";
 import { BOUQUETS, canonicalUrl, COLLECTION } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -54,5 +55,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...productPages];
+  const enhancementPages: MetadataRoute.Sitemap = ENHANCEMENTS.map((item) => ({
+    url: canonicalUrl(`/enhancements/${item.slug}`),
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
+  return [...staticPages, ...productPages, ...enhancementPages];
 }
