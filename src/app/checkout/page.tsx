@@ -11,8 +11,8 @@ import { DeliveryAddressInput } from "@/components/DeliveryAddressInput";
 import type { OrderSummary } from "@/types/cart";
 
 const DELIVERY_TIME_OPTIONS = [
-  "10:00 AM – 2:00 PM",
-  "2:00 PM – 6:00 PM",
+  "Morning Delivery (10:00 AM – 2:00 PM)",
+  "Afternoon Delivery (2:00 PM – 6:00 PM)",
 ] as const;
 
 function getTomorrowLocalDateString(): string {
@@ -330,6 +330,10 @@ export default function CheckoutPage() {
                       </option>
                     ))}
                   </select>
+                  <p className="font-body text-xs leading-relaxed text-charcoal-soft">
+                    Need delivery by a specific time? Please contact us before placing
+                    your order. An additional fee may apply.
+                  </p>
                 </div>
               </div>
 

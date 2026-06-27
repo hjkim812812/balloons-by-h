@@ -50,7 +50,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
     }
 
-    const validTimes = ["10:00 AM – 2:00 PM", "2:00 PM – 6:00 PM"];
+    const validTimes = [
+      "Morning Delivery (10:00 AM – 2:00 PM)",
+      "Afternoon Delivery (2:00 PM – 6:00 PM)",
+    ];
     if (!validTimes.includes(body.deliveryTime)) {
       return NextResponse.json({ error: "Invalid delivery time" }, { status: 400 });
     }
