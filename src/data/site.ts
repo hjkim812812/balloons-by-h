@@ -380,11 +380,6 @@ export const BOUQUETS: Bouquet[] = [
 
     image: "/images/bouquets/black-tie.png",
 
-    images: [
-      "/images/bouquets/black-tie.png",
-      "/images/bouquets/black-tie-2.png",
-    ],
-
   },
 
 ];
