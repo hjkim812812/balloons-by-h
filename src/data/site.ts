@@ -383,7 +383,7 @@ export const BOUQUETS: Bouquet[] = [
 
     mood: "Forest green and blush with refined charm",
 
-    image: "/images/bouquets/the-hotel.png",
+    image: "/images/bouquets/the-hotel-2.png",
 
   },
 
