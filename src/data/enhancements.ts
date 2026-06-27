@@ -15,7 +15,7 @@ export const ENHANCEMENTS: Enhancement[] = [
   },
   {
     slug: "mini-numbers",
-    name: "Mini Numbers",
+    name: "Mini Number Accent",
   },
   {
     slug: "heart-bouquets",
