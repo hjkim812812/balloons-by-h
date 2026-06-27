@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { CartProvider } from "@/context/CartContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { GoogleAnalyticsScripts } from "@/components/GoogleAnalyticsScripts";
 import { JsonLd } from "@/components/JsonLd";
 import { HOME_SEO } from "@/data/page-seo";
 import { SITE_URL } from "@/data/site";
@@ -50,6 +51,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </CartProvider>
+        <GoogleAnalyticsScripts />
       </body>
     </html>
   );

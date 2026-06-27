@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { trackPurchase } from "@/lib/analytics";
 import { getLastOrder } from "@/lib/order-session";
 import { BRAND } from "@/data/site";
 import { formatPrice } from "@/data/site";
@@ -12,6 +13,7 @@ export default function OrderConfirmationPage() {
   const params = useParams();
   const orderNumberParam = Number(params.orderNumber);
   const [order, setOrder] = useState<OrderSummary | null>(null);
+  const trackedPurchaseRef = useRef<number | null>(null);
 
   useEffect(() => {
     const lastOrder = getLastOrder();
@@ -19,6 +21,15 @@ export default function OrderConfirmationPage() {
       setOrder(lastOrder);
     }
   }, [orderNumberParam]);
+
+  useEffect(() => {
+    if (!order || trackedPurchaseRef.current === order.orderNumber) {
+      return;
+    }
+
+    trackedPurchaseRef.current = order.orderNumber;
+    trackPurchase(order);
+  }, [order]);
 
   if (!order) {
     return (
