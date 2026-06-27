@@ -46,11 +46,11 @@ export default function OrderConfirmationPage() {
         <div className="mx-auto max-w-3xl px-6 md:px-10">
           <div className="border border-champagne/20 bg-white p-10 md:p-14">
             <h1 className="font-display text-3xl text-charcoal md:text-4xl">
-              Order #{order.orderNumber}
+              Thank you for your order!
             </h1>
 
             <p className="mt-8 font-body text-base text-charcoal-soft">
-              Please complete your payment via Zelle.
+              Please complete your payment via Zelle to confirm your order.
             </p>
 
             {order.items.some(
