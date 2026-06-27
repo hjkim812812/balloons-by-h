@@ -30,6 +30,7 @@ export const ENHANCEMENTS: Enhancement[] = [
     slug: "personalized-bubble-accent",
     name: "Personalized Bubble Accent",
     image: "/images/enhancements/personalized-bubble-accent-v2.png",
+    detailImage: "/images/enhancements/personalized-bubble-accent-detail.png",
   },
 ];
 
