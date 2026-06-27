@@ -70,10 +70,21 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-ivory/10 py-6 text-center sm:py-7">
-        <p className="text-[0.65rem] tracking-wide opacity-40">
-          &copy; {year} {BRAND.name}. All rights reserved.
-        </p>
+      <div className="border-t border-ivory/10 px-5 py-6 sm:px-6 sm:py-7">
+        <div className="mx-auto max-w-3xl space-y-3 text-center">
+          <p className="text-[0.65rem] tracking-wide opacity-40">
+            &copy; {year} {BRAND.name}. All Rights Reserved.
+          </p>
+          <p className="font-body text-[0.65rem] leading-relaxed tracking-wide text-ivory/50">
+            All photographs, product designs, logos, text, graphics, and website content
+            are the exclusive property of {BRAND.name}.
+          </p>
+          <p className="font-body text-[0.65rem] leading-relaxed tracking-wide text-ivory/50">
+            Unauthorized copying, reproduction, distribution, or commercial use of any
+            content without prior written permission is strictly prohibited and may result
+            in legal action.
+          </p>
+        </div>
       </div>
     </footer>
   );
