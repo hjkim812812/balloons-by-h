@@ -31,6 +31,8 @@ export const ENHANCEMENTS: Enhancement[] = [
     name: "Personalized Bubble Accent",
     image: "/images/enhancements/personalized-bubble-accent-v2.png",
     detailImage: "/images/enhancements/personalized-bubble-accent-detail.png",
+    description:
+      "A custom bubble accent personalized with your message and finished with coordinating glitter to beautifully complement your bouquet.",
   },
 ];
 
