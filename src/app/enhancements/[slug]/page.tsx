@@ -6,6 +6,7 @@ import { ProductGallery } from "@/components/ProductGallery";
 import {
   ENHANCEMENTS,
   getEnhancementBySlug,
+  getEnhancementImages,
 } from "@/data/enhancements";
 import { formatPrice } from "@/data/site";
 import { createPageMetadata } from "@/lib/metadata";
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${enhancement.name} | Balloons by H`,
     description,
     path: `/enhancements/${slug}`,
-    image: enhancement.image,
+    image: enhancement.detailImage ?? enhancement.image,
     absoluteTitle: true,
   });
 }
@@ -46,7 +47,7 @@ export default async function EnhancementDetailPage({ params }: Props) {
   const currentIndex = ENHANCEMENTS.findIndex((item) => item.slug === slug);
   const prev = ENHANCEMENTS[currentIndex - 1];
   const next = ENHANCEMENTS[currentIndex + 1];
-  const images = enhancement.image ? [enhancement.image] : [];
+  const images = getEnhancementImages(enhancement);
 
   return (
     <div className="bg-ivory pt-16 md:pt-[4.5rem]">
