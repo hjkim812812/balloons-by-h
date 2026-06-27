@@ -86,7 +86,7 @@ export const INSTAGRAM_PLACEHOLDERS = [
 
   { src: "/images/bouquets/rose-champagne.png", alt: "Instagram placeholder — Rosé Champagne bouquet" },
 
-  { src: "/images/bouquets/black-tie.png", alt: "Instagram placeholder — Black Tie bouquet" },
+  { src: "/images/bouquets/black-tie-v2.png", alt: "Instagram placeholder — Black Tie bouquet" },
 
 ] as const;
 
@@ -378,7 +378,7 @@ export const BOUQUETS: Bouquet[] = [
 
     mood: "Dramatic monochrome for formal occasions",
 
-    image: "/images/bouquets/black-tie.png",
+    image: "/images/bouquets/black-tie-v2.png",
 
   },
 
