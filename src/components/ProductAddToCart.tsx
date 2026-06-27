@@ -62,7 +62,7 @@ export function ProductAddToCart({
             value={quantity}
             onChange={handleQuantityChange}
             disabled={disabled}
-            className="min-h-[44px] w-14 border border-champagne/20 bg-ivory px-2 py-3 text-center font-body text-sm text-charcoal outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 disabled:cursor-not-allowed disabled:opacity-50"
+            className="min-h-[44px] w-14 border border-champagne/20 bg-ivory px-2 py-3 text-center font-body text-sm text-charcoal outline-none transition-all [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 disabled:cursor-not-allowed disabled:opacity-50"
           />
           <button
             type="button"
