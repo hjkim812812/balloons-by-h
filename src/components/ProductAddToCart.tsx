@@ -99,9 +99,9 @@ export function ProductAddToCart({
             id={`personalized-message-${item.id}`}
             value={personalizedMessage}
             onChange={(e) => setPersonalizedMessage(e.target.value)}
-            rows={3}
+            rows={1}
             disabled={disabled}
-            className="resize-y border border-champagne/20 bg-ivory px-4 py-3 font-body text-sm leading-relaxed outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 disabled:cursor-not-allowed disabled:opacity-50"
+            className="resize-y border border-champagne/20 bg-ivory px-4 py-2 font-body text-sm leading-relaxed outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 disabled:cursor-not-allowed disabled:opacity-50"
           />
         </div>
       )}
