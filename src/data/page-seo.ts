@@ -45,6 +45,17 @@ export const COLLECTIONS_SEO = {
   keywords: ["luxury balloon bouquets Beverly Hills", "balloon collection Los Angeles"],
 } as const;
 
+export const ENHANCEMENTS_SEO = {
+  title: "Balloon Enhancements | Balloons by H",
+  description:
+    "Add luxury balloon enhancements to your order — number balloons, mini numbers, heart bouquets, and personalized bubble accents. Beverly Hills balloon delivery.",
+  keywords: [
+    "number balloon Beverly Hills",
+    "personalized balloon Los Angeles",
+    "balloon enhancements",
+  ],
+} as const;
+
 export const COLLECTION_DETAIL_SEO = {
   title: "Luxury Garden Balloon Collection | Balloons by H",
   description: `Luxury balloon bouquets handcrafted in Beverly Hills. Delivered across Bel Air, Brentwood, and Westside Los Angeles. Starting at ${formatPrice(BOUQUET_PRICE)}.`,

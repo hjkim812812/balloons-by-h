@@ -16,6 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: canonicalUrl("/enhancements"),
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
       url: canonicalUrl(`/collections/${COLLECTION.slug}`),
       lastModified: new Date(),
       changeFrequency: "weekly",

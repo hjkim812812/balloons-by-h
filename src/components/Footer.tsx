@@ -3,6 +3,7 @@ import { BRAND, BUSINESS_HOURS } from "@/data/site";
 
 const NAV_LINKS = [
   { href: "/collections", label: "Collections" },
+  { href: "/enhancements", label: "Enhancements" },
   { href: "/delivery", label: "Delivery" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Inquire" },
