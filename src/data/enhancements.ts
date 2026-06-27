@@ -8,6 +8,7 @@ export const ENHANCEMENTS: Enhancement[] = [
   {
     slug: "36-number-balloon",
     name: '36" Number Balloon',
+    image: "/images/enhancements/36-number-balloon.png",
   },
   {
     slug: "mini-numbers",
