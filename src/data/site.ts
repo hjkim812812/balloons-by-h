@@ -144,155 +144,6 @@ export const BOUQUETS: Bouquet[] = [
 
   {
 
-    slug: "rodeo-drive-lavender",
-
-    name: "Rodeo Drive Lavender",
-
-    accent: "#B8A8C8",
-
-    accentLight: "#E8E0F0",
-
-    mood: "Soft lavender with a hint of evening glamour",
-
-    image: "/images/bouquets/rodeo-drive-lavender.png",
-
-  },
-
-  {
-
-    slug: "sunset-rose",
-
-    name: "Sunset Rose",
-
-    accent: "#D4A098",
-
-    accentLight: "#F5E0DA",
-
-    mood: "Blush rose warmed by a California sunset",
-
-    image: "/images/bouquets/sunset-rose.png",
-
-  },
-
-  {
-
-    slug: "beverly-blue",
-
-    name: "Beverly Blue",
-
-    accent: "#98B8C8",
-
-    accentLight: "#D8E8F0",
-
-    mood: "Cool, refined blue with coastal ease",
-
-    image: "/images/bouquets/beverly-blue.png",
-
-  },
-
-  {
-
-    slug: "cotton-candy",
-
-    name: "Cotton Candy",
-
-    accent: "#D8C0C8",
-
-    accentLight: "#F5E8EC",
-
-    mood: "Soft pastel pink and blue with sweet charm",
-
-    image: "/images/bouquets/cotton-candy.png",
-
-  },
-
-  {
-
-    slug: "french-blush",
-
-    name: "French Blush",
-
-    accent: "#D8A8A8",
-
-    accentLight: "#F5E0E0",
-
-    mood: "Parisian blush with quiet romance",
-
-    image: "/images/bouquets/french-blush.png",
-
-  },
-
-  {
-
-    slug: "cloud-blue",
-
-    name: "Cloud Blue",
-
-    accent: "#A8C0D0",
-
-    accentLight: "#E8F0F5",
-
-    mood: "Ethereal blue, light as morning sky",
-
-    image: "/images/bouquets/cloud-blue.png",
-
-  },
-
-  {
-
-    slug: "golden-buttercream",
-
-    name: "Golden Buttercream",
-
-    accent: "#D4C080",
-
-    accentLight: "#F5ECD0",
-
-    mood: "Golden tones with buttery softness",
-
-    image: "/images/bouquets/golden-buttercream.png",
-
-  },
-
-  {
-
-    slug: "rose-champagne",
-
-    name: "Rosé Champagne",
-
-    accent: "#D8A898",
-
-    accentLight: "#F5E0D8",
-
-    mood: "Rosé hues with celebratory sparkle",
-
-    image: "/images/bouquets/rose-champagne.png",
-
-  },
-
-  {
-
-    slug: "black-tie",
-
-    name: "Black Tie",
-
-    accent: "#3C3C3C",
-
-    accentLight: "#E8E8E8",
-
-    mood: "Dramatic monochrome for formal occasions",
-
-    image: "/images/bouquets/black-tie.png",
-
-    images: [
-      "/images/bouquets/black-tie.png",
-      "/images/bouquets/black-tie-2.png",
-    ],
-
-  },
-
-  {
-
     slug: "lavender-bloom",
 
     name: "Lavender Bloom",
@@ -304,6 +155,22 @@ export const BOUQUETS: Bouquet[] = [
     mood: "Soft lavender and gold with garden elegance",
 
     image: "/images/bouquets/lavender-bloom.png",
+
+  },
+
+  {
+
+    slug: "seafoam-blush",
+
+    name: "Seafoam Blush",
+
+    accent: "#A8C4B0",
+
+    accentLight: "#E8D0D0",
+
+    mood: "Sage green and blush with soft romance",
+
+    image: "/images/bouquets/seafoam-blush.png",
 
   },
 
@@ -341,17 +208,17 @@ export const BOUQUETS: Bouquet[] = [
 
   {
 
-    slug: "seafoam-blush",
+    slug: "the-hotel",
 
-    name: "Seafoam Blush",
+    name: "The Hotel",
 
-    accent: "#A8C4B0",
+    accent: "#2F5D4A",
 
-    accentLight: "#E8D0D0",
+    accentLight: "#E8C0C8",
 
-    mood: "Sage green and blush with soft romance",
+    mood: "Forest green and blush with refined charm",
 
-    image: "/images/bouquets/seafoam-blush.png",
+    image: "/images/bouquets/the-hotel-2.png",
 
   },
 
@@ -373,17 +240,150 @@ export const BOUQUETS: Bouquet[] = [
 
   {
 
-    slug: "the-hotel",
+    slug: "sunset-rose",
 
-    name: "The Hotel",
+    name: "Sunset Rose",
 
-    accent: "#2F5D4A",
+    accent: "#D4A098",
 
-    accentLight: "#E8C0C8",
+    accentLight: "#F5E0DA",
 
-    mood: "Forest green and blush with refined charm",
+    mood: "Blush rose warmed by a California sunset",
 
-    image: "/images/bouquets/the-hotel-2.png",
+    image: "/images/bouquets/sunset-rose.png",
+
+  },
+
+  {
+
+    slug: "french-blush",
+
+    name: "French Blush",
+
+    accent: "#D8A8A8",
+
+    accentLight: "#F5E0E0",
+
+    mood: "Parisian blush with quiet romance",
+
+    image: "/images/bouquets/french-blush.png",
+
+  },
+
+  {
+
+    slug: "cotton-candy",
+
+    name: "Cotton Candy",
+
+    accent: "#D8C0C8",
+
+    accentLight: "#F5E8EC",
+
+    mood: "Soft pastel pink and blue with sweet charm",
+
+    image: "/images/bouquets/cotton-candy.png",
+
+  },
+
+  {
+
+    slug: "golden-buttercream",
+
+    name: "Golden Buttercream",
+
+    accent: "#D4C080",
+
+    accentLight: "#F5ECD0",
+
+    mood: "Golden tones with buttery softness",
+
+    image: "/images/bouquets/golden-buttercream.png",
+
+  },
+
+  {
+
+    slug: "rose-champagne",
+
+    name: "Rosé Champagne",
+
+    accent: "#D8A898",
+
+    accentLight: "#F5E0D8",
+
+    mood: "Rosé hues with celebratory sparkle",
+
+    image: "/images/bouquets/rose-champagne.png",
+
+  },
+
+  {
+
+    slug: "rodeo-drive-lavender",
+
+    name: "Rodeo Drive Lavender",
+
+    accent: "#B8A8C8",
+
+    accentLight: "#E8E0F0",
+
+    mood: "Soft lavender with a hint of evening glamour",
+
+    image: "/images/bouquets/rodeo-drive-lavender.png",
+
+  },
+
+  {
+
+    slug: "beverly-blue",
+
+    name: "Beverly Blue",
+
+    accent: "#98B8C8",
+
+    accentLight: "#D8E8F0",
+
+    mood: "Cool, refined blue with coastal ease",
+
+    image: "/images/bouquets/beverly-blue.png",
+
+  },
+
+  {
+
+    slug: "cloud-blue",
+
+    name: "Cloud Blue",
+
+    accent: "#A8C0D0",
+
+    accentLight: "#E8F0F5",
+
+    mood: "Ethereal blue, light as morning sky",
+
+    image: "/images/bouquets/cloud-blue.png",
+
+  },
+
+  {
+
+    slug: "black-tie",
+
+    name: "Black Tie",
+
+    accent: "#3C3C3C",
+
+    accentLight: "#E8E8E8",
+
+    mood: "Dramatic monochrome for formal occasions",
+
+    image: "/images/bouquets/black-tie.png",
+
+    images: [
+      "/images/bouquets/black-tie.png",
+      "/images/bouquets/black-tie-2.png",
+    ],
 
   },
 
