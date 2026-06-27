@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
-import { getNextOrderNumber, createServerSupabase } from "@/lib/supabase";
+import { sendOrderEmail } from "@/lib/send-order-email";
+import {
+  createServerSupabase,
+  getNextOrderNumber,
+  getSupabaseConfig,
+} from "@/lib/supabase";
 import type { OrderItem } from "@/types/cart";
 
 type OrderRequestBody = {
@@ -11,6 +16,7 @@ type OrderRequestBody = {
   deliveryTime: string;
   items: OrderItem[];
   total: number;
+  customMessage?: string;
 };
 
 function isValidEmail(email: string) {
@@ -61,9 +67,28 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Order total mismatch" }, { status: 400 });
     }
 
-    const orderNumber = await getNextOrderNumber();
-    const supabase = createServerSupabase();
+    if (!getSupabaseConfig()) {
+      console.error(
+        "Order API error: Missing Supabase environment variables (NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY)."
+      );
+      return NextResponse.json(
+        { error: "Order system is not configured. Please contact us to complete your order." },
+        { status: 503 }
+      );
+    }
 
+    let orderNumber: number;
+    try {
+      orderNumber = await getNextOrderNumber();
+    } catch (error) {
+      console.error("Order number generation error:", error);
+      return NextResponse.json(
+        { error: "Unable to create order. Please try again." },
+        { status: 500 }
+      );
+    }
+
+    const supabase = createServerSupabase();
     const { error } = await supabase.from("orders").insert({
       order_number: orderNumber,
       name: body.name.trim(),
@@ -77,9 +102,27 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      console.error("Supabase insert error:", error);
+      console.error("Supabase insert error:", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+      });
       return NextResponse.json({ error: "Failed to save order" }, { status: 500 });
     }
+
+    await sendOrderEmail({
+      orderNumber,
+      name: body.name.trim(),
+      email: body.email.trim(),
+      phone: body.phone.trim(),
+      deliveryAddress: body.deliveryAddress.trim(),
+      deliveryDate: body.deliveryDate,
+      deliveryTime: body.deliveryTime,
+      items: body.items,
+      total: body.total,
+      customMessage: body.customMessage?.trim(),
+    });
 
     return NextResponse.json({
       orderNumber,

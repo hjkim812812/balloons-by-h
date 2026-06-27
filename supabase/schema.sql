@@ -13,3 +13,5 @@ create table if not exists orders (
 );
 
 create index if not exists orders_order_number_idx on orders (order_number);
+
+alter table orders disable row level security;
