@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 type AddToCartButtonProps = {
   item: Omit<CartItem, "quantity">;
+  quantity?: number;
   className?: string;
   fullWidth?: boolean;
   disabled?: boolean;
@@ -14,6 +15,7 @@ type AddToCartButtonProps = {
 
 export function AddToCartButton({
   item,
+  quantity = 1,
   className,
   fullWidth,
   disabled,
@@ -23,7 +25,7 @@ export function AddToCartButton({
 
   function handleClick() {
     if (disabled) return;
-    addItem(item);
+    addItem(item, quantity);
     setAdded(true);
     window.setTimeout(() => setAdded(false), 2000);
   }

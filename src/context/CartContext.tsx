@@ -16,7 +16,7 @@ type CartContextValue = {
   items: CartItem[];
   itemCount: number;
   total: number;
-  addItem: (item: Omit<CartItem, "quantity">) => void;
+  addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
   removeItem: (id: string) => void;
   clearCart: () => void;
 };
@@ -49,17 +49,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items, hydrated]);
 
-  const addItem = useCallback((item: Omit<CartItem, "quantity">) => {
+  const addItem = useCallback((item: Omit<CartItem, "quantity">, quantity = 1) => {
+    const qty = Math.max(1, Math.floor(quantity));
     setItems((current) => {
       const existing = current.find((entry) => entry.id === item.id);
       if (existing) {
         return current.map((entry) =>
           entry.id === item.id
-            ? { ...entry, quantity: entry.quantity + 1 }
+            ? { ...entry, quantity: entry.quantity + qty }
             : entry
         );
       }
-      return [...current, { ...item, quantity: 1 }];
+      return [...current, { ...item, quantity: qty }];
     });
   }, []);
 

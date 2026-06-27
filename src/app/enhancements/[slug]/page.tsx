@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AddToCartButton } from "@/components/AddToCartButton";
+import { ProductAddToCart } from "@/components/ProductAddToCart";
 import { BookButton } from "@/components/BookButton";
 import { ProductGallery } from "@/components/ProductGallery";
 import {
@@ -94,7 +94,7 @@ export default async function EnhancementDetailPage({ params }: Props) {
               )}
 
               <div className="mt-10 max-w-sm space-y-4">
-                <AddToCartButton
+                <ProductAddToCart
                   item={{
                     id: `enhancement-${enhancement.slug}`,
                     name: enhancement.name,

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AddToCartButton } from "@/components/AddToCartButton";
+import { ProductAddToCart } from "@/components/ProductAddToCart";
+import { ProductEnhancementsSection } from "@/components/ProductEnhancementsSection";
 import { BookButton } from "@/components/BookButton";
 import { JsonLd } from "@/components/JsonLd";
 import { ProductGallery } from "@/components/ProductGallery";
@@ -98,7 +99,7 @@ export default async function ProductDetailPage({ params }: Props) {
               </p>
 
               <div className="mt-10 max-w-sm space-y-4">
-                <AddToCartButton
+                <ProductAddToCart
                   item={{
                     id: `bouquet-${bouquet.slug}`,
                     name: bouquet.name,
@@ -118,6 +119,8 @@ export default async function ProductDetailPage({ params }: Props) {
               </div>
             </div>
           </div>
+
+          <ProductEnhancementsSection />
 
           {/* Prev / Next */}
           <div className="mt-20 flex items-center justify-between border-t border-champagne/15 pt-10">

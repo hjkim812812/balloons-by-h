@@ -38,11 +38,9 @@ export default function CartPage() {
                       >
                         {item.name}
                       </Link>
-                      {item.quantity > 1 && (
-                        <p className="mt-1 font-body text-xs text-charcoal-soft">
-                          Qty {item.quantity}
-                        </p>
-                      )}
+                      <p className="mt-1 font-body text-xs text-charcoal-soft">
+                        Qty {item.quantity}
+                      </p>
                     </div>
                     <div className="flex shrink-0 flex-col items-end gap-3">
                       <p className="font-body text-sm tracking-wide text-charcoal">
