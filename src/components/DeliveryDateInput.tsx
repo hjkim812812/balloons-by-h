@@ -129,7 +129,7 @@ function MobileDeliveryDateInput({
         onClick={() => setOpen((current) => !current)}
         className={`${className} ${CHECKOUT_DATE_BUTTON_CLASS}`}
       >
-        {value ? formatDisplayDate(value) : "Select delivery date"}
+        {value ? formatDisplayDate(value) : ""}
       </button>
       {open && (
         <div

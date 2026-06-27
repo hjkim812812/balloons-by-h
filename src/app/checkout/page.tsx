@@ -404,9 +404,7 @@ export default function CheckoutPage() {
                     defaultValue=""
                     className={`${getCheckoutFieldClass(Boolean(errors["delivery-time"]))} ${CHECKOUT_SELECT_CLASS}`}
                   >
-                    <option value="" disabled>
-                      Select a window
-                    </option>
+                    <option value="" disabled hidden />
                     {DELIVERY_TIME_OPTIONS.map((option) => (
                       <option key={option} value={option}>
                         {option}
