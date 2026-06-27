@@ -21,24 +21,57 @@ declare global {
   }
 }
 
+const GTAG_POLL_MS = 50;
+const GTAG_MAX_ATTEMPTS = 100;
+
+function runWhenGtagReady(callback: () => void) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  if (typeof window.gtag === "function") {
+    callback();
+    return;
+  }
+
+  let attempts = 0;
+  const timer = window.setInterval(() => {
+    attempts += 1;
+
+    if (typeof window.gtag === "function") {
+      window.clearInterval(timer);
+      callback();
+      return;
+    }
+
+    if (attempts >= GTAG_MAX_ATTEMPTS) {
+      window.clearInterval(timer);
+    }
+  }, GTAG_POLL_MS);
+}
+
 function gtagEvent(
   eventName: string,
   params?: Record<string, unknown>
 ) {
-  if (!isGoogleAnalyticsEnabled() || typeof window.gtag !== "function") {
+  if (!isGoogleAnalyticsEnabled()) {
     return;
   }
 
-  window.gtag("event", eventName, params);
+  runWhenGtagReady(() => {
+    window.gtag?.("event", eventName, params);
+  });
 }
 
 export function trackPageView(url: string) {
-  if (!isGoogleAnalyticsEnabled() || typeof window.gtag !== "function") {
+  if (!isGoogleAnalyticsEnabled()) {
     return;
   }
 
-  window.gtag("config", GA_MEASUREMENT_ID, {
-    page_path: url,
+  runWhenGtagReady(() => {
+    window.gtag?.("config", GA_MEASUREMENT_ID, {
+      page_path: url,
+    });
   });
 }
 
