@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { generateOrderNumber } from "@/lib/generate-order-number";
+import { isValidDeliveryDate } from "@/lib/delivery-date";
 import { DELIVERY_FEE, getOrderTotal } from "@/lib/order-pricing";
 import { sendOrderEmail } from "@/lib/send-order-email";
 import type { OrderItem } from "@/types/cart";
@@ -56,6 +57,10 @@ export async function POST(request: Request) {
     ];
     if (!validTimes.includes(body.deliveryTime)) {
       return NextResponse.json({ error: "Invalid delivery time" }, { status: 400 });
+    }
+
+    if (!isValidDeliveryDate(body.deliveryDate.trim())) {
+      return NextResponse.json({ error: "Invalid delivery date" }, { status: 400 });
     }
 
     const subtotal = body.items.reduce(

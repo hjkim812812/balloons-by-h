@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/data/site";
 import { DELIVERY_FEE, getOrderTotal } from "@/lib/order-pricing";
 import { setLastOrder } from "@/lib/order-session";
 import { DeliveryAddressInput } from "@/components/DeliveryAddressInput";
+import { getTomorrowLocalDateString, isValidDeliveryDate } from "@/lib/delivery-date";
 import type { OrderSummary } from "@/types/cart";
 
 const DELIVERY_TIME_OPTIONS = [
@@ -15,27 +16,38 @@ const DELIVERY_TIME_OPTIONS = [
   "Afternoon Delivery (2:00 PM – 6:00 PM)",
 ] as const;
 
-function getTomorrowLocalDateString(): string {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const year = tomorrow.getFullYear();
-  const month = String(tomorrow.getMonth() + 1).padStart(2, "0");
-  const day = String(tomorrow.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
+const DELIVERY_DATE_ERROR =
+  "Please select a delivery date starting tomorrow or later.";
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, total, clearCart } = useCart();
   const [errors, setErrors] = useState<Record<string, boolean>>({});
+  const [deliveryDateError, setDeliveryDateError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [minDeliveryDate, setMinDeliveryDate] = useState("");
+  const [minDeliveryDate] = useState(getTomorrowLocalDateString);
   const orderTotal = getOrderTotal(total);
 
-  useEffect(() => {
-    setMinDeliveryDate(getTomorrowLocalDateString());
-  }, []);
+  function validateDeliveryDate(date: string) {
+    if (date && !isValidDeliveryDate(date)) {
+      setErrors((prev) => ({ ...prev, "delivery-date": true }));
+      setDeliveryDateError(DELIVERY_DATE_ERROR);
+      return false;
+    }
+
+    setErrors((prev) => {
+      if (!prev["delivery-date"]) {
+        return prev;
+      }
+
+      const next = { ...prev };
+      delete next["delivery-date"];
+      return next;
+    });
+    setDeliveryDateError("");
+    return true;
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -70,8 +82,11 @@ export default function CheckoutPage() {
     }
 
     const deliveryDate = String(data.get("delivery-date") ?? "");
-    if (deliveryDate && deliveryDate < getTomorrowLocalDateString()) {
+    if (deliveryDate && !isValidDeliveryDate(deliveryDate)) {
       newErrors["delivery-date"] = true;
+      setDeliveryDateError(DELIVERY_DATE_ERROR);
+    } else {
+      setDeliveryDateError("");
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -303,9 +318,14 @@ export default function CheckoutPage() {
                     name="delivery-date"
                     type="date"
                     required
-                    min={minDeliveryDate || undefined}
+                    min={minDeliveryDate}
+                    onChange={(event) => validateDeliveryDate(event.target.value)}
+                    onBlur={(event) => validateDeliveryDate(event.target.value)}
                     className={`border bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 ${errors["delivery-date"] ? "border-red-300" : "border-champagne/20"}`}
                   />
+                  {deliveryDateError && (
+                    <p className="font-body text-xs text-red-600">{deliveryDateError}</p>
+                  )}
                 </div>
                 <div className="flex flex-col gap-2">
                   <label
