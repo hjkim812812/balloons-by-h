@@ -7,6 +7,7 @@ import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/data/site";
 import { DELIVERY_FEE, getOrderTotal } from "@/lib/order-pricing";
 import { setLastOrder } from "@/lib/order-session";
+import { DeliveryAddressInput } from "@/components/DeliveryAddressInput";
 import type { OrderSummary } from "@/types/cart";
 
 const DELIVERY_TIME_OPTIONS = [
@@ -281,11 +282,10 @@ export default function CheckoutPage() {
                 >
                   Delivery Address <span className="text-champagne">*</span>
                 </label>
-                <input
+                <DeliveryAddressInput
                   id="delivery-address"
                   name="delivery-address"
                   required
-                  autoComplete="street-address"
                   className={`border bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 ${errors["delivery-address"] ? "border-red-300" : "border-champagne/20"}`}
                 />
               </div>
