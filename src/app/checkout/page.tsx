@@ -48,6 +48,10 @@ export default function CheckoutPage() {
       newErrors.email = true;
     }
 
+    if (!data.get("policy-agreement")) {
+      newErrors["policy-agreement"] = true;
+    }
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -272,6 +276,48 @@ export default function CheckoutPage() {
                     ))}
                   </select>
                 </div>
+              </div>
+
+              <div className="mt-5">
+                <label
+                  htmlFor="policy-agreement"
+                  className={`flex cursor-pointer items-start gap-3 ${errors["policy-agreement"] ? "text-red-600" : ""}`}
+                >
+                  <input
+                    id="policy-agreement"
+                    name="policy-agreement"
+                    type="checkbox"
+                    className="mt-1 h-4 w-4 shrink-0 accent-champagne"
+                  />
+                  <span className="font-body text-sm text-charcoal-soft">
+                    I have read and agree to the{" "}
+                    <Link
+                      href="/terms-of-service"
+                      className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
+                    >
+                      Terms of Service
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="/privacy-policy"
+                      className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
+                    >
+                      Privacy Policy
+                    </Link>
+                    , and{" "}
+                    <Link
+                      href="/return-refund-policy"
+                      className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
+                    >
+                      Return & Refund Policy
+                    </Link>
+                    .
+                  </span>
+                </label>
+                <p className="mt-3 font-body text-xs text-charcoal-soft">
+                  All personalized and custom-made products are final sale and are not
+                  eligible for returns or refunds.
+                </p>
               </div>
 
               {submitError && (
