@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/data/site";
 import { setLastOrder } from "@/lib/order-session";
@@ -13,12 +13,26 @@ const DELIVERY_TIME_OPTIONS = [
   "2:00 PM – 6:00 PM",
 ] as const;
 
+function getTomorrowLocalDateString(): string {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const year = tomorrow.getFullYear();
+  const month = String(tomorrow.getMonth() + 1).padStart(2, "0");
+  const day = String(tomorrow.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, total, clearCart } = useCart();
   const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [minDeliveryDate, setMinDeliveryDate] = useState("");
+
+  useEffect(() => {
+    setMinDeliveryDate(getTomorrowLocalDateString());
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -50,6 +64,11 @@ export default function CheckoutPage() {
 
     if (!data.get("policy-agreement")) {
       newErrors["policy-agreement"] = true;
+    }
+
+    const deliveryDate = String(data.get("delivery-date") ?? "");
+    if (deliveryDate && deliveryDate < getTomorrowLocalDateString()) {
+      newErrors["delivery-date"] = true;
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -249,6 +268,7 @@ export default function CheckoutPage() {
                     name="delivery-date"
                     type="date"
                     required
+                    min={minDeliveryDate || undefined}
                     className={`border bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 ${errors["delivery-date"] ? "border-red-300" : "border-champagne/20"}`}
                   />
                 </div>

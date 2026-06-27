@@ -1,5 +1,4 @@
 import { EnhancementCard } from "@/components/EnhancementCard";
-import { ProductEnhancementAdd } from "@/components/ProductEnhancementAdd";
 import { ENHANCEMENTS } from "@/data/enhancements";
 
 export function ProductEnhancementsSection() {
@@ -10,10 +9,7 @@ export function ProductEnhancementsSection() {
       </h2>
       <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
         {ENHANCEMENTS.map((enhancement, index) => (
-          <div key={enhancement.slug}>
-            <EnhancementCard enhancement={enhancement} index={index} />
-            <ProductEnhancementAdd enhancement={enhancement} />
-          </div>
+          <EnhancementCard key={enhancement.slug} enhancement={enhancement} index={index} />
         ))}
       </div>
     </div>
