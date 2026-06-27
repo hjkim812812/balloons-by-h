@@ -10,8 +10,10 @@ export type Enhancement = {
 export const ENHANCEMENTS: Enhancement[] = [
   {
     slug: "36-number-balloon",
-    name: '36" Number Balloon',
+    name: "Number Balloons",
     image: "/images/enhancements/36-number-balloon.png",
+    description:
+      'A 36" helium number balloon, thoughtfully color-coordinated to beautifully complement your bouquet.',
     price: 45,
   },
   {
