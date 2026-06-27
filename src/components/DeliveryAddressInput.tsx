@@ -95,7 +95,7 @@ const AUTOCOMPLETE_STYLES = `
 `;
 
 function hasErrorClass(className: string) {
-  return className.includes("checkout-field-error");
+  return className.includes("border-red-300");
 }
 
 function waitForImportLibrary(timeoutMs = 10000): Promise<void> {

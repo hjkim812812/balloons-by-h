@@ -2,6 +2,8 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 
+import { CHECKOUT_DATE_BUTTON_CLASS } from "@/lib/checkout-form-styles";
+
 type DeliveryDateInputProps = {
   id: string;
   name: string;
@@ -125,7 +127,7 @@ function MobileDeliveryDateInput({
         aria-expanded={open}
         aria-controls={calendarId}
         onClick={() => setOpen((current) => !current)}
-        className={className}
+        className={`${className} ${CHECKOUT_DATE_BUTTON_CLASS}`}
       >
         {value ? formatDisplayDate(value) : "Select delivery date"}
       </button>
