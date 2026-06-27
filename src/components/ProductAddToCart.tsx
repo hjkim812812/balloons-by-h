@@ -46,35 +46,60 @@ export function ProductAddToCart({
       return;
     }
 
-    let lockedScrollY = window.scrollY;
-
-    const restoreScroll = () => {
-      if (window.scrollY !== lockedScrollY) {
-        window.scrollTo({ top: lockedScrollY, left: 0, behavior: "auto" });
+    function keepInputVisible() {
+      if (!textarea) {
+        return;
       }
-    };
+
+      const viewport = window.visualViewport;
+      if (!viewport) {
+        return;
+      }
+
+      const rect = textarea.getBoundingClientRect();
+      const safeTop = viewport.offsetTop + 16;
+      const safeBottom = viewport.offsetTop + viewport.height - 16;
+
+      if (rect.bottom > safeBottom) {
+        window.scrollBy({
+          top: rect.bottom - safeBottom,
+          left: 0,
+          behavior: "auto",
+        });
+        return;
+      }
+
+      if (rect.top < safeTop) {
+        window.scrollBy({
+          top: rect.top - safeTop,
+          left: 0,
+          behavior: "auto",
+        });
+      }
+    }
 
     const handleFocusIn = () => {
-      lockedScrollY = window.scrollY;
-      requestAnimationFrame(restoreScroll);
-      window.setTimeout(restoreScroll, 0);
-      window.setTimeout(restoreScroll, 100);
+      window.requestAnimationFrame(() => {
+        keepInputVisible();
+        window.setTimeout(keepInputVisible, 100);
+        window.setTimeout(keepInputVisible, 300);
+      });
     };
 
-    const handleViewportChange = () => {
-      if (document.activeElement === textarea) {
-        restoreScroll();
+    const handleViewportResize = () => {
+      if (document.activeElement !== textarea) {
+        return;
       }
+
+      keepInputVisible();
     };
 
     textarea.addEventListener("focusin", handleFocusIn);
-    window.visualViewport?.addEventListener("resize", handleViewportChange);
-    window.visualViewport?.addEventListener("scroll", handleViewportChange);
+    window.visualViewport?.addEventListener("resize", handleViewportResize);
 
     return () => {
       textarea.removeEventListener("focusin", handleFocusIn);
-      window.visualViewport?.removeEventListener("resize", handleViewportChange);
-      window.visualViewport?.removeEventListener("scroll", handleViewportChange);
+      window.visualViewport?.removeEventListener("resize", handleViewportResize);
     };
   }, [showPersonalizedMessage]);
 
