@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import type { CartItem } from "@/types/cart";
 import { buildCartItemId } from "@/lib/cart-item-id";
@@ -29,6 +29,54 @@ export function ProductAddToCart({
   const [quantity, setQuantity] = useState(1);
   const [personalizedMessage, setPersonalizedMessage] = useState("");
   const [balloonNumber, setBalloonNumber] = useState("0");
+  const personalizedMessageRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!showPersonalizedMessage) {
+      return;
+    }
+
+    const textarea = personalizedMessageRef.current;
+    if (!textarea) {
+      return;
+    }
+
+    const mobileQuery = window.matchMedia("(max-width: 768px)");
+    if (!mobileQuery.matches) {
+      return;
+    }
+
+    let lockedScrollY = window.scrollY;
+
+    const restoreScroll = () => {
+      if (window.scrollY !== lockedScrollY) {
+        window.scrollTo({ top: lockedScrollY, left: 0, behavior: "auto" });
+      }
+    };
+
+    const handleFocusIn = () => {
+      lockedScrollY = window.scrollY;
+      requestAnimationFrame(restoreScroll);
+      window.setTimeout(restoreScroll, 0);
+      window.setTimeout(restoreScroll, 100);
+    };
+
+    const handleViewportChange = () => {
+      if (document.activeElement === textarea) {
+        restoreScroll();
+      }
+    };
+
+    textarea.addEventListener("focusin", handleFocusIn);
+    window.visualViewport?.addEventListener("resize", handleViewportChange);
+    window.visualViewport?.addEventListener("scroll", handleViewportChange);
+
+    return () => {
+      textarea.removeEventListener("focusin", handleFocusIn);
+      window.visualViewport?.removeEventListener("resize", handleViewportChange);
+      window.visualViewport?.removeEventListener("scroll", handleViewportChange);
+    };
+  }, [showPersonalizedMessage]);
 
   const selectedBalloonNumber = showBalloonNumberSelector
     ? Number.parseInt(balloonNumber, 10)
@@ -130,12 +178,13 @@ export function ProductAddToCart({
             Add your personalized message
           </label>
           <textarea
+            ref={personalizedMessageRef}
             id={`personalized-message-${item.id}`}
             value={personalizedMessage}
             onChange={(e) => setPersonalizedMessage(e.target.value)}
             rows={1}
             disabled={disabled}
-            className="resize-y border border-champagne/20 bg-ivory px-4 py-2 font-body text-sm leading-relaxed outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 disabled:cursor-not-allowed disabled:opacity-50"
+            className="resize-y border border-champagne/20 bg-ivory px-4 py-2 font-body text-base leading-relaxed outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
           />
         </div>
       )}
