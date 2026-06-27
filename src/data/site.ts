@@ -22,7 +22,7 @@ export const BRAND = {
 
   location: "Beverly Hills · Los Angeles",
 
-  email: "hello@balloonsbyh.com",
+  email: "balloonsbyh.orders@gmail.com",
 
   instagramHandle: "balloons.by.h",
 
