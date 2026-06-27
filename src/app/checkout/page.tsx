@@ -8,6 +8,7 @@ import { formatPrice } from "@/data/site";
 import { DELIVERY_FEE, getOrderTotal } from "@/lib/order-pricing";
 import { setLastOrder } from "@/lib/order-session";
 import { DeliveryAddressInput } from "@/components/DeliveryAddressInput";
+import { DeliveryDateInput } from "@/components/DeliveryDateInput";
 import { getTomorrowLocalDateString, isValidDeliveryDate } from "@/lib/delivery-date";
 import type { OrderSummary } from "@/types/cart";
 
@@ -313,14 +314,13 @@ export default function CheckoutPage() {
                   >
                     Delivery Date <span className="text-champagne">*</span>
                   </label>
-                  <input
+                  <DeliveryDateInput
                     id="delivery-date"
                     name="delivery-date"
-                    type="date"
                     required
                     min={minDeliveryDate}
-                    onChange={(event) => validateDeliveryDate(event.target.value)}
-                    onBlur={(event) => validateDeliveryDate(event.target.value)}
+                    onChange={validateDeliveryDate}
+                    onBlur={validateDeliveryDate}
                     className={`border bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 ${errors["delivery-date"] ? "border-red-300" : "border-champagne/20"}`}
                   />
                   {deliveryDateError && (
