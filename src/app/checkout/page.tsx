@@ -29,6 +29,9 @@ const DELIVERY_TIME_OPTIONS = [
 const DELIVERY_DATE_ERROR =
   "Please select a delivery date starting tomorrow or later.";
 
+const CHECKOUT_NOTE_CLASS =
+  "font-body text-xs font-normal leading-relaxed text-charcoal-soft";
+
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, total, clearCart } = useCart();
@@ -411,7 +414,7 @@ export default function CheckoutPage() {
                       </option>
                     ))}
                   </select>
-                  <p className="font-body text-xs leading-relaxed text-charcoal-soft">
+                  <p className={CHECKOUT_NOTE_CLASS}>
                     Need delivery by a specific time? Please contact us before placing
                     your order. An additional fee may apply.
                   </p>
@@ -429,32 +432,32 @@ export default function CheckoutPage() {
                     type="checkbox"
                     className="mt-1 h-4 w-4 shrink-0 accent-champagne"
                   />
-                  <span className="font-body text-sm text-charcoal-soft">
+                  <span className={CHECKOUT_NOTE_CLASS}>
                     I have read and agree to the{" "}
                     <Link
                       href="/terms-of-service"
-                      className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
+                      className="text-charcoal-soft underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
                     >
                       Terms of Service
                     </Link>
                     ,{" "}
                     <Link
                       href="/privacy-policy"
-                      className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
+                      className="text-charcoal-soft underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
                     >
                       Privacy Policy
                     </Link>
                     , and{" "}
                     <Link
                       href="/return-refund-policy"
-                      className="text-charcoal underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
+                      className="text-charcoal-soft underline-offset-4 transition-colors hover:text-champagne-dark hover:underline"
                     >
                       Return & Refund Policy
                     </Link>
                     .
                   </span>
                 </label>
-                <p className="mt-3 font-body text-xs text-charcoal-soft">
+                <p className={`mt-3 ${CHECKOUT_NOTE_CLASS}`}>
                   All personalized and custom-made products are final sale and are not
                   eligible for returns or refunds.
                 </p>

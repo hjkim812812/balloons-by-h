@@ -177,7 +177,6 @@ function FallbackAddressInput({
       name={name}
       required={required}
       autoComplete="street-address"
-      placeholder="Start typing your delivery address"
       className={className}
     />
   );
@@ -345,7 +344,6 @@ function MobilePlacesAutocomplete({
         value={value}
         autoComplete="off"
         enterKeyHint="search"
-        placeholder="Start typing your delivery address"
         onChange={handleInputChange}
         onFocus={() => {
           if (suggestions.length > 0) {
@@ -424,7 +422,7 @@ function DesktopPlaceAutocomplete({
 
         placeAutocomplete.id = id;
         placeAutocomplete.name = name;
-        placeAutocomplete.placeholder = "Start typing your delivery address";
+        placeAutocomplete.placeholder = "";
         applyAutocompleteStyles(placeAutocomplete, hasError);
 
         selectListener = async (event: Event) => {
