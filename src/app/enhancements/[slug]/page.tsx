@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!enhancement) return { title: "Enhancement Not Found | Balloons by H" };
 
   const description =
-    enhancement.description ??
+    enhancement.description?.replace(/\n\n/g, " ") ??
     `Inquire about ${enhancement.name} — luxury balloon enhancements by Balloons by H in Beverly Hills.`;
 
   return createPageMetadata({
@@ -75,9 +75,16 @@ export default async function EnhancementDetailPage({ params }: Props) {
                 {enhancement.name}
               </h1>
               {enhancement.description && (
-                <p className="mt-8 max-w-md font-body text-base leading-relaxed text-charcoal-soft md:text-lg">
-                  {enhancement.description}
-                </p>
+                <div className="mt-8 max-w-md space-y-4">
+                  {enhancement.description.split("\n\n").map((paragraph) => (
+                    <p
+                      key={paragraph}
+                      className="font-body text-base leading-relaxed text-charcoal-soft md:text-lg"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
               )}
               {enhancement.price !== undefined && (
                 <p className="mt-6 font-body text-lg tracking-wide text-charcoal md:text-xl">

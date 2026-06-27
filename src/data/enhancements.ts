@@ -23,7 +23,7 @@ export const ENHANCEMENTS: Enhancement[] = [
     image: "/images/enhancements/heart-bouquets-v2.png",
     detailImage: "/images/enhancements/heart-bouquets-detail.png",
     description:
-      "Add a matching 10-heart bouquet for a fuller, more elegant presentation. Made in the same color palette as your bouquet.",
+      "A matching 10-heart bouquet that adds fullness and elegance to your arrangement.\n\nMade in the same color palette as your bouquet.",
     price: 95,
   },
   {
