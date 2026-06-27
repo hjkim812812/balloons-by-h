@@ -17,6 +17,7 @@ export const ENHANCEMENTS: Enhancement[] = [
   {
     slug: "heart-bouquets",
     name: "Heart Bouquets",
+    image: "/images/enhancements/heart-bouquets.png",
   },
   {
     slug: "personalized-bubble-accent",
