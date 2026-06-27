@@ -86,7 +86,7 @@ export function DeliveryAddressInput({
     useRef<google.maps.places.PlaceAutocompleteElement | null>(null);
   const hasError = hasErrorClass(className);
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY?.trim();
-  const [useFallback, setUseFallback] = useState(!apiKey);
+  const [useFallback, setUseFallback] = useState(true);
 
   useEffect(() => {
     const styleId = "delivery-address-autocomplete-styles";
@@ -98,9 +98,13 @@ export function DeliveryAddressInput({
       document.head.appendChild(style);
     }
 
-    const container = containerRef.current;
-    if (!apiKey || !container) {
+    if (!apiKey) {
       setUseFallback(true);
+      return;
+    }
+
+    const container = containerRef.current;
+    if (!container) {
       return;
     }
 
@@ -109,7 +113,7 @@ export function DeliveryAddressInput({
 
     loadGoogleMaps(apiKey)
       .then(async () => {
-        if (cancelled || !container) {
+        if (cancelled || !containerRef.current) {
           return;
         }
 
@@ -142,7 +146,7 @@ export function DeliveryAddressInput({
         };
 
         placeAutocomplete.addEventListener("gmp-select", selectListener);
-        container.replaceChildren(placeAutocomplete);
+        containerRef.current.replaceChildren(placeAutocomplete);
         autocompleteRef.current = placeAutocomplete;
         setUseFallback(false);
       })
@@ -161,6 +165,7 @@ export function DeliveryAddressInput({
       }
       autocompleteRef.current = null;
       container.replaceChildren();
+      setUseFallback(true);
     };
   }, [apiKey, hasError, id, name]);
 
@@ -174,7 +179,8 @@ export function DeliveryAddressInput({
   }, [hasError]);
 
   return (
-    <div ref={containerRef}>
+    <>
+      <div ref={containerRef} className={useFallback ? "hidden" : "block"} />
       {useFallback && (
         <input
           id={id}
@@ -184,6 +190,6 @@ export function DeliveryAddressInput({
           className={className}
         />
       )}
-    </div>
+    </>
   );
 }
