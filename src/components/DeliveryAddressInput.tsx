@@ -12,9 +12,59 @@ type DeliveryAddressInputProps = {
 const IVORY = "#FAF8F5";
 const CHAMPAGNE_BORDER = "rgba(194, 165, 107, 0.2)";
 const ERROR_BORDER = "#fca5a5";
+const MOBILE_MEDIA_QUERY = "(max-width: 768px)";
+
+const AUTOCOMPLETE_STYLES = `
+  .delivery-address-autocomplete-host {
+    position: relative;
+    isolation: isolate;
+  }
+
+  gmp-place-autocomplete {
+    width: 100%;
+    color-scheme: light;
+  }
+
+  @media (min-width: 769px) {
+    gmp-place-autocomplete {
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    gmp-place-autocomplete {
+      font-size: 16px;
+    }
+
+    .delivery-address-autocomplete-host gmp-place-autocomplete::part(prediction-list) {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      max-height: 40vh;
+      overflow-y: auto;
+    }
+
+    .delivery-address-fallback-input {
+      font-size: 16px;
+    }
+  }
+`;
 
 function hasErrorClass(className: string) {
   return className.includes("border-red-300");
+}
+
+function isMobileViewport() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia(MOBILE_MEDIA_QUERY).matches
+  );
+}
+
+function getAutocompleteFontSize() {
+  return isMobileViewport() ? "16px" : "0.875rem";
 }
 
 function waitForImportLibrary(timeoutMs = 10000): Promise<void> {
@@ -72,7 +122,48 @@ function applyAutocompleteStyles(
   element.style.borderRadius = "0";
   element.style.colorScheme = "light";
   element.style.fontFamily = "var(--font-jost), system-ui, sans-serif";
-  element.style.fontSize = "0.875rem";
+  element.style.fontSize = getAutocompleteFontSize();
+}
+
+function attachMobileFocusStabilizer(host: HTMLElement): () => void {
+  if (!isMobileViewport()) {
+    return () => {};
+  }
+
+  let lockedScrollY = window.scrollY;
+
+  const restoreScroll = () => {
+    if (window.scrollY !== lockedScrollY) {
+      window.scrollTo({ top: lockedScrollY, left: 0, behavior: "auto" });
+    }
+  };
+
+  const handleFocusIn = (event: FocusEvent) => {
+    if (!host.contains(event.target as Node)) {
+      return;
+    }
+
+    lockedScrollY = window.scrollY;
+    requestAnimationFrame(restoreScroll);
+    window.setTimeout(restoreScroll, 0);
+    window.setTimeout(restoreScroll, 100);
+  };
+
+  const handleViewportChange = () => {
+    if (host.contains(document.activeElement)) {
+      restoreScroll();
+    }
+  };
+
+  host.addEventListener("focusin", handleFocusIn);
+  window.visualViewport?.addEventListener("resize", handleViewportChange);
+  window.visualViewport?.addEventListener("scroll", handleViewportChange);
+
+  return () => {
+    host.removeEventListener("focusin", handleFocusIn);
+    window.visualViewport?.removeEventListener("resize", handleViewportChange);
+    window.visualViewport?.removeEventListener("scroll", handleViewportChange);
+  };
 }
 
 export function DeliveryAddressInput({
@@ -81,6 +172,7 @@ export function DeliveryAddressInput({
   required,
   className,
 }: DeliveryAddressInputProps) {
+  const hostRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const autocompleteRef =
     useRef<google.maps.places.PlaceAutocompleteElement | null>(null);
@@ -93,11 +185,19 @@ export function DeliveryAddressInput({
     if (!document.getElementById(styleId)) {
       const style = document.createElement("style");
       style.id = styleId;
-      style.textContent =
-        "gmp-place-autocomplete { width: 100%; color-scheme: light; }";
+      style.textContent = AUTOCOMPLETE_STYLES;
       document.head.appendChild(style);
     }
 
+    const host = hostRef.current;
+    if (!host) {
+      return;
+    }
+
+    return attachMobileFocusStabilizer(host);
+  }, []);
+
+  useEffect(() => {
     if (!apiKey) {
       setUseFallback(true);
       return;
@@ -179,7 +279,7 @@ export function DeliveryAddressInput({
   }, [hasError]);
 
   return (
-    <>
+    <div ref={hostRef} className="delivery-address-autocomplete-host">
       <div ref={containerRef} className={useFallback ? "hidden" : "block"} />
       {useFallback && (
         <input
@@ -187,9 +287,9 @@ export function DeliveryAddressInput({
           name={name}
           required={required}
           autoComplete="street-address"
-          className={className}
+          className={`delivery-address-fallback-input ${className}`}
         />
       )}
-    </>
+    </div>
   );
 }
