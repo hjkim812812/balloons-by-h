@@ -6,6 +6,7 @@ export type CartItem = {
   productType: "bouquet" | "enhancement";
   href: string;
   quantity: number;
+  personalizedMessage?: string;
 };
 
 export type OrderItem = {
@@ -15,6 +16,7 @@ export type OrderItem = {
   quantity: number;
   slug: string;
   productType: "bouquet" | "enhancement";
+  personalizedMessage?: string;
 };
 
 export type OrderSummary = {

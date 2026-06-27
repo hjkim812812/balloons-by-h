@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import type { CartItem } from "@/types/cart";
+import { buildCartItemId } from "@/lib/cart-item-id";
 import { cn } from "@/lib/utils";
 
 type ProductAddToCartProps = {
@@ -10,6 +11,7 @@ type ProductAddToCartProps = {
   fullWidth?: boolean;
   disabled?: boolean;
   className?: string;
+  showPersonalizedMessage?: boolean;
 };
 
 const quantityControlClass =
@@ -20,8 +22,18 @@ export function ProductAddToCart({
   fullWidth,
   disabled,
   className,
+  showPersonalizedMessage,
 }: ProductAddToCartProps) {
   const [quantity, setQuantity] = useState(1);
+  const [personalizedMessage, setPersonalizedMessage] = useState("");
+
+  const cartItem: Omit<CartItem, "quantity"> = {
+    ...item,
+    id: buildCartItemId(item.id, showPersonalizedMessage ? personalizedMessage : undefined),
+    personalizedMessage: showPersonalizedMessage
+      ? personalizedMessage.trim() || undefined
+      : undefined,
+  };
 
   function decreaseQuantity() {
     setQuantity((current) => Math.max(1, current - 1));
@@ -75,8 +87,26 @@ export function ProductAddToCart({
           </button>
         </div>
       </div>
+      {showPersonalizedMessage && (
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor={`personalized-message-${item.id}`}
+            className="text-[0.65rem] uppercase tracking-luxury text-charcoal-soft"
+          >
+            Add your personalized message
+          </label>
+          <textarea
+            id={`personalized-message-${item.id}`}
+            value={personalizedMessage}
+            onChange={(e) => setPersonalizedMessage(e.target.value)}
+            rows={3}
+            disabled={disabled}
+            className="resize-y border border-champagne/20 bg-ivory px-4 py-3 font-body text-sm leading-relaxed outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 disabled:cursor-not-allowed disabled:opacity-50"
+          />
+        </div>
+      )}
       <AddToCartButton
-        item={item}
+        item={cartItem}
         quantity={quantity}
         fullWidth={fullWidth}
         disabled={disabled}

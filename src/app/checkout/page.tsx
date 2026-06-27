@@ -92,14 +92,17 @@ export default function CheckoutPage() {
           deliveryAddress: data.get("delivery-address"),
           deliveryDate: data.get("delivery-date"),
           deliveryTime: data.get("delivery-time"),
-          items: items.map(({ id, name, price, quantity, slug, productType }) => ({
-            id,
-            name,
-            price,
-            quantity,
-            slug,
-            productType,
-          })),
+          items: items.map(
+            ({ id, name, price, quantity, slug, productType, personalizedMessage }) => ({
+              id,
+              name,
+              price,
+              quantity,
+              slug,
+              productType,
+              personalizedMessage,
+            })
+          ),
           total: orderTotal,
           deliveryFee: DELIVERY_FEE,
         }),
@@ -171,13 +174,22 @@ export default function CheckoutPage() {
                 {items.map((item) => (
                   <li
                     key={item.id}
-                    className="flex items-center justify-between gap-4 font-body text-sm text-charcoal-soft"
+                    className="font-body text-sm text-charcoal-soft"
                   >
-                    <span>
-                      {item.name}
-                      {item.quantity > 1 ? ` × ${item.quantity}` : ""}
-                    </span>
-                    <span className="text-charcoal">{formatPrice(item.price * item.quantity)}</span>
+                    <div className="flex items-center justify-between gap-4">
+                      <span>
+                        {item.name}
+                        {item.quantity > 1 ? ` × ${item.quantity}` : ""}
+                      </span>
+                      <span className="text-charcoal">
+                        {formatPrice(item.price * item.quantity)}
+                      </span>
+                    </div>
+                    {item.personalizedMessage && (
+                      <p className="mt-1 text-xs text-charcoal-soft">
+                        {item.personalizedMessage}
+                      </p>
+                    )}
                   </li>
                 ))}
                 <li className="flex items-center justify-between gap-4 font-body text-sm text-charcoal-soft">

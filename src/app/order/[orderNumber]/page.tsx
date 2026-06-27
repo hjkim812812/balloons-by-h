@@ -54,6 +54,21 @@ export default function OrderConfirmationPage() {
               Please complete your payment via Zelle.
             </p>
 
+            {order.items.some((item) => item.personalizedMessage) && (
+              <div className="mt-8 space-y-4 font-body text-sm text-charcoal">
+                {order.items
+                  .filter((item) => item.personalizedMessage)
+                  .map((item) => (
+                    <div key={item.id}>
+                      <p className="text-[0.65rem] uppercase tracking-luxury text-charcoal-soft">
+                        {item.name}
+                      </p>
+                      <p className="mt-2">{item.personalizedMessage}</p>
+                    </div>
+                  ))}
+              </div>
+            )}
+
             <div className="mt-10 space-y-6 font-body text-sm text-charcoal">
               <div>
                 <p className="text-[0.65rem] uppercase tracking-luxury text-charcoal-soft">

@@ -41,6 +41,11 @@ export default function CartPage() {
                       <p className="mt-1 font-body text-xs text-charcoal-soft">
                         Qty {item.quantity}
                       </p>
+                      {item.personalizedMessage && (
+                        <p className="mt-2 font-body text-xs text-charcoal-soft">
+                          {item.personalizedMessage}
+                        </p>
+                      )}
                     </div>
                     <div className="flex shrink-0 flex-col items-end gap-3">
                       <p className="font-body text-sm tracking-wide text-charcoal">

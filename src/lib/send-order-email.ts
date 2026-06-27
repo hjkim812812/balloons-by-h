@@ -27,13 +27,14 @@ function getOrderFromEmail(): string {
   return configured || RESEND_TEST_SENDER;
 }
 
+function formatOrderItemLine(item: OrderItem): string {
+  const base = `- ${item.name} | Quantity: ${item.quantity} | Price: ${formatPrice(item.price * item.quantity)}`;
+  if (!item.personalizedMessage?.trim()) return base;
+  return `${base}\n  Personalized Message: ${item.personalizedMessage.trim()}`;
+}
+
 function buildOrderEmailText(data: OrderEmailData): string {
-  const itemsList = data.items
-    .map(
-      (item) =>
-        `- ${item.name} | Quantity: ${item.quantity} | Price: ${formatPrice(item.price * item.quantity)}`
-    )
-    .join("\n");
+  const itemsList = data.items.map(formatOrderItemLine).join("\n");
 
   const lines = [
     `New order received — Order #${data.orderNumber}`,
@@ -63,10 +64,12 @@ function buildOrderEmailText(data: OrderEmailData): string {
 
 function buildOrderEmailHtml(data: OrderEmailData): string {
   const itemsRows = data.items
-    .map(
-      (item) =>
-        `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;">${item.name}</td><td style="padding:8px 0;border-bottom:1px solid #eee;">${item.quantity}</td><td style="padding:8px 0;border-bottom:1px solid #eee;">${formatPrice(item.price * item.quantity)}</td></tr>`
-    )
+    .map((item) => {
+      const messageRow = item.personalizedMessage?.trim()
+        ? `<tr><td colspan="3" style="padding:0 0 8px 0;font-size:12px;color:#666;">Personalized Message: ${item.personalizedMessage.trim()}</td></tr>`
+        : "";
+      return `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;">${item.name}</td><td style="padding:8px 0;border-bottom:1px solid #eee;">${item.quantity}</td><td style="padding:8px 0;border-bottom:1px solid #eee;">${formatPrice(item.price * item.quantity)}</td></tr>${messageRow}`;
+    })
     .join("");
 
   const customMessageBlock = data.customMessage?.trim()
