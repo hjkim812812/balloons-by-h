@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { getLastOrder } from "@/lib/order-session";
 import { BRAND } from "@/data/site";
 import { formatPrice } from "@/data/site";
-import { DELIVERY_FEE } from "@/lib/order-pricing";
 import type { OrderSummary } from "@/types/cart";
 
 export default function OrderConfirmationPage() {
@@ -93,14 +92,7 @@ export default function OrderConfirmationPage() {
 
               <div>
                 <p className="text-[0.65rem] uppercase tracking-luxury text-charcoal-soft">
-                  Delivery
-                </p>
-                <p className="mt-2">{formatPrice(order.deliveryFee ?? DELIVERY_FEE)}</p>
-              </div>
-
-              <div>
-                <p className="text-[0.65rem] uppercase tracking-luxury text-charcoal-soft">
-                  Amount Due
+                  Total
                 </p>
                 <p className="mt-2 text-lg tracking-wide">{formatPrice(order.total)}</p>
               </div>
