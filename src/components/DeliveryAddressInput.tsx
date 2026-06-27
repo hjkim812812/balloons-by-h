@@ -13,6 +13,10 @@ const IVORY = "#FAF8F5";
 const CHAMPAGNE_BORDER = "rgba(194, 165, 107, 0.2)";
 const ERROR_BORDER = "#fca5a5";
 const MOBILE_MEDIA_QUERY = "(max-width: 768px)";
+const LOCATION_BIAS = {
+  center: { lat: 34.0736, lng: -118.4004 },
+  radius: 50000,
+} as const;
 
 const AUTOCOMPLETE_STYLES = `
   .delivery-address-autocomplete-host {
@@ -32,11 +36,11 @@ const AUTOCOMPLETE_STYLES = `
   }
 
   @media (max-width: 768px) {
-    gmp-place-autocomplete {
+    .delivery-address-mobile-input {
       font-size: 16px;
     }
 
-    .delivery-address-autocomplete-host gmp-place-autocomplete::part(prediction-list) {
+    .delivery-address-suggestions {
       position: absolute;
       top: 100%;
       left: 0;
@@ -44,6 +48,38 @@ const AUTOCOMPLETE_STYLES = `
       z-index: 10000;
       max-height: 40vh;
       overflow-y: auto;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border: 1px solid ${CHAMPAGNE_BORDER};
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(44, 44, 44, 0.08);
+    }
+
+    .delivery-address-suggestion-item {
+      display: block;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-family: var(--font-jost), system-ui, sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.35;
+      color: #2c2c2c;
+      cursor: pointer;
+    }
+
+    .delivery-address-suggestion-item:active,
+    .delivery-address-suggestion-item:hover {
+      background: rgba(201, 169, 98, 0.1);
+    }
+
+    .delivery-address-suggestion-secondary {
+      display: block;
+      margin-top: 0.125rem;
+      font-size: 0.75rem;
+      color: #5a5a5a;
     }
 
     .delivery-address-fallback-input {
@@ -54,17 +90,6 @@ const AUTOCOMPLETE_STYLES = `
 
 function hasErrorClass(className: string) {
   return className.includes("border-red-300");
-}
-
-function isMobileViewport() {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia(MOBILE_MEDIA_QUERY).matches
-  );
-}
-
-function getAutocompleteFontSize() {
-  return isMobileViewport() ? "16px" : "0.875rem";
 }
 
 function waitForImportLibrary(timeoutMs = 10000): Promise<void> {
@@ -122,87 +147,223 @@ function applyAutocompleteStyles(
   element.style.borderRadius = "0";
   element.style.colorScheme = "light";
   element.style.fontFamily = "var(--font-jost), system-ui, sans-serif";
-  element.style.fontSize = getAutocompleteFontSize();
+  element.style.fontSize = "0.875rem";
 }
 
-function attachMobileFocusStabilizer(host: HTMLElement): () => void {
-  if (!isMobileViewport()) {
-    return () => {};
-  }
-
-  let lockedScrollY = window.scrollY;
-
-  const restoreScroll = () => {
-    if (window.scrollY !== lockedScrollY) {
-      window.scrollTo({ top: lockedScrollY, left: 0, behavior: "auto" });
-    }
-  };
-
-  const handleFocusIn = (event: FocusEvent) => {
-    if (!host.contains(event.target as Node)) {
-      return;
-    }
-
-    lockedScrollY = window.scrollY;
-    requestAnimationFrame(restoreScroll);
-    window.setTimeout(restoreScroll, 0);
-    window.setTimeout(restoreScroll, 100);
-  };
-
-  const handleViewportChange = () => {
-    if (host.contains(document.activeElement)) {
-      restoreScroll();
-    }
-  };
-
-  host.addEventListener("focusin", handleFocusIn);
-  window.visualViewport?.addEventListener("resize", handleViewportChange);
-  window.visualViewport?.addEventListener("scroll", handleViewportChange);
-
-  return () => {
-    host.removeEventListener("focusin", handleFocusIn);
-    window.visualViewport?.removeEventListener("resize", handleViewportChange);
-    window.visualViewport?.removeEventListener("scroll", handleViewportChange);
-  };
-}
-
-export function DeliveryAddressInput({
+function FallbackAddressInput({
   id,
   name,
   required,
   className,
 }: DeliveryAddressInputProps) {
+  return (
+    <input
+      id={id}
+      name={name}
+      required={required}
+      autoComplete="street-address"
+      placeholder="Start typing your delivery address"
+      className={`delivery-address-fallback-input ${className}`}
+    />
+  );
+}
+
+function MobilePlacesAutocomplete({
+  id,
+  name,
+  required,
+  className,
+  apiKey,
+}: DeliveryAddressInputProps & { apiKey: string }) {
   const hostRef = useRef<HTMLDivElement>(null);
+  const sessionTokenRef =
+    useRef<google.maps.places.AutocompleteSessionToken | null>(null);
+  const debounceRef = useRef<number | null>(null);
+  const requestIdRef = useRef(0);
+  const [value, setValue] = useState("");
+  const [suggestions, setSuggestions] = useState<
+    google.maps.places.PlacePrediction[]
+  >([]);
+  const [open, setOpen] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    loadGoogleMaps(apiKey)
+      .then(() => {
+        if (!cancelled) {
+          setReady(true);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setReady(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+      if (debounceRef.current) {
+        window.clearTimeout(debounceRef.current);
+      }
+    };
+  }, [apiKey]);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    function handlePointerDown(event: PointerEvent) {
+      if (!hostRef.current?.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [open]);
+
+  async function fetchSuggestions(input: string) {
+    const trimmed = input.trim();
+    if (!trimmed || !ready) {
+      setSuggestions([]);
+      setOpen(false);
+      return;
+    }
+
+    const requestId = ++requestIdRef.current;
+
+    if (!sessionTokenRef.current) {
+      const { AutocompleteSessionToken } = (await google.maps.importLibrary(
+        "places"
+      )) as google.maps.PlacesLibrary;
+      sessionTokenRef.current = new AutocompleteSessionToken();
+    }
+
+    const { AutocompleteSuggestion } = (await google.maps.importLibrary(
+      "places"
+    )) as google.maps.PlacesLibrary;
+
+    const { suggestions: nextSuggestions } =
+      await AutocompleteSuggestion.fetchAutocompleteSuggestions({
+        input: trimmed,
+        sessionToken: sessionTokenRef.current,
+        includedRegionCodes: ["us"],
+        locationBias: LOCATION_BIAS,
+      });
+
+    if (requestId !== requestIdRef.current) {
+      return;
+    }
+
+    const predictions = nextSuggestions
+      .map((suggestion) => suggestion.placePrediction)
+      .filter(
+        (prediction): prediction is google.maps.places.PlacePrediction =>
+          Boolean(prediction)
+      );
+
+    setSuggestions(predictions);
+    setOpen(predictions.length > 0);
+  }
+
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const nextValue = event.target.value;
+    setValue(nextValue);
+
+    if (debounceRef.current) {
+      window.clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = window.setTimeout(() => {
+      fetchSuggestions(nextValue).catch(() => {
+        setSuggestions([]);
+        setOpen(false);
+      });
+    }, 250);
+  }
+
+  async function handleSelect(prediction: google.maps.places.PlacePrediction) {
+    try {
+      const place = prediction.toPlace();
+      await place.fetchFields({ fields: ["formattedAddress"] });
+      const formatted =
+        place.formattedAddress?.trim() || prediction.text.text.trim();
+      setValue(formatted);
+    } catch {
+      setValue(prediction.text.text.trim());
+    }
+
+    setSuggestions([]);
+    setOpen(false);
+    sessionTokenRef.current = null;
+  }
+
+  return (
+    <div ref={hostRef} className="delivery-address-autocomplete-host">
+      <input
+        id={id}
+        name={name}
+        required={required}
+        value={value}
+        autoComplete="off"
+        enterKeyHint="search"
+        placeholder="Start typing your delivery address"
+        onChange={handleInputChange}
+        onFocus={() => {
+          if (suggestions.length > 0) {
+            setOpen(true);
+          }
+        }}
+        className={`delivery-address-mobile-input ${className}`}
+      />
+      {open && suggestions.length > 0 && (
+        <ul className="delivery-address-suggestions" role="listbox">
+          {suggestions.map((prediction) => {
+            const mainText =
+              prediction.mainText?.text ?? prediction.text.text ?? "";
+            const secondaryText = prediction.secondaryText?.text ?? "";
+
+            return (
+              <li key={prediction.placeId} role="presentation">
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected="false"
+                  className="delivery-address-suggestion-item"
+                  onClick={() => handleSelect(prediction)}
+                >
+                  {mainText}
+                  {secondaryText ? (
+                    <span className="delivery-address-suggestion-secondary">
+                      {secondaryText}
+                    </span>
+                  ) : null}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function DesktopPlaceAutocomplete({
+  id,
+  name,
+  className,
+  apiKey,
+}: DeliveryAddressInputProps & { apiKey: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const autocompleteRef =
     useRef<google.maps.places.PlaceAutocompleteElement | null>(null);
   const hasError = hasErrorClass(className);
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY?.trim();
   const [useFallback, setUseFallback] = useState(true);
 
   useEffect(() => {
-    const styleId = "delivery-address-autocomplete-styles";
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement("style");
-      style.id = styleId;
-      style.textContent = AUTOCOMPLETE_STYLES;
-      document.head.appendChild(style);
-    }
-
-    const host = hostRef.current;
-    if (!host) {
-      return;
-    }
-
-    return attachMobileFocusStabilizer(host);
-  }, []);
-
-  useEffect(() => {
-    if (!apiKey) {
-      setUseFallback(true);
-      return;
-    }
-
     const container = containerRef.current;
     if (!container) {
       return;
@@ -223,10 +384,7 @@ export function DeliveryAddressInput({
 
         const placeAutocomplete = new PlaceAutocompleteElement({
           includedRegionCodes: ["us"],
-          locationBias: {
-            center: { lat: 34.0736, lng: -118.4004 },
-            radius: 50000,
-          },
+          locationBias: LOCATION_BIAS,
         });
 
         placeAutocomplete.id = id;
@@ -279,17 +437,94 @@ export function DeliveryAddressInput({
   }, [hasError]);
 
   return (
-    <div ref={hostRef} className="delivery-address-autocomplete-host">
+    <div className="delivery-address-autocomplete-host">
       <div ref={containerRef} className={useFallback ? "hidden" : "block"} />
       {useFallback && (
-        <input
+        <FallbackAddressInput
           id={id}
           name={name}
-          required={required}
-          autoComplete="street-address"
-          className={`delivery-address-fallback-input ${className}`}
+          required
+          className={className}
         />
       )}
     </div>
+  );
+}
+
+export function DeliveryAddressInput({
+  id,
+  name,
+  required,
+  className,
+}: DeliveryAddressInputProps) {
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY?.trim();
+  const [useMobileAutocomplete, setUseMobileAutocomplete] = useState<
+    boolean | null
+  >(null);
+
+  useEffect(() => {
+    const styleId = "delivery-address-autocomplete-styles";
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement("style");
+      style.id = styleId;
+      style.textContent = AUTOCOMPLETE_STYLES;
+      document.head.appendChild(style);
+    }
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY);
+    setUseMobileAutocomplete(mediaQuery.matches);
+
+    function handleChange(event: MediaQueryListEvent) {
+      setUseMobileAutocomplete(event.matches);
+    }
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  if (!apiKey) {
+    return (
+      <FallbackAddressInput
+        id={id}
+        name={name}
+        required={required}
+        className={className}
+      />
+    );
+  }
+
+  if (useMobileAutocomplete === null) {
+    return (
+      <FallbackAddressInput
+        id={id}
+        name={name}
+        required={required}
+        className={className}
+      />
+    );
+  }
+
+  if (useMobileAutocomplete) {
+    return (
+      <MobilePlacesAutocomplete
+        id={id}
+        name={name}
+        required={required}
+        className={className}
+        apiKey={apiKey}
+      />
+    );
+  }
+
+  return (
+    <DesktopPlaceAutocomplete
+      id={id}
+      name={name}
+      required={required}
+      className={className}
+      apiKey={apiKey}
+    />
   );
 }
