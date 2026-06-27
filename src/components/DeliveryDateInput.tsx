@@ -15,6 +15,8 @@ type DeliveryDateInputProps = {
 };
 
 const MOBILE_MEDIA_QUERY = "(max-width: 768px)";
+const DESKTOP_DATE_INPUT_CLASS =
+  "min-[769px]:invalid:text-transparent min-[769px]:invalid:[&::-webkit-datetime-edit]:opacity-0 min-[769px]:invalid:[&::-webkit-datetime-edit-fields-wrapper]:opacity-0";
 const WEEKDAY_LABELS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"] as const;
 
 function toLocalDateString(date: Date): string {
@@ -227,7 +229,7 @@ export function DeliveryDateInput(props: DeliveryDateInputProps) {
         min={props.min}
         onChange={(event) => props.onChange?.(event.target.value)}
         onBlur={(event) => props.onBlur?.(event.target.value)}
-        className={props.className}
+        className={`${props.className} ${DESKTOP_DATE_INPUT_CLASS}`}
       />
     );
   }
@@ -245,7 +247,7 @@ export function DeliveryDateInput(props: DeliveryDateInputProps) {
       min={props.min}
       onChange={(event) => props.onChange?.(event.target.value)}
       onBlur={(event) => props.onBlur?.(event.target.value)}
-      className={props.className}
+      className={`${props.className} ${DESKTOP_DATE_INPUT_CLASS}`}
     />
   );
 }
