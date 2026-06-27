@@ -50,19 +50,28 @@ const AUTOCOMPLETE_STYLES = `
   }
 
   @media (max-width: 768px) {
+    .checkout-form .delivery-address-field-open {
+      position: relative;
+      z-index: 100;
+    }
+
+    .delivery-address-autocomplete-host--open {
+      z-index: 100;
+    }
+
     .delivery-address-suggestions {
       position: absolute;
       top: 100%;
       left: 0;
       right: 0;
-      z-index: 10000;
+      z-index: 9999;
       max-height: 40vh;
       overflow-y: auto;
       margin: 0;
       padding: 0;
       list-style: none;
       border: 1px solid ${CHAMPAGNE_BORDER};
-      background: #fff;
+      background-color: #ffffff;
       box-shadow: 0 8px 24px rgba(44, 44, 44, 0.08);
     }
 
@@ -231,6 +240,19 @@ function MobilePlacesAutocomplete({
     return () => document.removeEventListener("pointerdown", handlePointerDown);
   }, [open]);
 
+  useEffect(() => {
+    const fieldWrapper = hostRef.current?.parentElement;
+    if (!fieldWrapper || !window.matchMedia(MOBILE_MEDIA_QUERY).matches) {
+      return;
+    }
+
+    fieldWrapper.classList.toggle("delivery-address-field-open", open);
+
+    return () => {
+      fieldWrapper.classList.remove("delivery-address-field-open");
+    };
+  }, [open]);
+
   async function fetchSuggestions(input: string) {
     const trimmed = input.trim();
     if (!trimmed || !ready) {
@@ -308,7 +330,14 @@ function MobilePlacesAutocomplete({
   }
 
   return (
-    <div ref={hostRef} className="delivery-address-autocomplete-host">
+    <div
+      ref={hostRef}
+      className={
+        open
+          ? "delivery-address-autocomplete-host delivery-address-autocomplete-host--open"
+          : "delivery-address-autocomplete-host"
+      }
+    >
       <input
         id={id}
         name={name}
