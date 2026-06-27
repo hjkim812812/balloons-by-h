@@ -54,16 +54,25 @@ export default function OrderConfirmationPage() {
               Please complete your payment via Zelle.
             </p>
 
-            {order.items.some((item) => item.personalizedMessage) && (
+            {order.items.some(
+              (item) => item.personalizedMessage || item.balloonNumber !== undefined
+            ) && (
               <div className="mt-8 space-y-4 font-body text-sm text-charcoal">
                 {order.items
-                  .filter((item) => item.personalizedMessage)
+                  .filter(
+                    (item) => item.personalizedMessage || item.balloonNumber !== undefined
+                  )
                   .map((item) => (
                     <div key={item.id}>
                       <p className="text-[0.65rem] uppercase tracking-luxury text-charcoal-soft">
                         {item.name}
                       </p>
-                      <p className="mt-2">{item.personalizedMessage}</p>
+                      {item.personalizedMessage && (
+                        <p className="mt-2">{item.personalizedMessage}</p>
+                      )}
+                      {item.balloonNumber !== undefined && (
+                        <p className="mt-2">Balloon Number: {item.balloonNumber}</p>
+                      )}
                     </div>
                   ))}
               </div>

@@ -12,6 +12,7 @@ type ProductAddToCartProps = {
   disabled?: boolean;
   className?: string;
   showPersonalizedMessage?: boolean;
+  showBalloonNumberSelector?: boolean;
 };
 
 const quantityControlClass =
@@ -23,16 +24,26 @@ export function ProductAddToCart({
   disabled,
   className,
   showPersonalizedMessage,
+  showBalloonNumberSelector,
 }: ProductAddToCartProps) {
   const [quantity, setQuantity] = useState(1);
   const [personalizedMessage, setPersonalizedMessage] = useState("");
+  const [balloonNumber, setBalloonNumber] = useState("0");
+
+  const selectedBalloonNumber = showBalloonNumberSelector
+    ? Number.parseInt(balloonNumber, 10)
+    : undefined;
 
   const cartItem: Omit<CartItem, "quantity"> = {
     ...item,
-    id: buildCartItemId(item.id, showPersonalizedMessage ? personalizedMessage : undefined),
+    id: buildCartItemId(item.id, {
+      personalizedMessage: showPersonalizedMessage ? personalizedMessage : undefined,
+      balloonNumber: showBalloonNumberSelector ? selectedBalloonNumber : undefined,
+    }),
     personalizedMessage: showPersonalizedMessage
       ? personalizedMessage.trim() || undefined
       : undefined,
+    balloonNumber: showBalloonNumberSelector ? selectedBalloonNumber : undefined,
   };
 
   function decreaseQuantity() {
@@ -87,6 +98,29 @@ export function ProductAddToCart({
           </button>
         </div>
       </div>
+      {showBalloonNumberSelector && (
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor={`balloon-number-${item.id}`}
+            className="text-[0.65rem] uppercase tracking-luxury text-charcoal-soft"
+          >
+            Balloon Number
+          </label>
+          <select
+            id={`balloon-number-${item.id}`}
+            value={balloonNumber}
+            onChange={(e) => setBalloonNumber(e.target.value)}
+            disabled={disabled}
+            className="border border-champagne/20 bg-ivory px-4 py-3 font-body text-sm outline-none transition-all focus:border-champagne focus:bg-white focus:ring-2 focus:ring-champagne/15 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {Array.from({ length: 10 }, (_, digit) => (
+              <option key={digit} value={digit}>
+                {digit}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       {showPersonalizedMessage && (
         <div className="flex flex-col gap-2">
           <label

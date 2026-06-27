@@ -29,8 +29,15 @@ function getOrderFromEmail(): string {
 
 function formatOrderItemLine(item: OrderItem): string {
   const base = `- ${item.name} | Quantity: ${item.quantity} | Price: ${formatPrice(item.price * item.quantity)}`;
-  if (!item.personalizedMessage?.trim()) return base;
-  return `${base}\n  Personalized Message: ${item.personalizedMessage.trim()}`;
+  const details: string[] = [];
+  if (item.personalizedMessage?.trim()) {
+    details.push(`Personalized Message: ${item.personalizedMessage.trim()}`);
+  }
+  if (item.balloonNumber !== undefined) {
+    details.push(`Balloon Number: ${item.balloonNumber}`);
+  }
+  if (details.length === 0) return base;
+  return `${base}\n  ${details.join("\n  ")}`;
 }
 
 function buildOrderEmailText(data: OrderEmailData): string {
@@ -65,10 +72,20 @@ function buildOrderEmailText(data: OrderEmailData): string {
 function buildOrderEmailHtml(data: OrderEmailData): string {
   const itemsRows = data.items
     .map((item) => {
-      const messageRow = item.personalizedMessage?.trim()
-        ? `<tr><td colspan="3" style="padding:0 0 8px 0;font-size:12px;color:#666;">Personalized Message: ${item.personalizedMessage.trim()}</td></tr>`
-        : "";
-      return `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;">${item.name}</td><td style="padding:8px 0;border-bottom:1px solid #eee;">${item.quantity}</td><td style="padding:8px 0;border-bottom:1px solid #eee;">${formatPrice(item.price * item.quantity)}</td></tr>${messageRow}`;
+      const detailRows: string[] = [];
+      if (item.personalizedMessage?.trim()) {
+        detailRows.push(`Personalized Message: ${item.personalizedMessage.trim()}`);
+      }
+      if (item.balloonNumber !== undefined) {
+        detailRows.push(`Balloon Number: ${item.balloonNumber}`);
+      }
+      const detailsHtml = detailRows
+        .map(
+          (detail) =>
+            `<tr><td colspan="3" style="padding:0 0 8px 0;font-size:12px;color:#666;">${detail}</td></tr>`
+        )
+        .join("");
+      return `<tr><td style="padding:8px 0;border-bottom:1px solid #eee;">${item.name}</td><td style="padding:8px 0;border-bottom:1px solid #eee;">${item.quantity}</td><td style="padding:8px 0;border-bottom:1px solid #eee;">${formatPrice(item.price * item.quantity)}</td></tr>${detailsHtml}`;
     })
     .join("");
 

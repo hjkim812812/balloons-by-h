@@ -93,7 +93,7 @@ export default function CheckoutPage() {
           deliveryDate: data.get("delivery-date"),
           deliveryTime: data.get("delivery-time"),
           items: items.map(
-            ({ id, name, price, quantity, slug, productType, personalizedMessage }) => ({
+            ({
               id,
               name,
               price,
@@ -101,6 +101,16 @@ export default function CheckoutPage() {
               slug,
               productType,
               personalizedMessage,
+              balloonNumber,
+            }) => ({
+              id,
+              name,
+              price,
+              quantity,
+              slug,
+              productType,
+              personalizedMessage,
+              balloonNumber,
             })
           ),
           total: orderTotal,
@@ -188,6 +198,11 @@ export default function CheckoutPage() {
                     {item.personalizedMessage && (
                       <p className="mt-1 text-xs text-charcoal-soft">
                         {item.personalizedMessage}
+                      </p>
+                    )}
+                    {item.balloonNumber !== undefined && (
+                      <p className="mt-1 text-xs text-charcoal-soft">
+                        Balloon Number: {item.balloonNumber}
                       </p>
                     )}
                   </li>

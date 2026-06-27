@@ -1,8 +1,24 @@
+type CartItemIdOptions = {
+  personalizedMessage?: string;
+  balloonNumber?: number;
+};
+
 export function buildCartItemId(
   baseId: string,
-  personalizedMessage?: string
+  options?: CartItemIdOptions | string
 ): string {
-  const message = personalizedMessage?.trim();
-  if (!message) return baseId;
-  return `${baseId}::${message}`;
+  if (typeof options === "string") {
+    const message = options.trim();
+    return message ? `${baseId}::${message}` : baseId;
+  }
+
+  if (options?.personalizedMessage?.trim()) {
+    return `${baseId}::${options.personalizedMessage.trim()}`;
+  }
+
+  if (options?.balloonNumber !== undefined) {
+    return `${baseId}::${options.balloonNumber}`;
+  }
+
+  return baseId;
 }

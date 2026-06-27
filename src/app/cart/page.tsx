@@ -46,6 +46,11 @@ export default function CartPage() {
                           {item.personalizedMessage}
                         </p>
                       )}
+                      {item.balloonNumber !== undefined && (
+                        <p className="mt-2 font-body text-xs text-charcoal-soft">
+                          Balloon Number: {item.balloonNumber}
+                        </p>
+                      )}
                     </div>
                     <div className="flex shrink-0 flex-col items-end gap-3">
                       <p className="font-body text-sm tracking-wide text-charcoal">

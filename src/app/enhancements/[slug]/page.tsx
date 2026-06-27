@@ -105,6 +105,7 @@ export default async function EnhancementDetailPage({ params }: Props) {
                   fullWidth
                   disabled={enhancement.price === undefined}
                   showPersonalizedMessage={enhancement.slug === "personalized-bubble-accent"}
+                  showBalloonNumberSelector={enhancement.slug === "36-number-balloon"}
                 />
               </div>
             </div>

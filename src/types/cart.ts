@@ -7,6 +7,7 @@ export type CartItem = {
   href: string;
   quantity: number;
   personalizedMessage?: string;
+  balloonNumber?: number;
 };
 
 export type OrderItem = {
@@ -17,6 +18,7 @@ export type OrderItem = {
   slug: string;
   productType: "bouquet" | "enhancement";
   personalizedMessage?: string;
+  balloonNumber?: number;
 };
 
 export type OrderSummary = {
