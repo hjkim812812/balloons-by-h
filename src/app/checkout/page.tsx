@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/data/site";
+import { DELIVERY_FEE, getOrderTotal } from "@/lib/order-pricing";
 import { setLastOrder } from "@/lib/order-session";
 import type { OrderSummary } from "@/types/cart";
 
@@ -29,6 +30,7 @@ export default function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [minDeliveryDate, setMinDeliveryDate] = useState("");
+  const orderTotal = getOrderTotal(total);
 
   useEffect(() => {
     setMinDeliveryDate(getTomorrowLocalDateString());
@@ -98,7 +100,8 @@ export default function CheckoutPage() {
             slug,
             productType,
           })),
-          total,
+          total: orderTotal,
+          deliveryFee: DELIVERY_FEE,
         }),
       });
 
@@ -112,6 +115,7 @@ export default function CheckoutPage() {
       const order: OrderSummary = {
         orderNumber: result.orderNumber,
         total: result.total,
+        deliveryFee: result.deliveryFee,
         items: result.items,
         name: result.name,
         email: result.email,
@@ -176,13 +180,17 @@ export default function CheckoutPage() {
                     <span className="text-charcoal">{formatPrice(item.price * item.quantity)}</span>
                   </li>
                 ))}
+                <li className="flex items-center justify-between gap-4 font-body text-sm text-charcoal-soft">
+                  <span>Delivery</span>
+                  <span className="text-charcoal">{formatPrice(DELIVERY_FEE)}</span>
+                </li>
               </ul>
               <div className="mt-6 flex items-center justify-between border-t border-champagne/15 pt-6">
                 <p className="font-body text-[0.65rem] uppercase tracking-luxury text-charcoal-soft">
                   Total
                 </p>
                 <p className="font-body text-lg tracking-wide text-charcoal">
-                  {formatPrice(total)}
+                  {formatPrice(orderTotal)}
                 </p>
               </div>
             </div>

@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
+import { generateOrderNumber } from "@/lib/generate-order-number";
+import { DELIVERY_FEE, getOrderTotal } from "@/lib/order-pricing";
 import { sendOrderEmail } from "@/lib/send-order-email";
-import {
-  createServerSupabase,
-  getNextOrderNumber,
-  getSupabaseConfig,
-} from "@/lib/supabase";
 import type { OrderItem } from "@/types/cart";
 
 type OrderRequestBody = {
@@ -58,75 +55,43 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid delivery time" }, { status: 400 });
     }
 
-    const calculatedTotal = body.items.reduce(
+    const subtotal = body.items.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
     );
 
-    if (calculatedTotal !== body.total) {
+    if (getOrderTotal(subtotal) !== body.total) {
       return NextResponse.json({ error: "Order total mismatch" }, { status: 400 });
     }
 
-    if (!getSupabaseConfig()) {
-      console.error(
-        "Order API error: Missing Supabase environment variables (NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY)."
-      );
-      return NextResponse.json(
-        { error: "Order system is not configured. Please contact us to complete your order." },
-        { status: 503 }
-      );
-    }
+    const orderNumber = generateOrderNumber();
 
-    let orderNumber: number;
     try {
-      orderNumber = await getNextOrderNumber();
-    } catch (error) {
-      console.error("Order number generation error:", error);
+      await sendOrderEmail({
+        orderNumber,
+        name: body.name.trim(),
+        email: body.email.trim(),
+        phone: body.phone.trim(),
+        deliveryAddress: body.deliveryAddress.trim(),
+        deliveryDate: body.deliveryDate,
+        deliveryTime: body.deliveryTime,
+        items: body.items,
+        total: body.total,
+        deliveryFee: DELIVERY_FEE,
+        customMessage: body.customMessage?.trim(),
+      });
+    } catch (emailError) {
+      console.error("Order email error:", emailError);
       return NextResponse.json(
-        { error: "Unable to create order. Please try again." },
+        { error: "Unable to submit order. Please try again." },
         { status: 500 }
       );
     }
 
-    const supabase = createServerSupabase();
-    const { error } = await supabase.from("orders").insert({
-      order_number: orderNumber,
-      name: body.name.trim(),
-      email: body.email.trim(),
-      phone: body.phone.trim(),
-      delivery_address: body.deliveryAddress.trim(),
-      delivery_date: body.deliveryDate,
-      delivery_time: body.deliveryTime,
-      items: body.items,
-      total: body.total,
-    });
-
-    if (error) {
-      console.error("Supabase insert error:", {
-        message: error.message,
-        code: error.code,
-        details: error.details,
-        hint: error.hint,
-      });
-      return NextResponse.json({ error: "Failed to save order" }, { status: 500 });
-    }
-
-    await sendOrderEmail({
-      orderNumber,
-      name: body.name.trim(),
-      email: body.email.trim(),
-      phone: body.phone.trim(),
-      deliveryAddress: body.deliveryAddress.trim(),
-      deliveryDate: body.deliveryDate,
-      deliveryTime: body.deliveryTime,
-      items: body.items,
-      total: body.total,
-      customMessage: body.customMessage?.trim(),
-    });
-
     return NextResponse.json({
       orderNumber,
       total: body.total,
+      deliveryFee: DELIVERY_FEE,
       items: body.items,
       name: body.name.trim(),
       email: body.email.trim(),

@@ -13,14 +13,19 @@ export type OrderEmailData = {
   deliveryTime: string;
   items: OrderItem[];
   total: number;
+  deliveryFee: number;
   customMessage?: string;
 };
 
 const ORDER_NOTIFICATION_EMAIL =
   process.env.ORDER_NOTIFICATION_EMAIL ?? "hjkim812@yahoo.com";
 
-const ORDER_FROM_EMAIL =
-  process.env.ORDER_FROM_EMAIL ?? `${BRAND.name} <${BRAND.email}>`;
+const RESEND_TEST_SENDER = `${BRAND.name} <onboarding@resend.dev>`;
+
+function getOrderFromEmail(): string {
+  const configured = process.env.ORDER_FROM_EMAIL?.trim();
+  return configured || RESEND_TEST_SENDER;
+}
 
 function buildOrderEmailText(data: OrderEmailData): string {
   const itemsList = data.items
@@ -44,6 +49,7 @@ function buildOrderEmailText(data: OrderEmailData): string {
     "Items Ordered:",
     itemsList,
     "",
+    `Delivery: ${formatPrice(data.deliveryFee)}`,
     `Total Amount Due: ${formatPrice(data.total)}`,
     `Zelle Payment Memo: Order #${data.orderNumber}`,
   ];
@@ -87,6 +93,7 @@ function buildOrderEmailHtml(data: OrderEmailData): string {
       </thead>
       <tbody>${itemsRows}</tbody>
     </table>
+    <p><strong>Delivery:</strong> ${formatPrice(data.deliveryFee)}</p>
     <p><strong>Total Amount Due:</strong> ${formatPrice(data.total)}</p>
     <p><strong>Zelle Payment Memo:</strong> Order #${data.orderNumber}</p>
     ${customMessageBlock}
@@ -96,24 +103,19 @@ function buildOrderEmailHtml(data: OrderEmailData): string {
 export async function sendOrderEmail(data: OrderEmailData): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
-    console.warn("RESEND_API_KEY is not set. Skipping order email notification.");
-    return;
+    throw new Error("RESEND_API_KEY is not configured");
   }
 
-  try {
-    const resend = new Resend(apiKey);
-    const { error } = await resend.emails.send({
-      from: ORDER_FROM_EMAIL,
-      to: ORDER_NOTIFICATION_EMAIL,
-      subject: `New Order #${data.orderNumber} — ${BRAND.name}`,
-      text: buildOrderEmailText(data),
-      html: buildOrderEmailHtml(data),
-    });
+  const resend = new Resend(apiKey);
+  const { error } = await resend.emails.send({
+    from: getOrderFromEmail(),
+    to: ORDER_NOTIFICATION_EMAIL,
+    subject: `New Order #${data.orderNumber} — ${BRAND.name}`,
+    text: buildOrderEmailText(data),
+    html: buildOrderEmailHtml(data),
+  });
 
-    if (error) {
-      console.error("Resend order email error:", error);
-    }
-  } catch (error) {
-    console.error("Order email send error:", error);
+  if (error) {
+    throw new Error(error.message);
   }
 }

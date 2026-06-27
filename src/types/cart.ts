@@ -20,6 +20,7 @@ export type OrderItem = {
 export type OrderSummary = {
   orderNumber: number;
   total: number;
+  deliveryFee: number;
   items: OrderItem[];
   name: string;
   email: string;
