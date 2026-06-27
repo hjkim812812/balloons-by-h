@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { generateOrderNumber } from "@/lib/generate-order-number";
 import { isValidDeliveryDate } from "@/lib/delivery-date";
+import { isValidPhoneNumber } from "@/lib/phone";
 import { DELIVERY_FEE, getOrderTotal } from "@/lib/order-pricing";
 import { sendOrderEmail } from "@/lib/send-order-email";
 import type { OrderItem } from "@/types/cart";
@@ -45,6 +46,10 @@ export async function POST(request: Request) {
 
     if (!isValidEmail(body.email)) {
       return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
+    }
+
+    if (!isValidPhoneNumber(body.phone.trim())) {
+      return NextResponse.json({ error: "Invalid phone number" }, { status: 400 });
     }
 
     if (!Array.isArray(body.items) || body.items.length === 0) {

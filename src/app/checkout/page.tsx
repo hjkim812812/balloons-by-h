@@ -14,6 +14,11 @@ import {
   CHECKOUT_SELECT_CLASS,
   getCheckoutFieldClass,
 } from "@/lib/checkout-form-styles";
+import {
+  isValidPhoneNumber,
+  PHONE_NUMBER_ERROR,
+  sanitizePhoneInput,
+} from "@/lib/phone";
 import type { OrderSummary } from "@/types/cart";
 
 const DELIVERY_TIME_OPTIONS = [
@@ -29,6 +34,8 @@ export default function CheckoutPage() {
   const { items, total, clearCart } = useCart();
   const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [deliveryDateError, setDeliveryDateError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [minDeliveryDate] = useState(getTomorrowLocalDateString);
@@ -54,6 +61,44 @@ export default function CheckoutPage() {
     return true;
   }
 
+  function validatePhone(value: string) {
+    if (value && !isValidPhoneNumber(value)) {
+      setErrors((prev) => ({ ...prev, phone: true }));
+      setPhoneError(PHONE_NUMBER_ERROR);
+      return false;
+    }
+
+    setErrors((prev) => {
+      if (!prev.phone) {
+        return prev;
+      }
+
+      const next = { ...prev };
+      delete next.phone;
+      return next;
+    });
+    setPhoneError("");
+    return true;
+  }
+
+  function handlePhoneChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const sanitized = sanitizePhoneInput(event.target.value);
+    setPhone(sanitized);
+
+    if (isValidPhoneNumber(sanitized)) {
+      setErrors((prev) => {
+        if (!prev.phone) {
+          return prev;
+        }
+
+        const next = { ...prev };
+        delete next.phone;
+        return next;
+      });
+      setPhoneError("");
+    }
+  }
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitError("");
@@ -64,7 +109,6 @@ export default function CheckoutPage() {
     const required = [
       "name",
       "email",
-      "phone",
       "delivery-address",
       "delivery-date",
       "delivery-time",
@@ -80,6 +124,13 @@ export default function CheckoutPage() {
     const email = String(data.get("email") ?? "");
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = true;
+    }
+
+    if (!isValidPhoneNumber(phone)) {
+      newErrors.phone = true;
+      setPhoneError(PHONE_NUMBER_ERROR);
+    } else {
+      setPhoneError("");
     }
 
     if (!data.get("policy-agreement")) {
@@ -290,9 +341,17 @@ export default function CheckoutPage() {
                   name="phone"
                   type="tel"
                   required
+                  value={phone}
+                  inputMode="numeric"
                   autoComplete="tel"
+                  maxLength={10}
+                  onChange={handlePhoneChange}
+                  onBlur={() => validatePhone(phone)}
                   className={getCheckoutFieldClass(Boolean(errors.phone))}
                 />
+                {phoneError && (
+                  <p className="font-body text-xs text-red-600">{phoneError}</p>
+                )}
               </div>
 
               <div className="mt-5 flex flex-col gap-2">
