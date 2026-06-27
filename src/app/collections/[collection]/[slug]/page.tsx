@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductAddToCart } from "@/components/ProductAddToCart";
 import { ProductEnhancementsSection } from "@/components/ProductEnhancementsSection";
-import { BookButton } from "@/components/BookButton";
 import { JsonLd } from "@/components/JsonLd";
 import { ProductGallery } from "@/components/ProductGallery";
 import { getBouquetSeo, getProductJsonLd } from "@/data/page-seo";
@@ -98,7 +97,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 {formatPrice(BOUQUET_PRICE)}
               </p>
 
-              <div className="mt-10 max-w-sm space-y-4">
+              <div className="mt-10 max-w-sm">
                 <ProductAddToCart
                   item={{
                     id: `bouquet-${bouquet.slug}`,
@@ -108,12 +107,6 @@ export default async function ProductDetailPage({ params }: Props) {
                     productType: "bouquet",
                     href: `/collections/${COLLECTION.slug}/${bouquet.slug}`,
                   }}
-                  fullWidth
-                />
-                <BookButton
-                  bouquetName={bouquet.name}
-                  slug={bouquet.slug}
-                  variant="primary"
                   fullWidth
                 />
               </div>
