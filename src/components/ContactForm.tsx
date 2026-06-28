@@ -11,7 +11,7 @@ export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -34,8 +34,23 @@ export function ContactForm() {
       return;
     }
 
+    const payload = Object.fromEntries(data.entries());
+
+    try {
+      const response = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        return;
+      }
+    } catch {
+      return;
+    }
+
     setErrors({});
-    console.log("Inquiry submitted:", Object.fromEntries(data.entries()));
     setSubmitted(true);
     form.reset();
   }

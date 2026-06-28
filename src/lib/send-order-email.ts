@@ -22,7 +22,7 @@ const ORDER_NOTIFICATION_EMAIL =
 
 const ORDER_FROM_EMAIL_DEFAULT = `${BRAND.name} <orders@balloonsbyh.com>`;
 
-function getOrderFromEmail(): string {
+export function getOrderFromEmail(): string {
   const configured = process.env.ORDER_FROM_EMAIL?.trim();
   return configured || ORDER_FROM_EMAIL_DEFAULT;
 }
