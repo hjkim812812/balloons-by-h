@@ -368,6 +368,22 @@ export const BOUQUETS: Bouquet[] = [
 
   {
 
+    slug: "blush-apricot",
+
+    name: "Blush Apricot",
+
+    accent: "#C8A882",
+
+    accentLight: "#F0E4D8",
+
+    mood: "Soft peach and gold with sage-green stems",
+
+    image: "/images/bouquets/blush-apricot.png",
+
+  },
+
+  {
+
     slug: "black-tie",
 
     name: "Black Tie",
