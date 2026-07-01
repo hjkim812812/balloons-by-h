@@ -57,4 +57,4 @@ Copy `.env.example` to `.env.local` for local development.
 
 All 15 bouquets share the same design and price — only colors change:
 
-Rodeo Drive Lavender · Champagne Ivory · Sunset Rose · Beverly Blue · Baby Welcome · Lemon Cream · Garden Sage · French Blush · Pearl White · Mocha Latte · Cloud Blue · Golden Buttercream · Rosé Champagne · White Orchid · Black Tie
+Rodeo Drive Lavender · Champagne Ivory · Raspberry Rose · Beverly Blue · Baby Welcome · Lemon Cream · Garden Sage · French Blush · Pearl White · Mocha Latte · Cloud Blue · Golden Buttercream · Rosé Champagne · White Orchid · Black Tie

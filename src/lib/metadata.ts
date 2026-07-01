@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { BRAND, BOUQUET_PHOTOS, canonicalUrl } from "@/data/site";
 
-const DEFAULT_OG_IMAGE = BOUQUET_PHOTOS["sunset-rose"];
+const DEFAULT_OG_IMAGE = BOUQUET_PHOTOS["raspberry-rose"];
 
 type PageMetadataOptions = {
   title: string;

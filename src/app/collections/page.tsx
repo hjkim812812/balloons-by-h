@@ -35,7 +35,7 @@ export default function CollectionsPage() {
             >
               <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[420px]">
                 <Image
-                  src={BOUQUET_PHOTOS["sunset-rose"]}
+                  src={BOUQUET_PHOTOS["raspberry-rose"]}
                   alt={COLLECTION.name}
                   fill
                   loading="lazy"

@@ -31,7 +31,7 @@ export default function AboutPage() {
             <ScrollReveal>
               <div className="relative aspect-[4/5] overflow-hidden">
                 <Image
-                  src={BOUQUET_PHOTOS["sunset-rose"]}
+                  src={BOUQUET_PHOTOS["raspberry-rose"]}
                   alt="Luxury balloon bouquet by Balloons by H — Beverly Hills balloon delivery"
                   fill
                   loading="lazy"

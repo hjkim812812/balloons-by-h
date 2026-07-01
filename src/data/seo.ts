@@ -86,7 +86,7 @@ export function getLocalBusinessJsonLd() {
       "Luxury handcrafted balloon bouquets and balloon delivery in Beverly Hills, Bel Air, Brentwood, West Hollywood, and Santa Monica.",
     url: SITE_URL,
     email: BRAND.email,
-    image: canonicalUrl("/images/bouquets/sunset-rose.png"),
+    image: canonicalUrl("/images/bouquets/raspberry-rose.png"),
     priceRange: "$$$",
     address: {
       "@type": "PostalAddress",

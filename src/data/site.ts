@@ -76,7 +76,7 @@ export const TRUST_ITEMS = [
 
 export const INSTAGRAM_PLACEHOLDERS = [
 
-  { src: "/images/bouquets/sunset-rose.png", alt: "Instagram placeholder — Sunset Rose bouquet" },
+  { src: "/images/bouquets/raspberry-rose.png", alt: "Instagram placeholder — Raspberry Rose bouquet" },
 
   { src: "/images/bouquets/french-blush.png", alt: "Instagram placeholder — French Blush bouquet" },
 
@@ -240,17 +240,17 @@ export const BOUQUETS: Bouquet[] = [
 
   {
 
-    slug: "sunset-rose",
+    slug: "raspberry-rose",
 
-    name: "Sunset Rose",
+    name: "Raspberry Rose",
 
-    accent: "#D4A098",
+    accent: "#B87888",
 
-    accentLight: "#F5E0DA",
+    accentLight: "#E8D0D8",
 
-    mood: "Blush rose warmed by a California sunset",
+    mood: "Dusty rose and mauve with sage-green stems",
 
-    image: "/images/bouquets/sunset-rose.png",
+    image: "/images/bouquets/raspberry-rose.png",
 
   },
 

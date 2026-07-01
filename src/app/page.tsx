@@ -38,7 +38,7 @@ import { COLLECTION } from "@/data/site";
 
 const FEATURED = [
 
-  "sunset-rose",
+  "raspberry-rose",
 
   "french-blush",
 
@@ -78,9 +78,9 @@ export default function HomePage() {
 
         <Image
 
-          src={BOUQUET_PHOTOS["sunset-rose"]}
+          src={BOUQUET_PHOTOS["raspberry-rose"]}
 
-          alt="Sunset Rose — Balloons by H"
+          alt="Raspberry Rose — Balloons by H"
 
           fill
 
