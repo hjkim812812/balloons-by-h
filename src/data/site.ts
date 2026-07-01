@@ -234,7 +234,7 @@ export const BOUQUETS: Bouquet[] = [
 
     mood: "Classic black and white with formal elegance",
 
-    image: "/images/bouquets/blanc-noir.png",
+    image: "/images/bouquets/blanc-noir-v2.png",
 
   },
 
